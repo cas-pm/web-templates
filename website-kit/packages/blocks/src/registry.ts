@@ -58,8 +58,8 @@ export const blockRegistry: Readonly<Record<BlockType, BlockRegistryEntry>> = {
     editable: {
       eyebrow: { field: "eyebrow", kind: "text", maxLength: 60, allowedFormatting: [] },
       heading: { field: "heading", kind: "text", maxLength: 120, allowedFormatting: [] },
-      // `body` is an array of paragraphs; content-assist edits one paragraph by
-      // index, e.g. field "body.0".
+      // `body` is an array of paragraphs. TODO(content-assist): support editing
+      // a single paragraph by index (e.g. field "body.0"); not implemented yet.
       body: {
         field: "body",
         kind: "richText",

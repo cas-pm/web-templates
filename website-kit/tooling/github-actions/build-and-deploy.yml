@@ -30,6 +30,8 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      # Validate every block's example.json against its schema before building.
+      - run: pnpm --filter @web/blocks test:examples
       - run: pnpm build
       - run: pnpm --if-present check # astro check / typecheck gate
       - uses: actions/upload-artifact@v4

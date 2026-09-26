@@ -2,10 +2,13 @@ import type { z } from "zod";
 import {
   type AllowedFormatting,
   type BlockType,
+  CtaBlockSchema,
+  FaqBlockSchema,
   HeroBlockSchema,
   LegalBlockSchema,
   RichTextBlockSchema,
   ServiceCardBlockSchema,
+  ServicesBlockSchema,
 } from "./schemas.js";
 
 /**
@@ -42,20 +45,25 @@ export const blockRegistry: Readonly<Record<BlockType, BlockRegistryEntry>> = {
     type: "hero",
     schema: HeroBlockSchema,
     editable: {
-      heading: { field: "heading", kind: "text", maxLength: 80, allowedFormatting: [] },
-      subheading: { field: "subheading", kind: "text", maxLength: 160, allowedFormatting: [] },
+      eyebrow: { field: "eyebrow", kind: "text", maxLength: 60, allowedFormatting: [] },
+      heading: { field: "heading", kind: "text", maxLength: 120, allowedFormatting: [] },
+      subheading: { field: "subheading", kind: "text", maxLength: 220, allowedFormatting: [] },
       "cta.label": { field: "cta.label", kind: "text", maxLength: 60, allowedFormatting: [] },
+      "secondaryCta.label": { field: "secondaryCta.label", kind: "text", maxLength: 60, allowedFormatting: [] },
     },
   },
   richText: {
     type: "richText",
     schema: RichTextBlockSchema,
     editable: {
-      heading: { field: "heading", kind: "text", maxLength: 80, allowedFormatting: [] },
+      eyebrow: { field: "eyebrow", kind: "text", maxLength: 60, allowedFormatting: [] },
+      heading: { field: "heading", kind: "text", maxLength: 120, allowedFormatting: [] },
+      // `body` is an array of paragraphs; content-assist edits one paragraph by
+      // index, e.g. field "body.0".
       body: {
         field: "body",
         kind: "richText",
-        maxLength: 2000,
+        maxLength: 1200,
         allowedFormatting: ["bold", "italic", "link"],
       },
     },
@@ -67,6 +75,33 @@ export const blockRegistry: Readonly<Record<BlockType, BlockRegistryEntry>> = {
       title: { field: "title", kind: "text", maxLength: 60, allowedFormatting: [] },
       description: { field: "description", kind: "text", maxLength: 280, allowedFormatting: [] },
       "cta.label": { field: "cta.label", kind: "text", maxLength: 60, allowedFormatting: [] },
+    },
+  },
+  services: {
+    type: "services",
+    schema: ServicesBlockSchema,
+    editable: {
+      eyebrow: { field: "eyebrow", kind: "text", maxLength: 60, allowedFormatting: [] },
+      heading: { field: "heading", kind: "text", maxLength: 120, allowedFormatting: [] },
+      intro: { field: "intro", kind: "text", maxLength: 300, allowedFormatting: [] },
+      // Per-item fields are addressed as "items.<n>.title" / "items.<n>.description".
+    },
+  },
+  cta: {
+    type: "cta",
+    schema: CtaBlockSchema,
+    editable: {
+      heading: { field: "heading", kind: "text", maxLength: 120, allowedFormatting: [] },
+      body: { field: "body", kind: "text", maxLength: 300, allowedFormatting: [] },
+      "cta.label": { field: "cta.label", kind: "text", maxLength: 60, allowedFormatting: [] },
+    },
+  },
+  faq: {
+    type: "faq",
+    schema: FaqBlockSchema,
+    editable: {
+      heading: { field: "heading", kind: "text", maxLength: 120, allowedFormatting: [] },
+      // Per-item: "items.<n>.question" / "items.<n>.answer".
     },
   },
   legal: {

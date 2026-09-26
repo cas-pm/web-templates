@@ -1,8 +1,23 @@
 ---
+import Seo from "@web/seo/Seo.astro";
+import { defaultTheme, themeToCss } from "@web/tokens";
+import { organizationJsonLd } from "@web/seo";
+import { site } from "../lib/site.ts";
+
 interface Props {
   title: string;
+  description?: string;
 }
-const { title } = Astro.props;
+const { title, description } = Astro.props;
+
+const pageTitle = title === site.name ? title : `${title} · ${site.name}`;
+const currentPath = Astro.url.pathname;
+
+const orgJsonLd = organizationJsonLd({
+  name: site.name,
+  url: site.url,
+  telephone: site.phone,
+});
 ---
 
 <!doctype html>
@@ -10,11 +25,108 @@ const { title } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <Seo title={pageTitle} description={description} canonical={new URL(currentPath, site.url).href} jsonLd={[orgJsonLd]} />
+    <style set:html={themeToCss(defaultTheme)}></style>
   </head>
   <body>
-    <main>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="/">{site.shortName}</a>
+        <nav aria-label="Primary">
+          <ul role="list">
+            {site.nav.map((link) => (
+              <li>
+                <a href={link.href} aria-current={currentPath === link.href ? "page" : undefined}>{link.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <a class="btn btn-primary header-cta" href="/contact">Get a quote</a>
+      </div>
+    </header>
+
+    <main id="main">
       <slot />
     </main>
+
+    <footer class="site-footer">
+      <div class="bar">
+        <div>
+          <p class="brand">{site.name}</p>
+          <p class="muted">{site.tagline}</p>
+          <p class="muted">{site.address}</p>
+        </div>
+        <div>
+          <p><a href={site.phoneHref}>{site.phone}</a></p>
+          <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+        </div>
+        <nav aria-label="Legal">
+          <ul role="list">
+            {site.legalNav.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+          </ul>
+        </nav>
+      </div>
+      <p class="colophon muted">
+        © {new Date().getFullYear()} {site.name}. Company no. {site.companyNumber} · VAT {site.vatNumber}
+      </p>
+    </footer>
+
+    <style>
+      :root { color-scheme: light; }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        font-family: var(--font-body);
+        color: var(--color-fg);
+        background: var(--color-bg);
+        line-height: 1.5;
+      }
+      h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; }
+      a { color: var(--color-primary); }
+
+      .skip-link {
+        position: absolute; left: -999px;
+        background: var(--color-fg); color: var(--color-bg); padding: 0.5rem 1rem;
+      }
+      .skip-link:focus { left: 1rem; top: 1rem; z-index: 10; }
+
+      .bar {
+        max-width: 1120px; margin: 0 auto; padding: 1rem 1.5rem;
+        display: flex; align-items: center; gap: 1.5rem;
+      }
+      .site-header { border-bottom: 1px solid var(--color-border); position: sticky; top: 0; background: var(--color-bg); z-index: 5; }
+      .brand { font-weight: 700; text-decoration: none; color: var(--color-fg); }
+      .site-header nav { margin-left: auto; }
+      .site-header nav ul { display: flex; gap: 1.25rem; list-style: none; margin: 0; padding: 0; }
+      .site-header nav a { text-decoration: none; color: var(--color-fg); }
+      .site-header nav a[aria-current="page"] { color: var(--color-primary); font-weight: 600; }
+      .header-cta { white-space: nowrap; }
+
+      .site-footer { border-top: 1px solid var(--color-border); margin-top: 4rem; }
+      .site-footer .bar { align-items: flex-start; flex-wrap: wrap; justify-content: space-between; }
+      .site-footer nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 1rem; }
+      .site-footer p { margin: 0.25rem 0; }
+      .muted { color: var(--color-muted); }
+      .colophon { max-width: 1120px; margin: 0 auto; padding: 0 1.5rem 2rem; font-size: 0.85rem; }
+
+      /* @web/ui component styles */
+      .section { padding: 3rem 0; }
+      .section-inner { max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
+      .section-narrow .section-inner { max-width: 720px; }
+      .section-wide .section-inner { max-width: 1240px; }
+      .section-full .section-inner { max-width: none; padding: 0; }
+
+      .btn {
+        display: inline-block; padding: 0.7rem 1.3rem; border-radius: var(--radius-md, 0.5rem);
+        font-weight: 600; text-decoration: none; cursor: pointer; border: 1px solid transparent;
+      }
+      .btn-primary { background: var(--color-primary); color: var(--color-primary-fg); }
+      .btn-secondary { background: var(--color-fg); color: var(--color-bg); }
+      .btn-ghost { background: transparent; color: var(--color-primary); border-color: var(--color-border); }
+    </style>
   </body>
 </html>

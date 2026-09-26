@@ -1,0 +1,11 @@
+---
+import Base from "../layouts/Base.astro";
+import BlockRenderer from "../components/BlockRenderer.astro";
+import { getPage } from "../lib/content.ts";
+
+const page = getPage("services");
+---
+
+<Base title={page.title} description={page.description}>
+  {page.blocks.map((block) => <BlockRenderer block={block} />)}
+</Base>

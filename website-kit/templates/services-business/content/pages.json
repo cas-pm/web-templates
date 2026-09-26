@@ -2,40 +2,205 @@
   "pages": [
     {
       "slug": "home",
-      "title": "Home",
+      "title": "Meridian Bookkeeping & Advisory",
+      "description": "Manchester bookkeepers and accountants for small businesses. Bookkeeping, payroll, VAT and year-end accounts, handled properly so you can focus on trading.",
       "language": "en",
       "blocks": [
         {
           "type": "hero",
-          "heading": "Your business, done properly",
-          "subheading": "TODO: client value proposition.",
-          "cta": { "label": "Get in touch", "href": "/contact" }
+          "eyebrow": "Manchester bookkeepers",
+          "heading": "Clean books, fewer surprises, more time to run your business",
+          "subheading": "We handle the bookkeeping, payroll and VAT for growing UK small businesses — accurately, on time, and explained in plain English.",
+          "cta": { "label": "Get a quote", "href": "/contact" },
+          "secondaryCta": { "label": "See our services", "href": "/services" },
+          "image": "/img/hero.svg"
+        },
+        {
+          "type": "richText",
+          "eyebrow": "Why it matters",
+          "heading": "Numbers you can actually trust",
+          "body": [
+            "Most small business owners don't lie awake worrying about debits and credits — they worry about cash, tax bills and whether the figures they're looking at are right. That's exactly the worry we take off your plate.",
+            "Meridian keeps your records tidy month to month, so there are no nasty January surprises and every decision you make is based on real, up-to-date numbers."
+          ]
+        },
+        {
+          "type": "services",
+          "eyebrow": "What we do",
+          "heading": "Everything your business needs to stay compliant",
+          "intro": "Pick the pieces you need, or hand us the lot. Fixed monthly fees — no surprise invoices.",
+          "items": [
+            { "title": "Bookkeeping", "description": "Day-to-day records kept current with cloud software, bank feeds reconciled weekly so you always know where you stand.", "href": "/services" },
+            { "title": "Payroll", "description": "Accurate PAYE, pensions auto-enrolment and payslips run on schedule, with RTI submissions to HMRC handled for you.", "href": "/services" },
+            { "title": "VAT & tax returns", "description": "VAT returns prepared and filed under Making Tax Digital, plus Self Assessment and corporation tax when they fall due.", "href": "/services" },
+            { "title": "Management accounts", "description": "Monthly or quarterly reports that show profit, cash and trends clearly — so you can plan, not just look back.", "href": "/services" },
+            { "title": "Company formation", "description": "New company set up correctly from day one: incorporation, HMRC registrations and a sensible chart of accounts.", "href": "/services" },
+            { "title": "Advisory", "description": "A real person to call about pricing, hiring, or a big purchase — practical advice from someone who knows your numbers.", "href": "/services" }
+          ]
+        },
+        {
+          "type": "richText",
+          "eyebrow": "Why Meridian",
+          "heading": "A bookkeeper who picks up the phone",
+          "body": [
+            "You get a named contact who knows your business — not a call centre and not a different face every quarter. We reply within one working day, and we explain things without the jargon.",
+            "We work with Xero and QuickBooks, we're AAT-licensed and fully insured, and our fees are fixed and agreed up front so you can budget with confidence."
+          ]
+        },
+        {
+          "type": "faq",
+          "heading": "Common questions",
+          "items": [
+            { "question": "Do I need to switch accounting software?", "answer": "Not necessarily. We work with Xero and QuickBooks and can review whatever you use today. If a change would genuinely save you time or money we'll say so and handle the migration — otherwise we'll happily work with your current setup." },
+            { "question": "How much does it cost?", "answer": "Every business is different, so we quote a fixed monthly fee based on transaction volume and the services you need. You'll always know the price before we start, and there are no charges for a quick phone call or email." },
+            { "question": "Can you take over from my current bookkeeper?", "answer": "Yes. Switching is straightforward — we handle the handover, get access to your records and software, and make sure nothing is missed. Most clients are fully moved across within a couple of weeks." },
+            { "question": "Are you registered and insured?", "answer": "We're licensed by the AAT, registered for anti-money-laundering supervision, and carry professional indemnity insurance. We're also registered as HMRC agents so we can deal with them on your behalf." }
+          ]
+        },
+        {
+          "type": "cta",
+          "heading": "Ready to hand off the books?",
+          "body": "Tell us a little about your business and we'll send a fixed-fee quote within one working day.",
+          "cta": { "label": "Get a quote", "href": "/contact" }
+        }
+      ]
+    },
+    {
+      "slug": "services",
+      "title": "Services",
+      "description": "Bookkeeping, payroll, VAT and tax returns, management accounts, company formation and advisory for UK small businesses.",
+      "language": "en",
+      "blocks": [
+        {
+          "type": "hero",
+          "variant": "centered",
+          "eyebrow": "Services",
+          "heading": "Bookkeeping and accounts, done properly",
+          "subheading": "Fixed monthly fees, cloud software, and a named contact who knows your business. Choose what you need below.",
+          "cta": { "label": "Get a quote", "href": "/contact" }
+        },
+        {
+          "type": "services",
+          "heading": "Core services",
+          "intro": "Mix and match, or let us run the whole finance function for you.",
+          "items": [
+            { "title": "Bookkeeping", "description": "Bank feeds reconciled weekly, purchases and sales recorded, and your ledgers kept ready for VAT and year-end at all times." },
+            { "title": "Payroll", "description": "Weekly or monthly payroll, payslips, pensions auto-enrolment, starters and leavers, and RTI filings submitted to HMRC on time." },
+            { "title": "VAT & tax returns", "description": "MTD-compliant VAT returns, Self Assessment for directors and sole traders, and corporation tax computations and filing." },
+            { "title": "Management accounts", "description": "Clear monthly or quarterly reporting on profit, margins and cash, with commentary that tells you what the numbers mean." },
+            { "title": "Company formation", "description": "Incorporation at Companies House, HMRC registrations, and a chart of accounts set up to suit how you actually trade." },
+            { "title": "Advisory", "description": "Budgeting, cash-flow forecasting and a sounding board for the big decisions — pricing, hiring, equipment and growth." }
+          ]
+        },
+        {
+          "type": "richText",
+          "heading": "How we work",
+          "body": [
+            "We start with a short call to understand your business and how it runs today. From there we agree a fixed monthly fee and a simple checklist of what we need from you each period.",
+            "Everything lives in the cloud, so you and your team can raise invoices and snap receipts on your phone while we take care of the reconciliations, filings and reporting behind the scenes."
+          ]
+        },
+        {
+          "type": "cta",
+          "heading": "Not sure which services you need?",
+          "body": "Book a free 20-minute call and we'll point you in the right direction — no pressure, no jargon.",
+          "cta": { "label": "Book a call", "href": "/contact" }
+        }
+      ]
+    },
+    {
+      "slug": "about",
+      "title": "About",
+      "description": "Meridian Bookkeeping & Advisory is a Manchester bookkeeping practice helping small businesses stay on top of their numbers.",
+      "language": "en",
+      "blocks": [
+        {
+          "type": "hero",
+          "variant": "centered",
+          "eyebrow": "About us",
+          "heading": "A small practice that treats your business like our own",
+          "subheading": "We're a Manchester-based bookkeeping and advisory practice working with tradespeople, agencies and independent shops across the North West."
+        },
+        {
+          "type": "richText",
+          "heading": "Our story",
+          "body": [
+            "Meridian started in 2016 with a simple frustration: too many small businesses were getting their accounts back months late, riddled with jargon and impossible to act on. We thought bookkeeping should be timely, clear and genuinely useful.",
+            "Today we look after the books for more than a hundred local businesses. We've grown by referral, because clients tell their friends that for once the numbers make sense — and someone actually answers the phone."
+          ]
+        },
+        {
+          "type": "richText",
+          "heading": "What we value",
+          "body": [
+            "Clarity over jargon. Every report and email is written so you can act on it, not so it sounds clever.",
+            "On time, every time. Deadlines are the whole point of a bookkeeper — we don't miss them.",
+            "Fixed, fair fees. You'll never get an invoice for a phone call or a quick question."
+          ]
+        },
+        {
+          "type": "cta",
+          "heading": "Like the sound of us?",
+          "body": "We'd love to hear about your business. Get in touch for a friendly, no-obligation chat.",
+          "cta": { "label": "Contact us", "href": "/contact" }
+        }
+      ]
+    },
+    {
+      "slug": "contact",
+      "title": "Contact",
+      "description": "Get in touch with Meridian Bookkeeping & Advisory in Manchester — phone, email or WhatsApp. Fixed-fee quotes within one working day.",
+      "language": "en",
+      "blocks": [
+        {
+          "type": "hero",
+          "variant": "centered",
+          "eyebrow": "Contact",
+          "heading": "Let's talk about your books",
+          "subheading": "Tell us a little about your business and we'll come back with a fixed-fee quote within one working day."
+        },
+        {
+          "type": "richText",
+          "heading": "How to reach us",
+          "body": [
+            "Phone: +44 161 555 0142 — Monday to Friday, 9am to 5pm.",
+            "Email: hello@meridian-bookkeeping.example — we reply within one working day.",
+            "Office: Suite 4, 122 Deansgate, Manchester M3 2BW. Visits by appointment."
+          ]
+        },
+        {
+          "type": "cta",
+          "heading": "Prefer to write it down?",
+          "body": "Send us an email with a few details about your business and we'll take it from there.",
+          "cta": { "label": "Email us", "href": "mailto:hello@meridian-bookkeeping.example" }
         }
       ]
     },
     {
       "slug": "privacy",
       "title": "Privacy Policy",
+      "description": "How Meridian Bookkeeping & Advisory collects and uses personal data.",
       "language": "en",
       "blocks": [
         {
           "type": "legal",
           "heading": "Privacy Policy",
           "needsLegalReview": true,
-          "body": "TODO: PLACEHOLDER PRIVACY POLICY — REQUIRES CLIENT LEGAL REVIEW BEFORE PUBLISHING. This template text is not legal advice. Describe what personal data is collected, why, the lawful basis, retention, third parties/processors (e.g. analytics), data subject rights, and contact details for the data controller."
+          "body": "PLACEHOLDER PRIVACY POLICY — REQUIRES CLIENT LEGAL REVIEW BEFORE PUBLISHING. This template text is not legal advice.\n\nWho we are: Meridian Bookkeeping & Advisory (company no. 12345678) is the data controller for the personal data described in this policy. You can contact us at hello@meridian-bookkeeping.example.\n\nWhat we collect: contact details you provide through our enquiry form or by email or phone (name, business name, email address, telephone number), and basic analytics about how visitors use this website.\n\nWhy we collect it: to respond to your enquiry, to provide our services under our engagement letter, and to meet our legal and regulatory obligations as a bookkeeping practice.\n\nLawful basis: performance of a contract, our legitimate interest in responding to enquiries, and compliance with legal obligations (including anti-money-laundering rules).\n\nRetention: we keep client records for the periods required by HMRC and our regulator, and enquiry data for no longer than necessary.\n\nYour rights: you can ask to access, correct or erase your personal data, or object to certain processing. Contact us to make a request.\n\nTODO: confirm processors (accounting software, email, analytics), international transfers, cookie detail (see the cookie policy), and complaints/ICO wording with the client's solicitor."
         }
       ]
     },
     {
       "slug": "cookies",
       "title": "Cookie Policy",
+      "description": "How Meridian Bookkeeping & Advisory uses cookies on this website.",
       "language": "en",
       "blocks": [
         {
           "type": "legal",
           "heading": "Cookie Policy",
           "needsLegalReview": true,
-          "body": "TODO: PLACEHOLDER COOKIE POLICY — REQUIRES CLIENT LEGAL REVIEW BEFORE PUBLISHING. This template text is not legal advice. List cookie categories (strictly necessary, analytics, marketing), their purpose and duration, how consent is obtained/withdrawn, and links to any third-party cookie policies."
+          "body": "PLACEHOLDER COOKIE POLICY — REQUIRES CLIENT LEGAL REVIEW BEFORE PUBLISHING. This template text is not legal advice.\n\nWhat cookies are: small text files stored on your device that help websites work and understand how they are used.\n\nStrictly necessary cookies: required for the site to function (for example, remembering your cookie choices). These are always on.\n\nAnalytics cookies: with your consent, we use analytics to understand which pages are useful and how visitors find us. These are off until you opt in.\n\nMarketing cookies: we do not currently use marketing or advertising cookies. If that changes, this policy and our consent banner will be updated first.\n\nManaging cookies: you can change or withdraw your consent at any time using the cookie settings, and you can block cookies in your browser settings.\n\nTODO: confirm the exact cookie names, durations and providers (analytics/tag manager) and the consent-banner behaviour with the client before publishing."
         }
       ]
     }

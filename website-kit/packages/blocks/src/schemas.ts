@@ -31,16 +31,23 @@ export type Cta = z.infer<typeof CtaSchema>;
 
 export const HeroBlockSchema = z.object({
   type: z.literal("hero"),
-  heading: z.string().min(1).max(80),
-  subheading: z.string().max(160),
+  heading: z.string().min(1).max(120),
+  subheading: z.string().max(220),
   cta: CtaSchema.optional(),
+  /** Optional secondary link rendered beside the primary CTA. */
+  secondaryCta: CtaSchema.optional(),
+  /** Path to a hero image under public/ (e.g. "/img/hero.jpg"). */
+  image: z.string().optional(),
+  eyebrow: z.string().max(60).optional(),
 });
 export type HeroBlock = z.infer<typeof HeroBlockSchema>;
 
 export const RichTextBlockSchema = z.object({
   type: z.literal("richText"),
-  heading: z.string().max(80).optional(),
-  body: z.string().max(2000),
+  eyebrow: z.string().max(60).optional(),
+  heading: z.string().max(120).optional(),
+  /** Body paragraphs. Each string is one paragraph. */
+  body: z.array(z.string().max(1200)).min(1),
 });
 export type RichTextBlock = z.infer<typeof RichTextBlockSchema>;
 
@@ -51,6 +58,46 @@ export const ServiceCardBlockSchema = z.object({
   cta: CtaSchema.optional(),
 });
 export type ServiceCardBlock = z.infer<typeof ServiceCardBlockSchema>;
+
+/** A grid of services with an optional intro. */
+export const ServiceItemSchema = z.object({
+  title: z.string().min(1).max(60),
+  description: z.string().max(300),
+  href: HrefSchema.optional(),
+});
+export type ServiceItem = z.infer<typeof ServiceItemSchema>;
+
+export const ServicesBlockSchema = z.object({
+  type: z.literal("services"),
+  eyebrow: z.string().max(60).optional(),
+  heading: z.string().max(120).optional(),
+  intro: z.string().max(300).optional(),
+  items: z.array(ServiceItemSchema).min(1),
+});
+export type ServicesBlock = z.infer<typeof ServicesBlockSchema>;
+
+/** A call-to-action band. */
+export const CtaBlockSchema = z.object({
+  type: z.literal("cta"),
+  heading: z.string().min(1).max(120),
+  body: z.string().max(300).optional(),
+  cta: CtaSchema,
+});
+export type CtaBlock = z.infer<typeof CtaBlockSchema>;
+
+/** FAQ list (also a good candidate for FAQPage JSON-LD via @web/seo). */
+export const FaqItemSchema = z.object({
+  question: z.string().min(1).max(200),
+  answer: z.string().min(1).max(1000),
+});
+export type FaqItem = z.infer<typeof FaqItemSchema>;
+
+export const FaqBlockSchema = z.object({
+  type: z.literal("faq"),
+  heading: z.string().max(120).optional(),
+  items: z.array(FaqItemSchema).min(1),
+});
+export type FaqBlock = z.infer<typeof FaqBlockSchema>;
 
 /** Legal blocks (privacy, cookies) — long-form body, needs client legal review. */
 export const LegalBlockSchema = z.object({
@@ -65,6 +112,9 @@ export const BlockSchema = z.discriminatedUnion("type", [
   HeroBlockSchema,
   RichTextBlockSchema,
   ServiceCardBlockSchema,
+  ServicesBlockSchema,
+  CtaBlockSchema,
+  FaqBlockSchema,
   LegalBlockSchema,
 ]);
 export type Block = z.infer<typeof BlockSchema>;
@@ -73,6 +123,8 @@ export type BlockType = Block["type"];
 export const PageSchema = z.object({
   slug: z.string(),
   title: z.string(),
+  /** Meta description for <head>. */
+  description: z.string().max(320).optional(),
   language: z.string().default("en"),
   blocks: z.array(BlockSchema),
 });

@@ -1,24 +1,11 @@
 ---
 import Base from "../layouts/Base.astro";
+import BlockRenderer from "../components/BlockRenderer.astro";
 import { getPage } from "../lib/content.ts";
 
 const page = getPage("privacy");
-// Legal blocks are flagged needsLegalReview — content requires client legal
-// review before this page is considered production-ready.
-const legal = page.blocks.find((b) => b.type === "legal");
 ---
 
-<Base title={page.title}>
-  {legal && legal.type === "legal" && (
-    <article>
-      {legal.needsLegalReview && (
-        <p data-legal-review-required>
-          ⚠️ Draft — requires client legal review before publishing.
-        </p>
-      )}
-      <h1>{legal.heading}</h1>
-      {/* TODO: render rich-text body with the shared sanitizing renderer. */}
-      <div>{legal.body}</div>
-    </article>
-  )}
+<Base title={page.title} description={page.description}>
+  {page.blocks.map((block) => <BlockRenderer block={block} />)}
 </Base>

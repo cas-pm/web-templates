@@ -1,0 +1,176 @@
+---
+import type { Block } from "@web/blocks/schemas";
+import Section from "@web/ui/Section.astro";
+import Button from "@web/ui/Button.astro";
+
+interface Props {
+  block: Block;
+}
+const { block } = Astro.props;
+---
+
+{block.type === "hero" && (
+  <Section width="wide">
+    <div class="hero" class:list={[block.image && "hero--split"]}>
+      <div class="hero__body">
+        {block.eyebrow && <p class="eyebrow">{block.eyebrow}</p>}
+        <h1>{block.heading}</h1>
+        {block.subheading && <p class="lead">{block.subheading}</p>}
+        <div class="actions">
+          {block.cta && <Button href={block.cta.href}>{block.cta.label}</Button>}
+          {block.secondaryCta && (
+            <Button href={block.secondaryCta.href} variant="ghost">{block.secondaryCta.label}</Button>
+          )}
+        </div>
+      </div>
+      {block.image && (
+        <div class="hero__media">
+          <img src={block.image} alt="" width="640" height="480" loading="eager" />
+        </div>
+      )}
+    </div>
+  </Section>
+)}
+
+{block.type === "richText" && (
+  <Section width="narrow">
+    <div class="prose">
+      {block.eyebrow && <p class="eyebrow">{block.eyebrow}</p>}
+      {block.heading && <h2>{block.heading}</h2>}
+      {block.body.map((p) => <p>{p}</p>)}
+    </div>
+  </Section>
+)}
+
+{block.type === "services" && (
+  <Section>
+    <div class="section-head">
+      {block.eyebrow && <p class="eyebrow">{block.eyebrow}</p>}
+      {block.heading && <h2>{block.heading}</h2>}
+      {block.intro && <p class="lead">{block.intro}</p>}
+    </div>
+    <ul class="grid" role="list">
+      {block.items.map((item) => (
+        <li class="card">
+          <h3>{item.title}</h3>
+          <p>{item.description}</p>
+          {item.href && <a class="card__link" href={item.href}>Learn more →</a>}
+        </li>
+      ))}
+    </ul>
+  </Section>
+)}
+
+{block.type === "serviceCard" && (
+  <Section width="narrow">
+    <div class="card">
+      <h3>{block.title}</h3>
+      <p>{block.description}</p>
+      {block.cta && <a class="card__link" href={block.cta.href}>{block.cta.label} →</a>}
+    </div>
+  </Section>
+)}
+
+{block.type === "cta" && (
+  <Section width="wide">
+    <div class="cta-band">
+      <div>
+        <h2>{block.heading}</h2>
+        {block.body && <p>{block.body}</p>}
+      </div>
+      <Button href={block.cta.href}>{block.cta.label}</Button>
+    </div>
+  </Section>
+)}
+
+{block.type === "faq" && (
+  <Section width="narrow">
+    <div class="section-head">
+      {block.heading && <h2>{block.heading}</h2>}
+    </div>
+    <div class="faq">
+      {block.items.map((item) => (
+        <details>
+          <summary>{item.question}</summary>
+          <p>{item.answer}</p>
+        </details>
+      ))}
+    </div>
+  </Section>
+)}
+
+{block.type === "legal" && (
+  <Section width="narrow">
+    <article class="prose">
+      {block.needsLegalReview && (
+        <p class="notice" data-legal-review-required>
+          ⚠️ Draft — requires client legal review before publishing.
+        </p>
+      )}
+      <h1>{block.heading}</h1>
+      {block.body.split("\n\n").map((p) => <p>{p}</p>)}
+    </article>
+  </Section>
+)}
+
+<style>
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin: 0 0 0.5rem;
+  }
+  .lead { font-size: 1.25rem; color: var(--color-muted); max-width: 46ch; }
+  .actions { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem; }
+
+  .hero { display: grid; gap: 2rem; padding: 2rem 0; }
+  .hero h1 { font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.1; margin: 0 0 1rem; }
+  .hero--split { grid-template-columns: 1.1fr 0.9fr; align-items: center; }
+  .hero__media img { width: 100%; height: auto; border-radius: var(--radius-lg, 1rem); }
+  @media (max-width: 768px) { .hero--split { grid-template-columns: 1fr; } }
+
+  .section-head { max-width: 52ch; margin-bottom: 2rem; }
+  .section-head h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); margin: 0 0 0.75rem; }
+
+  .grid {
+    list-style: none; padding: 0; margin: 0;
+    display: grid; gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+  .card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg, 1rem);
+    padding: 1.5rem;
+  }
+  .card h3 { margin: 0 0 0.5rem; font-size: 1.15rem; }
+  .card p { margin: 0 0 1rem; color: var(--color-muted); }
+  .card__link { color: var(--color-primary); font-weight: 600; text-decoration: none; }
+
+  .cta-band {
+    display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+    flex-wrap: wrap;
+    background: var(--color-primary); color: var(--color-primary-fg);
+    border-radius: var(--radius-lg, 1rem); padding: 2.5rem;
+  }
+  .cta-band h2 { margin: 0 0 0.25rem; }
+  .cta-band p { margin: 0; opacity: 0.9; }
+
+  .prose { max-width: 65ch; }
+  .prose h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); }
+  .prose p { line-height: 1.7; color: var(--color-fg); }
+
+  .faq details {
+    border-bottom: 1px solid var(--color-border);
+    padding: 1rem 0;
+  }
+  .faq summary { font-weight: 600; cursor: pointer; }
+  .faq p { color: var(--color-muted); margin: 0.75rem 0 0; }
+
+  .notice {
+    background: #fef3c7; border: 1px solid #f59e0b; color: #92400e;
+    padding: 0.75rem 1rem; border-radius: var(--radius-md, 0.5rem);
+  }
+</style>

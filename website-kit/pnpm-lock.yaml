@@ -185,6 +185,15 @@ importers:
       '@web/blocks':
         specifier: workspace:*
         version: link:../../packages/blocks
+      '@web/seo':
+        specifier: workspace:*
+        version: link:../../packages/seo
+      '@web/tokens':
+        specifier: workspace:*
+        version: link:../../packages/tokens
+      '@web/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       astro:
         specifier: ^4.16.0
         version: 4.16.19(@types/node@22.20.4)(rollup@4.63.5)(typescript@5.9.3)

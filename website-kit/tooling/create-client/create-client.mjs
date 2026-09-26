@@ -33,7 +33,7 @@ const USAGE = `Usage: create-client <client-name> --dir <path> [--template <${TE
  * @returns {Options}
  */
 export function parseArgs(argv) {
-  /** @type {Partial<Options> & { withGrowth: boolean, withAssist: boolean, dryRun: boolean }} */
+  /** @type {{ dir?: string, template?: string, flyApp?: string, withGrowth: boolean, withAssist: boolean, dryRun: boolean }} */
   const opts = { withGrowth: false, withAssist: false, dryRun: false };
   const positionals = [];
 
@@ -56,10 +56,11 @@ export function parseArgs(argv) {
   const clientName = positionals[0];
   if (!clientName) throw new Error(`missing <client-name>\n${USAGE}`);
   if (!opts.dir) throw new Error(`--dir is required\n${USAGE}`);
-  const template = opts.template ?? "services-business";
-  if (!TEMPLATES.includes(template)) {
+  const templateRaw = opts.template ?? "services-business";
+  if (!TEMPLATES.includes(templateRaw)) {
     throw new Error(`--template must be one of: ${TEMPLATES.join(", ")}`);
   }
+  const template = /** @type {Options["template"]} */ (templateRaw);
 
   return {
     clientName,

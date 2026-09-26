@@ -48,4 +48,4 @@ jobs:
           path: dist
       # TODO: deploy `dist/` to the target (Fly.io preview via flyctl, or static host).
       # TODO: expose the resulting deploy URL as a job output for status/ to read.
-      - run: echo "TODO: deploy dist/ (see fly.toml in the template)"
+      - run: 'echo "TODO deploy dist/ (see fly.toml in the template)"'

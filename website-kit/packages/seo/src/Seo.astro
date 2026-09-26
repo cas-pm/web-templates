@@ -1,0 +1,30 @@
+---
+/**
+ * Seo.astro — <head> meta tags, Open Graph, Twitter card, canonical, and
+ * optional JSON-LD blocks. Drop into a layout's <head>.
+ */
+interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+  image?: string;
+  /** Pre-built JSON-LD objects (see @web/seo/jsonld). */
+  jsonLd?: Record<string, unknown>[];
+}
+const { title, description, canonical, image, jsonLd = [] } = Astro.props;
+---
+
+<title>{title}</title>
+{description && <meta name="description" content={description} />}
+{canonical && <link rel="canonical" href={canonical} />}
+
+<meta property="og:title" content={title} />
+{description && <meta property="og:description" content={description} />}
+{image && <meta property="og:image" content={image} />}
+<meta name="twitter:card" content="summary_large_image" />
+
+{jsonLd.map((obj) => (
+  <script type="application/ld+json" set:html={JSON.stringify(obj)} />
+))}
+
+{/* TODO: locale/alternates, robots directives per page. */}

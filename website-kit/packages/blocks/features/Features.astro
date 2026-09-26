@@ -1,0 +1,14 @@
+---
+import type { FeaturesProps } from "./schema";
+
+interface Props {
+  data: FeaturesProps;
+}
+const { data } = Astro.props;
+// TODO: implement the Features block markup + styles.
+// Variants: grid, alternating, icon-list
+---
+
+<section data-block="features" data-variant={data.variant}>
+  {/* TODO: render Features using `data`. */}
+</section>

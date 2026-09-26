@@ -1,0 +1,12 @@
+---
+interface Props {
+  id?: string;
+  width?: "narrow" | "default" | "wide" | "full";
+  padded?: boolean;
+}
+const { id, width = "default", padded = true } = Astro.props;
+---
+<section id={id} class:list={["section", `section-${width}`, { "section-padded": padded }]}>
+  <div class="section-inner"><slot /></div>
+</section>
+{/* TODO: max-width per `width`, vertical rhythm from @web/tokens. */}

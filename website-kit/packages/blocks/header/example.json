@@ -1,0 +1,14 @@
+{
+  "logoText": "Acme",
+  "logoHref": "/",
+  "links": [
+    {
+      "label": "Services",
+      "href": "/services"
+    },
+    {
+      "label": "Contact",
+      "href": "/contact"
+    }
+  ]
+}

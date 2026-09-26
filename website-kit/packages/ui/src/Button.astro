@@ -1,0 +1,13 @@
+---
+interface Props {
+  href?: string;
+  variant?: "primary" | "secondary" | "ghost";
+  type?: "button" | "submit";
+}
+const { href, variant = "primary", type = "button" } = Astro.props;
+const Tag = href ? "a" : "button";
+---
+<Tag class:list={["btn", `btn-${variant}`]} href={href} type={href ? undefined : type}>
+  <slot />
+</Tag>
+{/* TODO: styles via @web/tokens custom properties. */}

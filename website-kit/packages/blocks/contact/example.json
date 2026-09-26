@@ -1,0 +1,9 @@
+{
+  "heading": "Contact us",
+  "channels": {
+    "whatsapp": "+441234567890",
+    "tel": "+441234567890",
+    "email": "hello@example.com"
+  },
+  "formAction": "/api/contact"
+}

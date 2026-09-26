@@ -1,0 +1,10 @@
+{
+  "heading": "FAQ",
+  "items": [
+    {
+      "question": "TODO?",
+      "answer": "TODO."
+    }
+  ],
+  "emitJsonLd": true
+}

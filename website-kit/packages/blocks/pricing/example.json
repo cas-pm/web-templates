@@ -1,0 +1,18 @@
+{
+  "heading": "Pricing",
+  "plans": [
+    {
+      "name": "Starter",
+      "price": "£99",
+      "period": "mo",
+      "features": [
+        "TODO"
+      ],
+      "cta": {
+        "label": "Choose",
+        "href": "/contact"
+      },
+      "featured": false
+    }
+  ]
+}

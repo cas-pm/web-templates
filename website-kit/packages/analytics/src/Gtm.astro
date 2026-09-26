@@ -1,0 +1,30 @@
+---
+/**
+ * Gtm.astro — Google Tag Manager snippet with Consent Mode defaults set BEFORE
+ * GTM loads. Put the <head> part in <head> and the <noscript> right after <body>.
+ */
+interface Props {
+  containerId: string; // "GTM-XXXXXXX"
+}
+const { containerId } = Astro.props;
+---
+
+{/* Consent defaults (deny until opt-in) must run before GTM. */}
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag("consent", "default", {
+    analytics_storage: "denied",
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+  });
+  {/* TODO: read stored consent choice and gtag("consent","update", …). */}
+</script>
+
+<script is:inline define:vars={{ containerId }}>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+  var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+  j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer',containerId);
+</script>

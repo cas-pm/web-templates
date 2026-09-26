@@ -1,0 +1,13 @@
+---
+interface Props {
+  href?: string;
+  as?: "article" | "div";
+}
+const { href, as = "article" } = Astro.props;
+const Tag = href ? "a" : as;
+---
+<Tag class="card" href={href}>
+  <slot name="media" />
+  <div class="card-body"><slot /></div>
+</Tag>
+{/* TODO: elevation/hover styles. */}

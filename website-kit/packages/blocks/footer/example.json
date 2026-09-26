@@ -1,0 +1,24 @@
+{
+  "columns": [
+    {
+      "title": "Company",
+      "links": [
+        {
+          "label": "About",
+          "href": "/about"
+        }
+      ]
+    }
+  ],
+  "legalLinks": [
+    {
+      "label": "Privacy",
+      "href": "/privacy"
+    },
+    {
+      "label": "Cookies",
+      "href": "/cookies"
+    }
+  ],
+  "copyright": "© Acme"
+}

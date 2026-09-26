@@ -1,0 +1,51 @@
+# Build-and-deploy workflow TEMPLATE for a client site repo.
+# create-client copies this to `.github/workflows/build-and-deploy.yml`.
+#
+# On build failure the previous deploy stays live (deploy step only runs on a
+# successful build). content-assist's status/ module polls this run.
+name: build-and-deploy
+
+on:
+  push:
+    branches: [main]
+  # content-assist triggers a publish/rollback deploy via workflow_dispatch.
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: "Why this deploy was triggered"
+        required: false
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: pnpm --if-present check # astro check / typecheck gate
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: dist
+
+  deploy:
+    needs: build # only deploys if build succeeded -> old version stays live on failure
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: dist
+      # TODO: deploy `dist/` to the target (Fly.io preview via flyctl, or static host).
+      # TODO: expose the resulting deploy URL as a job output for status/ to read.
+      - run: echo "TODO: deploy dist/ (see fly.toml in the template)"

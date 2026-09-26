@@ -1,0 +1,14 @@
+---
+import type { HeroProps } from "./schema";
+
+interface Props {
+  data: HeroProps;
+}
+const { data } = Astro.props;
+// TODO: implement the Hero block markup + styles.
+// Variants: split, centered, full-bleed, video
+---
+
+<section data-block="hero" data-variant={data.variant}>
+  {/* TODO: render Hero using `data`. */}
+</section>

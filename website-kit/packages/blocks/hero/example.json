@@ -1,0 +1,10 @@
+{
+  "variant": "split",
+  "heading": "Your business, done properly",
+  "subheading": "TODO value prop",
+  "cta": {
+    "label": "Get in touch",
+    "href": "/contact"
+  },
+  "media": "/hero.jpg"
+}

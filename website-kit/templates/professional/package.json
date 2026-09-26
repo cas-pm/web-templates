@@ -1,0 +1,25 @@
+{
+  "name": "@web/template-professional",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@web/blocks": "workspace:*",
+    "@web/ui": "workspace:*",
+    "@web/seo": "workspace:*",
+    "@web/tokens": "workspace:*",
+    "@web/motion": "workspace:*",
+    "@web/analytics": "workspace:*",
+    "astro": "^4.16.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4"
+  }
+}

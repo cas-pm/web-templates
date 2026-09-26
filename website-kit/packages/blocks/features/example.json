@@ -1,0 +1,11 @@
+{
+  "variant": "grid",
+  "heading": "Why us",
+  "items": [
+    {
+      "title": "Fast",
+      "description": "TODO",
+      "icon": "bolt"
+    }
+  ]
+}

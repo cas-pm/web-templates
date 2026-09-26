@@ -1,0 +1,14 @@
+---
+import type { LogosProps } from "./schema";
+
+interface Props {
+  data: LogosProps;
+}
+const { data } = Astro.props;
+// TODO: implement the Logos block markup + styles.
+// Variants: scroll-snap, marquee
+---
+
+<section data-block="logos" data-variant={data.variant}>
+  {/* TODO: render Logos using `data`. */}
+</section>

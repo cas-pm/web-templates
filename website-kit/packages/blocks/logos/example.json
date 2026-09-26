@@ -1,0 +1,10 @@
+{
+  "variant": "marquee",
+  "items": [
+    {
+      "name": "Client",
+      "src": "/logos/client.svg",
+      "href": "https://client.example"
+    }
+  ]
+}

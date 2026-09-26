@@ -1,0 +1,57 @@
+---
+// content-portal — minimal editing UI skeleton.
+// Screens (progressive workflow): field picker -> instruction -> diff+preview
+// -> publish; plus a history panel with rollback.
+// All data comes from content-assist (see src/lib/api.ts). No implementation
+// wired yet — this is layout + typed client only.
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Content Assist</title>
+  </head>
+  <body>
+    <h1>Content Assist</h1>
+
+    <!-- Screen 1: field picker -->
+    <section id="field-picker">
+      <h2>1. Pick a field</h2>
+      {/* TODO: GET fields for the selected page/language; render as a list. */}
+      <select name="field" disabled><option>TODO: load fields</option></select>
+    </section>
+
+    <!-- Screen 2: instruction input -->
+    <section id="instruction">
+      <h2>2. Describe the change</h2>
+      <textarea name="instruction" placeholder="e.g. make this punchier"></textarea>
+      <button type="button" disabled>Propose</button>
+    </section>
+
+    <!-- Screen 3: diff + preview -->
+    <section id="diff-preview">
+      <h2>3. Review</h2>
+      {/* TODO: show old vs new (diff) and the rendered block preview. */}
+      <div class="diff"><pre data-old></pre><pre data-new></pre></div>
+      <div class="preview" data-preview></div>
+    </section>
+
+    <!-- Screen 4: publish -->
+    <section id="publish">
+      <h2>4. Publish</h2>
+      {/* TODO: send with an idempotency key; requires the publish token. */}
+      <button type="button" disabled>Publish</button>
+    </section>
+
+    <!-- Screen 5: history with rollback -->
+    <section id="history">
+      <h2>History</h2>
+      {/* TODO: GET history; each row shows time/author/field/status + Rollback. */}
+      <table>
+        <thead><tr><th>Time</th><th>Author</th><th>Field</th><th>Status</th><th></th></tr></thead>
+        <tbody><!-- TODO: rows with a Rollback button each --></tbody>
+      </table>
+    </section>
+  </body>
+</html>

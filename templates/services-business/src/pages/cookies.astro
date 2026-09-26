@@ -1,0 +1,22 @@
+---
+import Base from "../layouts/Base.astro";
+import { getPage } from "../lib/content.ts";
+
+const page = getPage("cookies");
+const legal = page.blocks.find((b) => b.type === "legal");
+---
+
+<Base title={page.title}>
+  {legal && legal.type === "legal" && (
+    <article>
+      {legal.needsLegalReview && (
+        <p data-legal-review-required>
+          ⚠️ Draft — requires client legal review before publishing.
+        </p>
+      )}
+      <h1>{legal.heading}</h1>
+      {/* TODO: render rich-text body with the shared sanitizing renderer. */}
+      <div>{legal.body}</div>
+    </article>
+  )}
+</Base>

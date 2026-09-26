@@ -1,0 +1,20 @@
+{
+  "name": "@web/content-assist",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "scripts": {
+    "dev": "node --experimental-strip-types --watch src/index.ts",
+    "start": "node --experimental-strip-types src/index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.65.0",
+    "@hono/node-server": "^1.13.7",
+    "@octokit/rest": "^21.0.2",
+    "@web/blocks": "workspace:*",
+    "hono": "^4.6.11",
+    "zod": "^3.23.8"
+  }
+}

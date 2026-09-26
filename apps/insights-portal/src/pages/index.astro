@@ -1,0 +1,37 @@
+---
+import { loadPortalConfig } from "../lib/config.ts";
+
+const config = loadPortalConfig();
+
+// TODO (dashboard mode): server-side fetchReport(config.apiBaseUrl, "28d")
+// forwarding the request's auth, then render aggregates only.
+const reportLinks = [
+  { label: "Last 7 days", period: "7d" },
+  { label: "Last 28 days", period: "28d" },
+  { label: "Last 90 days", period: "90d" },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Insights</title>
+  </head>
+  <body>
+    <h1>Insights</h1>
+
+    {config.mode === "links" ? (
+      <ul>
+        {reportLinks.map((r) => (
+          <li><a href={`/report/${r.period}`}>{r.label}</a></li>
+        ))}
+      </ul>
+    ) : (
+      <section data-dashboard>
+        {/* TODO: render visitors / channels / top pages / conversions. */}
+        <p>Dashboard mode — aggregates only, never visitor identities.</p>
+      </section>
+    )}
+  </body>
+</html>

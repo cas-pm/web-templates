@@ -1,0 +1,43 @@
+{
+  "pages": [
+    {
+      "slug": "home",
+      "title": "Home",
+      "language": "en",
+      "blocks": [
+        {
+          "type": "hero",
+          "heading": "Your business, done properly",
+          "subheading": "TODO: client value proposition.",
+          "cta": { "label": "Get in touch", "href": "/contact" }
+        }
+      ]
+    },
+    {
+      "slug": "privacy",
+      "title": "Privacy Policy",
+      "language": "en",
+      "blocks": [
+        {
+          "type": "legal",
+          "heading": "Privacy Policy",
+          "needsLegalReview": true,
+          "body": "TODO: PLACEHOLDER PRIVACY POLICY — REQUIRES CLIENT LEGAL REVIEW BEFORE PUBLISHING. This template text is not legal advice. Describe what personal data is collected, why, the lawful basis, retention, third parties/processors (e.g. analytics), data subject rights, and contact details for the data controller."
+        }
+      ]
+    },
+    {
+      "slug": "cookies",
+      "title": "Cookie Policy",
+      "language": "en",
+      "blocks": [
+        {
+          "type": "legal",
+          "heading": "Cookie Policy",
+          "needsLegalReview": true,
+          "body": "TODO: PLACEHOLDER COOKIE POLICY — REQUIRES CLIENT LEGAL REVIEW BEFORE PUBLISHING. This template text is not legal advice. List cookie categories (strictly necessary, analytics, marketing), their purpose and duration, how consent is obtained/withdrawn, and links to any third-party cookie policies."
+        }
+      ]
+    }
+  ]
+}

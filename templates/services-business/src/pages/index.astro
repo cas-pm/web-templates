@@ -1,0 +1,20 @@
+---
+import Base from "../layouts/Base.astro";
+import { getPage } from "../lib/content.ts";
+
+const page = getPage("home");
+const hero = page.blocks.find((b) => b.type === "hero");
+---
+
+<Base title={page.title}>
+  {hero && hero.type === "hero" && (
+    <section>
+      <h1>{hero.heading}</h1>
+      <p>{hero.subheading}</p>
+      {hero.cta && <a href={hero.cta.href}>{hero.cta.label}</a>}
+    </section>
+  )}
+  <footer>
+    <a href="/privacy">Privacy</a> · <a href="/cookies">Cookies</a>
+  </footer>
+</Base>

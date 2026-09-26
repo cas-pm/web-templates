@@ -13,10 +13,14 @@
     "./*": "./*"
   },
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:examples": "tsx scripts/check-examples.ts"
   },
   "dependencies": {
     "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2"
   },
   "peerDependencies": {
     "astro": "^4.16.0"

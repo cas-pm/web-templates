@@ -167,7 +167,7 @@ settings live in the home block in `content/pages.json` and its navigation in
 }
 ```
 
-- `height`: 50–120 viewport units; 100 fills the initial screen beneath the header.
+- `height`: 50–120 viewport units; 100 makes the media a full viewport tall; the navigation remains above it.
   Content and mobile minimum heights take priority so text never gets clipped.
 - `overlay`: 0–0.9, the dark shade that keeps text readable over your media.
 - `align`: `left` or `center`.

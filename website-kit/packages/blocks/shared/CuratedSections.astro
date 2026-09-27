@@ -27,7 +27,7 @@ for (const section of sections) {
   ids.add(section.id);
 }
 ---
-{sections.map(section => <div class="curated-section" data-section-name={section.label}>
+{sections.map(section => <div class:list={["curated-section", { "curated-section--hero": section.type === "hero" && ["full-bleed", "video"].includes(section.data.variant) }]} data-section-name={section.label}>
   {section.type === 'hero' && <Hero id={section.id} data={HeroPropsSchema.parse(section.data)} />}
   {section.type === 'services' && <Services id={section.id} data={ServicesPropsSchema.parse(section.data)} />}
   {section.type === 'features' && <Features id={section.id} data={FeaturesPropsSchema.parse(section.data)} />}

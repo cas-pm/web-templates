@@ -97,7 +97,7 @@
 .mk-stats dt { color: var(--mk-muted); }
 .mk-footer { padding-block: 3rem; border-top: 1px solid var(--mk-line); display: flex; justify-content: space-between; gap: 3rem; flex-wrap: wrap; }
 .mk-footer p { color: var(--mk-muted); font-size: .9rem; max-width: 38ch; }
-.mk-footer nav { display: flex; gap: 1.5rem; font-size: .9rem; }
+.mk-footer nav { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: .9rem; }
 @keyframes mk-open { from { opacity: 0; transform: translateY(-7px); } to { opacity: 1; transform: translateY(0); } }
 @media (max-width: 760px) {
   .mk-nav { min-height: 90px; gap: 1rem; flex-wrap: wrap; padding-block: 1.2rem; }
@@ -154,6 +154,7 @@
 .mk-site .mk-shell { width: min(calc(var(--mk-content-width) + 2 * var(--mk-gutter)), 100%); padding-inline: var(--mk-gutter); }
 .mk-page { width: 100%; }
 .mk-page > :not(.mk-hero) { width: min(var(--mk-content-width), calc(100% - 2 * var(--mk-gutter))); margin-inline: auto; }
+.mk-page > .curated-section--hero { width: 100%; }
 .mk-page > .mk-hero:not(.mk-hero--immersive) { width: min(var(--mk-content-width), calc(100% - 2 * var(--mk-gutter))); margin-inline: auto; }
 .mk-site [id] { scroll-margin-top: calc(var(--mk-nav-height) + 20px); }
 .mk-hero:not(.mk-hero--immersive) .mk-hero-copy { order: 0; }
@@ -161,7 +162,7 @@
 .mk-hero-actions { display: flex; gap: 1.8rem; align-items: center; flex-wrap: wrap; }
 .mk-hero-secondary { text-decoration: underline; text-underline-offset: 6px; font-size: .95rem; }
 .mk-hero-eyebrow { display: block; margin-bottom: 2rem; font-size: .95rem; }
-.mk-hero--immersive { position: relative; isolation: isolate; width: 100%; min-height: max(560px, calc(var(--mk-hero-height) - var(--mk-nav-height))); display: flex; align-items: center; padding: clamp(5rem, 9vh, 9rem) var(--mk-gutter) 8rem; background: #17212c; color: #fff; overflow: clip; }
+.mk-hero--immersive { position: relative; isolation: isolate; width: 100%; min-height: max(560px, var(--mk-hero-height)); display: flex; align-items: center; padding: clamp(5rem, 9vh, 9rem) var(--mk-gutter) 8rem; background: #17212c; color: #fff; overflow: clip; }
 .mk-hero--immersive .mk-hero-media { position: absolute; inset: 0; z-index: -2; border-radius: 0; background: #17212c; }
 .mk-hero--immersive .mk-hero-media img,.mk-hero--immersive .mk-hero-media video { width: 100%; height: 100%; object-fit: cover; object-position: var(--mk-hero-position); }
 .mk-hero--immersive::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(90deg, rgb(0 0 0 / var(--mk-hero-overlay)), rgb(0 0 0 / calc(var(--mk-hero-overlay) * .45))), linear-gradient(0deg, rgb(0 0 0 / .3), transparent 35%); }
@@ -204,7 +205,7 @@
   .mk-menu-icon::after { content: ''; position: absolute; top: 5px; width: 22px; height: 1.5px; left: 0; background: currentColor; }
   [aria-expanded="true"] .mk-menu-icon { transform: rotate(45deg); border-bottom: 0; height: 1px; }
   [aria-expanded="true"] .mk-menu-icon::after { top: -1.5px; transform: rotate(90deg); }
-  .mk-hero--immersive { min-height: max(620px, calc(var(--mk-hero-height) - var(--mk-nav-height))); padding-block: 5rem 7rem; }
+  .mk-hero--immersive { min-height: max(620px, var(--mk-hero-height)); padding-block: 5rem 7rem; }
   .mk-hero--immersive h1 { font-size: clamp(2.8rem, 9vw, 5rem); max-width: 13ch; }
   .mk-hero--immersive::after { background: rgb(0 0 0 / var(--mk-hero-overlay)); }
   .mk-hero-scroll,.mk-video-toggle { bottom: 1.8rem; }

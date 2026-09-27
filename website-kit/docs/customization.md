@@ -213,3 +213,17 @@ The block-library controls also adjust hero height, shading and crop position.
 Downloaded CSS includes those hero settings as explicit overrides of JSON values.
 Both professional and hospitality use sample remote hero photographs; replace
 them with local client assets for a self-contained site.
+
+## Named gallery variants
+
+Gallery styles now have stable names and IDs: **Gallery · Horizontal story**
+(`horizontal`) and **Gallery · Vertical showcase** (`vertical-showcase`). Each
+template's `/blocks/` library lists them separately. Change `data.variant` to choose
+the gallery, retaining `type: "gallery"` and a unique section `id`.
+
+See [the gallery guide](../packages/blocks/gallery/README.md) for copyable JSON,
+image titles, animation timing, sizing, autoplay and adding new named variants.
+
+### Twelve additional named blocks
+
+The library now includes Cinematic reveal, Expanding panels, Pinned chapters, Hover preview, Before / after, Stacked photographs, Editorial mosaic, Typographic menu, Image and statement, Specification sheet, Portrait feature, and Final invitation. See [the block collection guide](../packages/blocks/collection/README.md) and its copyable `examples.json` for settings and use in a client template.

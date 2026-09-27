@@ -3,13 +3,14 @@ import DesignSystem from './DesignSystem.astro';
 import Header from '../header/Header.astro';
 import { HeaderPropsSchema } from '../header/schema';
 interface Props {
+  catalogMode?: boolean;
   title: string; description: string; name: string; tagline: string; email: string;
   links: { label: string; href: string }[];
   navigation?: { sticky?: boolean; menuLabel?: string; closeLabel?: string; logoImage?: string };
   navCta?: { label: string; href: string };
   theme?: 'professional' | 'hospitality' | 'adventure';
 }
-const { navigation = {}, title, description, name, tagline, email, links, theme = 'professional', navCta = { label: 'Contact', href: '#contact' } } = Astro.props;
+const { catalogMode = false, navigation = {}, title, description, name, tagline, email, links, theme = 'professional', navCta = { label: 'Contact', href: '#contact' } } = Astro.props;
 const header = HeaderPropsSchema.parse({ ...navigation, logoText: name, links, cta: navCta });
 ---
 <!doctype html>
@@ -17,11 +18,11 @@ const header = HeaderPropsSchema.parse({ ...navigation, logoText: name, links, c
   <head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="description" content={description} /><title>{title}</title><DesignSystem /></head>
   <body class="mk-site" data-theme={theme}>
     <a class="mk-skip" href="#main">Skip to content</a>
-    <Header data={header} />
+    {!catalogMode && <Header data={header} />}
     <main id="main" class="mk-page"><slot /></main>
-    <div class="mk-shell">
+    {!catalogMode && <div class="mk-shell">
       <footer class="mk-footer"><div><a class="mk-brand" href="/">{name}</a><p>{tagline}</p></div><div><a href={`mailto:${email}`}>{email}</a><p>© {new Date().getFullYear()} {name}</p></div><nav aria-label="Footer">{links.map(link => <a href={link.href}>{link.label}</a>)}</nav></footer>
-    </div>
+    </div>}
   </body>
 </html>
 <style is:global>

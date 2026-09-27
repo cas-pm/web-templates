@@ -1,0 +1,19 @@
+---
+import type { VariantData } from './schema';
+interface Props {id:string;data:VariantData<'stacked-photographs'>}
+const {id,data}=Astro.props;
+---
+<section id={id} class="cb cb-section" data-stack style={`--cb-duration:${data.durationMs}ms`}>
+  <header class="cb-heading"><h2>{data.heading}</h2><p>{data.intro}</p></header>
+  <div class="cb-stack">{data.images.map((photo,i)=><figure style={`--cb-order:${i}`} data-stack-card><img src={photo.src} alt={photo.alt} loading="lazy" style={`object-position:${photo.position}`} /><figcaption><strong>{photo.title}</strong><span>{photo.caption}</span>{photo.href&&<a href={photo.href}>Explore ↗</a>}</figcaption></figure>)}</div>
+  <div class="cb-stack-controls" hidden><button class="cb-button" type="button" data-stack-prev aria-label="Previous photograph">←</button><span role="status" aria-live="polite" aria-atomic="true">1 / {data.images.length}</span><button class="cb-button" type="button" data-stack-next aria-label="Next photograph">→</button></div>
+</section>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-stack]').forEach(root=>{
+    const cards=[...root.querySelectorAll<HTMLElement>('[data-stack-card]')];const status=root.querySelector('[role=status]')!;const next=root.querySelector<HTMLButtonElement>('[data-stack-next]')!;const prev=root.querySelector<HTMLButtonElement>('[data-stack-prev]')!;let active=0;let busy=false;
+    const paint=()=>cards.forEach((card,i)=>{const order=(i-active+cards.length)%cards.length;card.style.setProperty('--cb-order',String(order));card.dataset.depth=String(Math.min(order,3));card.style.zIndex=String(cards.length-order);card.inert=order!==0;card.setAttribute('aria-hidden',String(order!==0));});
+    const step=(direction:number)=>{if(busy)return;busy=true;next.disabled=prev.disabled=true;const outgoing=cards[active];const animation=matchMedia('(prefers-reduced-motion: reduce)').matches?null:outgoing.animate([{transform:'translateX(0) rotate(0)',opacity:1},{transform:`translateX(${direction*35}%) rotate(${direction*12}deg)`,opacity:0}],{duration:parseFloat(getComputedStyle(root).getPropertyValue('--cb-duration'))||700,easing:'cubic-bezier(.2,.7,.2,1)',fill:'forwards'});
+      const finish=()=>{active=(active+direction+cards.length)%cards.length;paint();animation?.cancel();status.textContent=`${active+1} / ${cards.length} — ${cards[active].querySelector('strong')!.textContent}`;busy=false;next.disabled=prev.disabled=false;};if(animation)void animation.finished.then(finish,finish);else finish();};
+    next.addEventListener('click',()=>step(1));prev.addEventListener('click',()=>step(-1));root.querySelector<HTMLElement>('.cb-stack-controls')!.hidden=false;root.dataset.enhanced='true';paint();
+  });
+</script>

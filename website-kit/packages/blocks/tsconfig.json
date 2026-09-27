@@ -4,5 +4,5 @@
     "outDir": "dist",
     "noEmit": true
   },
-  "include": ["src/**/*.ts", "*/schema.ts", "scripts/**/*.ts"]
+  "include": ["src/**/*.ts", "*/schema.ts", "scripts/**/*.ts", "collection/**/*.ts"]
 }

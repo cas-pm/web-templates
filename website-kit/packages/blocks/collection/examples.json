@@ -1,0 +1,379 @@
+[
+  {
+    "id": "hero-cinematic-reveal",
+    "type": "hero",
+    "label": "Hero · Cinematic reveal",
+    "data": {
+      "heading": "A different pace.\nA place of your own.",
+      "intro": "Considered spaces for the way you want to live.",
+      "durationMs": 1400,
+      "variant": "cinematic-reveal",
+      "image": {
+        "src": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=85",
+        "alt": "Sunlight entering a studio through tall windows",
+        "position": "50% 50%"
+      },
+      "cta": {
+        "label": "Explore our spaces",
+        "href": "/work"
+      },
+      "overlay": 0.35
+    }
+  },
+  {
+    "id": "gallery-expanding-panels",
+    "type": "gallery",
+    "label": "Gallery · Expanding panels",
+    "data": {
+      "heading": "Find your kind of somewhere.",
+      "intro": "Three places, each with a character of its own. Select a photograph to explore.",
+      "durationMs": 700,
+      "variant": "expanding-panels",
+      "images": [
+        {
+          "src": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=85",
+          "alt": "Sunlight entering a studio through tall windows",
+          "position": "50% 50%",
+          "title": "Light, from morning onwards",
+          "caption": "The studio / Amsterdam",
+          "href": "/work"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=85",
+          "alt": "An open workspace with tables and places to gather",
+          "position": "50% 50%",
+          "title": "A place to stay a little longer",
+          "caption": "The gathering room / Rotterdam",
+          "href": "/work"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=1600&q=85",
+          "alt": "A timber cabin framed by trees",
+          "position": "50% 50%",
+          "title": "Away from the everyday",
+          "caption": "The woodland retreat / Veluwe",
+          "href": "/work"
+        }
+      ],
+      "height": 620
+    }
+  },
+  {
+    "id": "story-pinned-chapters",
+    "type": "story",
+    "label": "Story · Pinned chapters",
+    "data": {
+      "heading": "From first thought to a place that feels right.",
+      "intro": "Our process",
+      "variant": "pinned-chapters",
+      "chapters": [
+        {
+          "title": "Listen to the everyday.",
+          "body": "How you arrive. Where the light falls. Who gathers around the table. We begin with the small things that make a place yours.",
+          "image": {
+            "src": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=85",
+            "alt": "Sunlight entering a studio through tall windows",
+            "position": "50% 50%"
+          }
+        },
+        {
+          "title": "Make room for possibility.",
+          "body": "Plans become conversations, samples become palettes, and the spaces between things become as considered as the things themselves.",
+          "image": {
+            "src": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=85",
+            "alt": "An open workspace with tables and places to gather",
+            "position": "50% 50%"
+          }
+        },
+        {
+          "title": "Leave space for living.",
+          "body": "Natural materials, useful details, and a quieter rhythm. A finished space is only the beginning of its story.",
+          "image": {
+            "src": "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=1600&q=85",
+            "alt": "A timber cabin framed by trees",
+            "position": "50% 50%"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "projects-hover-preview",
+    "type": "projects",
+    "label": "Projects · Hover preview",
+    "data": {
+      "heading": "Selected places.",
+      "intro": "A few recent explorations in space, light, and belonging.",
+      "variant": "hover-preview",
+      "projects": [
+        {
+          "src": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=85",
+          "alt": "Sunlight entering a studio through tall windows",
+          "position": "50% 50%",
+          "title": "Light, from morning onwards",
+          "caption": "The studio / Amsterdam",
+          "href": "/work",
+          "category": "Workplace",
+          "year": "2026"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=85",
+          "alt": "An open workspace with tables and places to gather",
+          "position": "50% 50%",
+          "title": "A place to stay a little longer",
+          "caption": "The gathering room / Rotterdam",
+          "href": "/work",
+          "category": "Hospitality",
+          "year": "2026"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=1600&q=85",
+          "alt": "A timber cabin framed by trees",
+          "position": "50% 50%",
+          "title": "Away from the everyday",
+          "caption": "The woodland retreat / Veluwe",
+          "href": "/work",
+          "category": "Residential",
+          "year": "2026"
+        }
+      ]
+    }
+  },
+  {
+    "id": "comparison-before-after",
+    "type": "comparison",
+    "label": "Comparison · Before / after",
+    "data": {
+      "heading": "The same space. A different feeling.",
+      "intro": "Move the divider to compare monochrome and color treatments of the same photograph.",
+      "variant": "before-after",
+      "before": {
+        "src": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=85&sat=-100",
+        "alt": "Studio photograph with a monochrome treatment",
+        "position": "50% 50%"
+      },
+      "after": {
+        "src": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=85",
+        "alt": "Sunlight entering a studio through tall windows",
+        "position": "50% 50%"
+      },
+      "beforeLabel": "Monochrome",
+      "afterLabel": "Color",
+      "initial": 50
+    }
+  },
+  {
+    "id": "gallery-stacked-photographs",
+    "type": "gallery",
+    "label": "Gallery · Stacked photographs",
+    "data": {
+      "heading": "Notes from a slower afternoon.",
+      "intro": "A small collection of spaces worth remembering.",
+      "durationMs": 700,
+      "variant": "stacked-photographs",
+      "images": [
+        {
+          "src": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=85",
+          "alt": "Sunlight entering a studio through tall windows",
+          "position": "50% 50%",
+          "title": "Light, from morning onwards",
+          "caption": "The studio / Amsterdam",
+          "href": "/work"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=85",
+          "alt": "An open workspace with tables and places to gather",
+          "position": "50% 50%",
+          "title": "A place to stay a little longer",
+          "caption": "The gathering room / Rotterdam",
+          "href": "/work"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=1600&q=85",
+          "alt": "A timber cabin framed by trees",
+          "position": "50% 50%",
+          "title": "Away from the everyday",
+          "caption": "The woodland retreat / Veluwe",
+          "href": "/work"
+        }
+      ]
+    }
+  },
+  {
+    "id": "gallery-editorial-mosaic",
+    "type": "gallery",
+    "label": "Gallery · Editorial mosaic",
+    "data": {
+      "heading": "Spaces, in good company.",
+      "intro": "A window, a gathering place, a quiet escape. Details from our recent work.",
+      "variant": "editorial-mosaic",
+      "images": [
+        {
+          "src": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=85",
+          "alt": "Sunlight entering a studio through tall windows",
+          "position": "50% 50%",
+          "title": "Light, from morning onwards",
+          "caption": "The studio / Amsterdam",
+          "href": "/work"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=85",
+          "alt": "An open workspace with tables and places to gather",
+          "position": "50% 50%",
+          "title": "A place to stay a little longer",
+          "caption": "The gathering room / Rotterdam",
+          "href": "/work"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=1600&q=85",
+          "alt": "A timber cabin framed by trees",
+          "position": "50% 50%",
+          "title": "Away from the everyday",
+          "caption": "The woodland retreat / Veluwe",
+          "href": "/work"
+        }
+      ]
+    }
+  },
+  {
+    "id": "services-typographic-menu",
+    "type": "services",
+    "label": "Services · Typographic menu",
+    "data": {
+      "heading": "What we can shape together.",
+      "intro": "From a single room to a complete change of direction.",
+      "variant": "typographic-menu",
+      "items": [
+        {
+          "title": "Spatial direction",
+          "description": "A clear concept, material palette, and plan for how your space can work.",
+          "price": "From €1,800",
+          "link": {
+            "label": "Discuss a concept",
+            "href": "/contact"
+          }
+        },
+        {
+          "title": "Interior design",
+          "description": "Detailed spaces, thoughtfully specified and ready to become real.",
+          "price": "Quoted per project",
+          "link": {
+            "label": "Plan your interior",
+            "href": "/contact"
+          }
+        },
+        {
+          "title": "Finishing touches",
+          "description": "Furniture, lighting, and the objects that make it feel like yours.",
+          "link": {
+            "label": "Find the details",
+            "href": "/contact"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "story-image-statement",
+    "type": "story",
+    "label": "Story · Image and statement",
+    "data": {
+      "heading": "The best spaces leave room for you.",
+      "intro": "Our point of view",
+      "variant": "image-statement",
+      "image": {
+        "src": "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=1600&q=85",
+        "alt": "A timber cabin framed by trees",
+        "position": "50% 50%"
+      },
+      "body": "We work with light, natural materials, and the way people actually live. The result should feel personal from the first day, and grow more familiar with time.",
+      "link": {
+        "label": "Meet the studio",
+        "href": "/about"
+      }
+    }
+  },
+  {
+    "id": "details-specification-sheet",
+    "type": "details",
+    "label": "Details · Specification sheet",
+    "data": {
+      "heading": "The gathering room.",
+      "intro": "An open, light-filled setting for a working day or an evening together.",
+      "variant": "specification-sheet",
+      "image": {
+        "src": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=85",
+        "alt": "An open workspace with tables and places to gather",
+        "position": "50% 50%"
+      },
+      "details": [
+        {
+          "label": "Floor area",
+          "value": "145 m²"
+        },
+        {
+          "label": "Capacity",
+          "value": "Up to 24 guests"
+        },
+        {
+          "label": "Materials",
+          "value": "Oak, linen, brushed steel"
+        },
+        {
+          "label": "Included",
+          "value": "Meeting table, lounge, kitchenette"
+        },
+        {
+          "label": "Location",
+          "value": "Rotterdam, Netherlands"
+        }
+      ],
+      "link": {
+        "label": "Ask about this space",
+        "href": "/contact"
+      }
+    }
+  },
+  {
+    "id": "testimonials-portrait-feature",
+    "type": "testimonials",
+    "label": "Testimonial · Portrait feature",
+    "data": {
+      "variant": "portrait-feature",
+      "quote": "They understood how we wanted to feel in the space before we knew how to put it into words.",
+      "portrait": {
+        "src": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=800&q=85",
+        "alt": "Portrait accompanying the sample client testimonial",
+        "position": "50% 50%"
+      },
+      "name": "Alex Morgan",
+      "role": "Sample client / Residential project",
+      "heading": "In their words"
+    }
+  },
+  {
+    "id": "contact-final-invitation",
+    "type": "contact",
+    "label": "Contact · Final invitation",
+    "data": {
+      "heading": "Tell us what\nyou have in mind.",
+      "intro": "A new space, a different direction, or an idea that needs a little room.",
+      "variant": "final-invitation",
+      "cta": {
+        "label": "Start a conversation",
+        "href": "mailto:hello@example.com"
+      },
+      "details": [
+        {
+          "label": "hello@example.com",
+          "href": "mailto:hello@example.com"
+        },
+        {
+          "label": "+31 20 555 0100",
+          "href": "tel:+31205550100"
+        }
+      ],
+      "note": "Based in Amsterdam. Working wherever the story takes us."
+    }
+  }
+]

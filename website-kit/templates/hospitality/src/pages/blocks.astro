@@ -4,6 +4,6 @@ import BlockCatalog from '@web/blocks/shared/BlockCatalog.astro';
 import content from '../../content/home.json';
 import pages from '../../content/pages.json';
 type Section = (typeof pages.pages)[number]['sections'][number];
-const sections = pages.pages.flatMap<Section>(page => page.sections).filter((section,index,all) => all.findIndex(other => other.type === section.type) === index).map((section,index) => ({...section,id:`preview-${index}-${section.id}`}));
+const sections = pages.pages.flatMap<Section>(page => page.sections).filter((section,index,all) => all.findIndex(other => other.type === section.type && (other.data.variant ?? "default") === (section.data.variant ?? "default")) === index).map((section,index) => ({...section,id:`preview-${index}-${section.id}`}));
 ---
 <TemplateLayout title={`Section library · ${content.name}`} {...content} links={[{label:'Home',href:'/'}]} theme="hospitality"><BlockCatalog sections={sections} template={content.name} /></TemplateLayout>

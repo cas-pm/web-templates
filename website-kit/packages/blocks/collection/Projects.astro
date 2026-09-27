@@ -1,0 +1,20 @@
+---
+import type { VariantData } from './schema';
+interface Props {id:string;data:VariantData<'hover-preview'>}
+const {id,data}=Astro.props;
+---
+<section id={id} class="cb cb-section" data-projects>
+  <header class="cb-heading"><h2>{data.heading}</h2><p>{data.intro}</p></header>
+  <div class="cb-projects"><div class="cb-project-list">{data.projects.map((project,i)=><article class="cb-project" data-active={i===0?'true':'false'}>
+    <button type="button" aria-pressed={i===0} aria-controls={`${id}-preview`}><span>{project.title}</span><small>{project.category} {project.year}</small></button>
+    {project.href&&<a href={project.href} aria-label={`View ${project.title}`}>View project ↗</a>}
+    <img class="cb-project-fallback" src={project.src} alt={project.alt} loading="lazy" />
+  </article>)}</div><div class="cb-project-preview" id={`${id}-preview`}>{data.projects.map((project,i)=><figure hidden={i!==0}><img src={project.src} alt={project.alt} loading="lazy" style={`object-position:${project.position}`} /><figcaption>{project.caption}</figcaption></figure>)}</div></div>
+</section>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-projects]').forEach(root=>{
+    const rows=[...root.querySelectorAll<HTMLElement>('.cb-project')];const previews=[...root.querySelectorAll<HTMLElement>('.cb-project-preview figure')];
+    const select=(index:number)=>{rows.forEach((row,i)=>{row.dataset.active=String(i===index);row.querySelector('button')!.setAttribute('aria-pressed',String(i===index));previews[i].hidden=i!==index;});};
+    rows.forEach((row,i)=>{row.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')select(i);});row.addEventListener('focusin',()=>select(i));row.querySelector('button')!.addEventListener('click',()=>select(i));});root.dataset.enhanced='true';
+  });
+</script>

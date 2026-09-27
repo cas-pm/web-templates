@@ -1,0 +1,15 @@
+{
+  "variant": "vertical-showcase",
+  "heading": "Spaces with a point of view.",
+  "intro": "Scroll through the images, or use the arrows to explore.",
+  "autoplay": false,
+  "intervalMs": 4000,
+  "transitionMs": 700,
+  "height": 680,
+  "inactiveScale": 0.68,
+  "images": [
+    { "src": "/img/project-one.jpg", "alt": "Describe the first project image", "title": "The lakeside house" },
+    { "src": "/img/project-two.jpg", "alt": "Describe the second project image", "title": "A quieter place" },
+    { "src": "/img/project-three.jpg", "alt": "Describe the third project image", "title": "Room to gather" }
+  ]
+}

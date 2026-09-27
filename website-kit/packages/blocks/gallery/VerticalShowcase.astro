@@ -1,0 +1,132 @@
+---
+import type { GalleryProps } from './schema';
+interface Props { data: GalleryProps; id?: string }
+const { data, id } = Astro.props;
+const count = data.images.length;
+const slides = data.images.map((item, index) => ({ item, index, clone: false }));
+const renderSlides = count > 1 ? [{ ...slides[count - 1]!, clone: true }, ...slides, { ...slides[0]!, clone: true }] : slides;
+---
+<section id={id} class="mk-section vg" data-block="gallery" data-variant="vertical-showcase" data-autoplay={String(data.autoplay)} data-interval={data.intervalMs} data-duration={data.transitionMs} style={`--vg-height:${data.height}px;--vg-inactive:${data.inactiveScale}`}>
+  <div class="mk-section-heading mk-heading-row"><div><span class="mk-caption">{data.images.length} images</span><h2>{data.heading ?? 'A closer look'}</h2></div>{data.intro && <p>{data.intro}</p>}</div>
+  <div class="vg-stage" role="region" aria-label={data.heading ?? 'Vertical showcase'} aria-roledescription="carousel">
+    <div class="vg-track" tabindex="0" aria-label="Gallery images. Scroll vertically or use the arrow keys.">
+      {renderSlides.map(({ item, index, clone }) => <figure class="vg-slide" data-index={index} data-clone={String(clone)} aria-hidden={clone ? 'true' : undefined}>
+        <img class="vg-image" src={item.src} alt={clone ? '' : item.alt} width={item.width ?? 1200} height={item.height ?? 850} loading="lazy" draggable="false" />
+        <figcaption class="vg-title">{item.href && !clone ? <a href={item.href}>{item.title ?? item.alt}</a> : <span>{item.title ?? item.alt}</span>}</figcaption>
+      </figure>)}
+    </div>
+    <div class="vg-controls" hidden>
+      <span class="vg-position" aria-live="polite" aria-atomic="true">1 / {count}</span>
+      {count > 1 && <><button type="button" data-vg-prev aria-label="Previous image">↑</button><button type="button" data-vg-next aria-label="Next image">↓</button><button type="button" class="vg-play" data-vg-play>Play slideshow</button></>}
+    </div>
+  </div>
+</section>
+<script>
+  document.querySelectorAll<HTMLElement>('.vg').forEach(root => {
+    if (root.dataset.ready) return;
+    root.dataset.ready = 'true';
+    const track = root.querySelector<HTMLElement>('.vg-track')!;
+    const slides = [...track.querySelectorAll<HTMLElement>('.vg-slide')];
+    const originals = slides.filter(slide => slide.dataset.clone === 'false');
+    const count = originals.length;
+    const controls = root.querySelector<HTMLElement>('.vg-controls')!;
+    const position = controls.querySelector<HTMLElement>('.vg-position')!;
+    const playButton = controls.querySelector<HTMLButtonElement>('[data-vg-play]');
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    let active = count > 1 ? 1 : 0;
+    let selectedIndex = 0;
+    let playing = root.dataset.autoplay === 'true' && !reduced.matches;
+    let hovered = false, focused = false, visible = true;
+    let animation = 0, settleTimer: ReturnType<typeof setTimeout>, timer: ReturnType<typeof setInterval> | undefined;
+    const target = (index: number) => slides[index]!.offsetTop + slides[index]!.offsetHeight / 2 - track.clientHeight / 2;
+    const motionOff = () => reduced.matches || !!root.closest('[data-motion-disabled]');
+    const sync = () => {
+      const center = track.scrollTop + track.clientHeight / 2;
+      let nearest = Infinity;
+      slides.forEach((slide, index) => {
+        const distance = Math.abs(slide.offsetTop + slide.offsetHeight / 2 - center);
+        const focus = Math.max(0, 1 - distance / (slide.offsetHeight + 32));
+        slide.style.setProperty('--vg-focus', String(focus));
+        if (distance < nearest) { nearest = distance; active = index; }
+      });
+      const current = Number(slides[active]!.dataset.index);
+      originals.forEach(slide => {
+        const selected = Number(slide.dataset.index) === current;
+        slide.toggleAttribute('data-active', selected);
+        const link = slide.querySelector('a');
+        if (link) link.tabIndex = selected ? 0 : -1;
+      });
+    };
+    const announce = () => { selectedIndex = Number(slides[active]!.dataset.index); position.textContent = `${selectedIndex + 1} / ${count}`; };
+    const normalize = () => {
+      if (count < 2) return;
+      if (active === 0 && Math.abs(track.scrollTop - target(0)) < 3) track.scrollTop = target(count);
+      else if (active === slides.length - 1 && Math.abs(track.scrollTop - target(slides.length - 1)) < 3) track.scrollTop = target(1);
+      sync(); announce();
+    };
+    function cancelMotion() { cancelAnimationFrame(animation); animation = 0; track.style.scrollSnapType = ''; }
+    function go(delta: number) {
+      if(count < 2) return;
+      cancelMotion(); normalize();
+      const next = Math.max(0, Math.min(slides.length - 1, active + delta));
+      const from = track.scrollTop, to = target(next);
+      if(motionOff()) { track.scrollTop = to; sync(); normalize(); return; }
+      track.style.scrollSnapType = 'none';
+      const start = performance.now(), duration = Number(root.dataset.duration) || 700;
+      const frame = (now: number) => {
+        const t = Math.min(1, (now - start) / duration);
+        const ease = t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2;
+        track.scrollTop = from + (to - from)*ease;
+        sync();
+        if(t < 1 && !motionOff()) animation = requestAnimationFrame(frame);
+        else { track.scrollTop = to; cancelMotion(); sync(); normalize(); }
+      };
+      animation = requestAnimationFrame(frame);
+    }
+    const syncPlay = () => { if(playButton) { playButton.textContent = playing ? 'Pause slideshow' : 'Play slideshow'; playButton.setAttribute('aria-label', playButton.textContent); } };
+    controls.hidden = false; root.dataset.enhanced = 'true';
+    track.scrollTop = target(active); sync(); announce(); syncPlay();
+    track.addEventListener('scroll', () => {
+      sync(); clearTimeout(settleTimer);
+      settleTimer = setTimeout(() => { if(!animation) normalize(); }, 160);
+    }, {passive:true});
+    track.addEventListener('wheel', cancelMotion, {passive:true});
+    track.addEventListener('pointerdown', cancelMotion, {passive:true});
+    track.addEventListener('keydown', event => {
+      if(event.key === 'ArrowDown' || event.key === 'ArrowUp') { event.preventDefault(); go(event.key === 'ArrowDown' ? 1 : -1); }
+    });
+    controls.querySelector('[data-vg-prev]')?.addEventListener('click', () => go(-1));
+    controls.querySelector('[data-vg-next]')?.addEventListener('click', () => go(1));
+    playButton?.addEventListener('click', () => { playing = !playing; syncPlay(); });
+    root.addEventListener('pointerenter', event => { if(event.pointerType === 'mouse') hovered = true; });root.addEventListener('pointerleave', () => { hovered = false; });
+    const syncFocus = () => { focused = root.contains(document.activeElement) && document.activeElement !== playButton; };
+    root.addEventListener('focusin', syncFocus);root.addEventListener('focusout', () => { requestAnimationFrame(syncFocus); });
+    reduced.addEventListener('change', () => { if(reduced.matches) { playing = false; cancelMotion(); syncPlay(); } });
+    const observer = new IntersectionObserver(entries => { visible = entries.some(entry => entry.isIntersecting); }, {threshold:.2});observer.observe(root);
+    const resize = new ResizeObserver(() => { cancelMotion(); active = count > 1 ? selectedIndex + 1 : 0; track.scrollTop = target(active); sync(); announce(); });resize.observe(track);
+    if(count > 1) timer = setInterval(() => { if(playing && visible && !hovered && !focused && !document.hidden && !motionOff()) go(1); }, Number(root.dataset.interval) || 4000);
+    window.addEventListener('pagehide', () => { clearInterval(timer);clearTimeout(settleTimer);cancelMotion();observer.disconnect();resize.disconnect(); }, {once:true});
+  });
+</script>
+<style>
+  .vg { --vg-slide: min(52vw, 400px); }
+  .vg-stage { position: relative; background: var(--mk-paper); border-block: 1px solid var(--mk-line); }
+  .vg-track { position: relative; height: var(--vg-height); overflow-y: auto; overflow-x: hidden; scroll-snap-type: y mandatory; scrollbar-width: thin; padding-block: calc((var(--vg-height) - var(--vg-slide)) / 2); }
+  .vg-slide { position: relative; margin: 0 0 32px; height: var(--vg-slide); scroll-snap-align: center; }
+  .vg-slide:last-child { margin-bottom: 0; }
+  .vg-image { width: 54%; height: 100%; margin-left: 32%; object-fit: cover; border-radius: 0; transform: scale(calc(var(--vg-inactive) + (1 - var(--vg-inactive)) * var(--vg-focus, 1))); transform-origin: center; will-change: transform; }
+  .vg-title { position: absolute; left: 4%; top: 50%; width: 38%; transform: translateY(-50%); font-family: var(--mk-heading); font-size: clamp(1.5rem, 3.3vw, 3.6rem); line-height: 1.1; letter-spacing: -.04em; opacity: var(--vg-focus, 1); text-wrap: balance; pointer-events: none; }
+  .vg-title a { pointer-events: auto; text-decoration-thickness: 1px; text-underline-offset: 7px; }
+  .vg-controls { display: flex; justify-content: end; align-items: center; flex-wrap: wrap; gap: .7rem; padding: 1rem; border-top: 1px solid var(--mk-line); }
+  .vg-controls[hidden], .vg:not([data-enhanced]) [data-clone="true"] { display: none; }
+  .vg-position { margin-right: auto; font-size: .85rem; font-variant-numeric: tabular-nums; }
+  .vg-controls button { background: var(--mk-paper); color: var(--mk-ink); min-width: 44px; min-height: 44px; border: 1px solid var(--mk-line); border-radius: 50%; }
+  .vg-controls .vg-play { border-radius: 100px; padding: .5rem 1rem; font-size: .8rem; }
+  @media(max-width:760px) {
+    .vg { --vg-slide: 280px; }
+    .vg-track { height: min(var(--vg-height), 580px); padding-block: calc((min(var(--vg-height), 580px) - var(--vg-slide)) / 2); }
+    .vg-image { width: 76%; margin-left: 20%; height: 78%; }
+    .vg-title { top: auto; bottom: 0; left: 5%; width: 85%; transform: none; font-size: 1.65rem; padding-top: .75rem; }
+  }
+  @media(prefers-reduced-motion:reduce) { .vg-track { scroll-behavior: auto; } .vg-image { transform: none; will-change: auto; } }
+</style>

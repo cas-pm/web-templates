@@ -1,0 +1,15 @@
+---
+import { CollectionSchema } from './schema';
+import Cinematic from './Cinematic.astro';
+import Panels from './Panels.astro';
+import Chapters from './Chapters.astro';
+import Projects from './Projects.astro';
+import Comparison from './Comparison.astro';
+import Stack from './Stack.astro';
+import Static from './Static.astro';
+import './collection.css';
+interface Props {id:string;data:unknown}
+const {id}=Astro.props;
+const data=CollectionSchema.parse(Astro.props.data);
+---
+{data.variant==='cinematic-reveal'?<Cinematic id={id} data={data}/>:data.variant==='expanding-panels'?<Panels id={id} data={data}/>:data.variant==='pinned-chapters'?<Chapters id={id} data={data}/>:data.variant==='hover-preview'?<Projects id={id} data={data}/>:data.variant==='before-after'?<Comparison id={id} data={data}/>:data.variant==='stacked-photographs'?<Stack id={id} data={data}/>:<Static id={id} data={data}/>}

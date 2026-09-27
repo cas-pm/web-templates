@@ -11,3 +11,11 @@ The supplied pins are visual direction for spacious editorial layouts, image-led
 | https://pin.it/2ftkkKCYu | Photo art direction reference only |
 
 Use original or licensed final photography. In `content/pages.json`, update every `media`, `src`, `mediaAlt` and `alt` field. Check crop and contrast at mobile widths; do not use Pinterest image URLs in production.
+
+## Gallery · Vertical showcase
+
+https://www.pinterest.com/pin/5840674512510770/ was inspected as a public three-second
+video. It shows a vertical image carousel, an enlarged central image, smaller
+neighboring images and project titles that move with the images. The
+`vertical-showcase` gallery recreates that interaction with original browser code
+and starter assets. See `packages/blocks/gallery/README.md` for configuration.

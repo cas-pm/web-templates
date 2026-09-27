@@ -1,22 +1,101 @@
 ---
+import { createCollectionSections } from '../collection/library';
+import { isCollection } from '../collection/schema';
 import CuratedSections from './CuratedSections.astro';
+import { createGallerySections } from '../gallery/library';
+import { galleryVariants } from '../gallery/variants';
 interface Section { id: string; type: string; label: string; data: any }
 interface Props { sections: Section[]; template: string }
 const { sections, template } = Astro.props;
+// Catalogue variants independently instead of collapsing all galleries into one type.
+const galleries = createGallerySections();
+const existingSections = sections.map(section => {
+  if (section.type !== 'gallery' || isCollection(section.data)) return section;
+  const variant = galleryVariants.find(item => item.value === (section.data.variant ?? 'horizontal'));
+  return { ...section, id: `gallery-${variant?.value ?? section.id}`, label: variant ? `Gallery · ${variant.name}` : section.label };
+});
+const catalogSections = [...existingSections, ...galleries.filter(gallery => !sections.some(section => section.type === 'gallery' && (section.data.variant ?? 'horizontal') === gallery.data.variant)), ...createCollectionSections().filter(item => !sections.some(section => section.data.variant === item.data.variant))];
 ---
 <div class="catalog">
-  <aside class="catalog-sidebar" aria-label="Section library">
-    <div class="catalog-title"><span>SECTION LIBRARY</span><h1>{template}</h1><p>Select a section to inspect the rendered block and its editable name.</p></div>
-    <nav aria-label="Sections on this page">{sections.map((section, i) => <a href={`#${section.id}`}><span>{String(i+1).padStart(2,'0')}</span><span>{section.label}<small>{section.type}</small></span></a>)}</nav>
-    <a class="catalog-back" href="/">← Back to website</a>
+  <aside id="catalog-sidebar" class="catalog-sidebar" aria-label="Section library">
+    <div class="catalog-title"><a class="catalog-home" href="/">← Back to website</a><h1>{template}</h1><p>Select a block to inspect its layout and interactions.</p></div>
+    <nav aria-label="Sections on this page">{catalogSections.map(section => <a href={`#${section.id}`}><span>{section.label}<small>{section.type}</small></span></a>)}</nav>
   </aside>
-  <div class="catalog-main"><div class="catalog-intro"><span>LIVE COMPONENT PREVIEW</span><h2>Every section, clearly named.</h2><p>Copy a section entry from <code>content/pages.json</code> into any page's <code>sections</code> array. Give it a unique ID and edit its data.</p></div><CuratedSections sections={sections} /></div>
+  <div class="catalog-main">
+    <div class="catalog-toolbar">
+      <div><strong>Block previews</strong><span>Actual components, at the available screen width.</span></div>
+      <button type="button" class="catalog-menu-toggle" aria-expanded="true" aria-controls="catalog-sidebar" hidden>Hide menu · Full width</button>
+    </div>
+    <div class="catalog-previews">{catalogSections.map(section => <article class="catalog-preview" data-preview-id={section.id}>
+      <div class="catalog-preview-bar"><h2>{section.label}</h2><a href={`#${section.id}`} aria-label={`Link to ${section.label}`}>View block ↗</a></div>
+      <div class="catalog-preview-content"><CuratedSections sections={[section]} /></div>
+    </article>)}</div>
+  </div>
 </div>
+<script>
+  document.querySelectorAll<HTMLElement>('.catalog').forEach(catalog => {
+    const button = catalog.querySelector<HTMLButtonElement>('.catalog-menu-toggle')!;
+    const sidebar = catalog.querySelector<HTMLElement>('.catalog-sidebar')!;
+    button.hidden = false;
+    button.addEventListener('click', () => {
+      const hide = button.getAttribute('aria-expanded') === 'true';
+      const anchor = [...catalog.querySelectorAll<HTMLElement>('.catalog-preview')].find(el => el.getBoundingClientRect().bottom > 90);
+      const before = anchor?.getBoundingClientRect().top ?? 0;
+      catalog.dataset.menuHidden = String(hide);
+      sidebar.hidden = hide;
+      button.setAttribute('aria-expanded', String(!hide));
+      button.textContent = hide ? 'Show block menu' : 'Hide menu · Full width';
+      // Keep the block being inspected in place when its layout reflows.
+      if(anchor) window.scrollBy({top: anchor.getBoundingClientRect().top - before, behavior:'instant'});
+    });
+    const links = [...sidebar.querySelectorAll<HTMLAnchorElement>('nav a')];
+    const update = () => {
+      const previews = [...catalog.querySelectorAll<HTMLElement>('.catalog-preview')];
+      const current = previews.find(el => el.getBoundingClientRect().bottom > 140);
+      links.forEach(link => link.hash.slice(1) === current?.dataset.previewId ? link.setAttribute('aria-current','location') : link.removeAttribute('aria-current'));
+    };
+    let queued = false;
+    window.addEventListener('scroll', () => { if(!queued) { queued = true; requestAnimationFrame(() => { queued = false; update(); }); } }, {passive:true});
+    update();
+  });
+</script>
 <style is:global>
-  .catalog{display:grid;grid-template-columns:minmax(230px,280px) minmax(0,1fr)}
-  .catalog-sidebar{position:sticky;top:0;height:100svh;overflow:auto;padding:2rem 1.2rem;background:var(--mk-ink);color:var(--mk-paper)}
-  .catalog-title{padding:.3rem .7rem 1.7rem}.catalog-title>span,.catalog-intro>span{font-size:.7rem;letter-spacing:.16em;font-weight:700}.catalog-title h1{font-size:1.6rem;margin:.5rem 0}.catalog-title p{font-size:.86rem;opacity:.72;line-height:1.5}
-  .catalog-sidebar nav{display:grid;gap:.25rem}.catalog-sidebar nav a{color:inherit;text-decoration:none;display:grid;grid-template-columns:2rem 1fr;padding:.7rem;border-radius:7px}.catalog-sidebar nav a:hover,.catalog-sidebar nav a:focus-visible{background:#ffffff25}.catalog-sidebar nav a>span:first-child{opacity:.5}.catalog-sidebar small{display:block;opacity:.55;font-size:.7rem;margin-top:.15rem}.catalog-back{color:inherit;display:block;margin:2rem .7rem}
-  .catalog-intro{padding:clamp(2rem,5vw,5rem);background:var(--mk-surface)}.catalog-intro h2{font-size:clamp(2rem,4vw,4rem);max-width:15ch;margin:.7rem 0}.catalog-intro p{max-width:58ch;line-height:1.6}.catalog-main{min-width:0}.catalog-main .curated-section{border-top:3px solid var(--mk-accent)}
-  @media(max-width:760px){.catalog{display:block}.catalog-sidebar{position:relative;height:auto}.catalog-sidebar nav{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  .mk-page > .catalog { width:100%; max-width:none; margin:0; }
+  .catalog { --catalog-gap:32px; display:grid; grid-template-columns:240px minmax(0,1fr); gap:var(--catalog-gap); align-items:start; padding:24px; }
+  .catalog-sidebar { position:sticky; top:24px; height:calc(100svh - 48px); overflow:auto; padding:1.5rem 1rem; background:var(--mk-ink); color:var(--mk-paper); border-radius:12px; }
+  .catalog-title { padding:0 .5rem 1.5rem; }
+  .catalog-title h1 { font-size:1.6rem; margin:1.5rem 0 .6rem; }
+  .catalog-title p { font-size:.85rem; opacity:.75; line-height:1.5; }
+  .catalog-home { font-size:.8rem; text-underline-offset:4px; }
+  .catalog-sidebar nav { display:grid; gap:.35rem; }
+  .catalog-sidebar nav a { color:inherit; text-decoration:none; display:block; padding:.85rem .65rem; border-radius:7px; line-height:1.35; }
+  .catalog-sidebar nav a:hover,.catalog-sidebar nav a:focus-visible,.catalog-sidebar nav a[aria-current] { background:#ffffff20; }
+  .catalog-sidebar small { display:block; opacity:.6; font-size:.72rem; margin-top:.25rem; }
+  .catalog-main { min-width:0; }
+  .catalog-toolbar { position:sticky; top:0; z-index:20; min-height:76px; margin-bottom:24px; padding:1rem 0; display:flex; align-items:center; justify-content:space-between; gap:1rem; background:var(--mk-paper); border-bottom:1px solid var(--mk-line); }
+  .catalog-toolbar strong { display:block; font-size:1rem; }
+  .catalog-toolbar span { display:block; font-size:.8rem; color:var(--mk-muted); }
+  .catalog-menu-toggle { font:inherit; font-size:.85rem; padding:.7rem 1rem; border:1px solid var(--mk-line); border-radius:100px; background:var(--mk-paper); color:var(--mk-ink); white-space:nowrap; min-height:44px; }
+  .catalog-previews { display:grid; gap:48px; }
+  .catalog-preview { min-width:0; background:var(--mk-paper); border:1px solid var(--mk-line); }
+  .catalog-preview-bar { display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:1rem 1.5rem; border-bottom:1px solid var(--mk-line); background:var(--mk-surface); }
+  .mk-site .catalog-preview-bar h2 { margin:0; font-family:var(--mk-body); font-size:.95rem; font-weight:600; line-height:1.4; letter-spacing:0; }
+  .catalog-preview-bar a { flex-shrink:0; font-size:.8rem; text-underline-offset:4px; }
+  .catalog-preview-content > .curated-section:not(.curated-section--hero) { padding-inline:clamp(1.25rem,3vw,3rem); }
+  .catalog-preview-content [id] { scroll-margin-top:96px; }
+  .catalog[data-menu-hidden="true"] { grid-template-columns:minmax(0,1fr); padding-inline:0; }
+  .catalog[data-menu-hidden="true"] .catalog-toolbar { padding-inline:24px; }
+  .catalog[data-menu-hidden="true"] .catalog-preview { border-inline:0; }
+  .catalog-sidebar[hidden] { display:none; }
+  @media(max-width:1000px) { .catalog { grid-template-columns:200px minmax(0,1fr); gap:24px; padding:16px; } }
+  @media(max-width:760px) {
+    .catalog { display:flex; flex-direction:column; gap:24px; padding:12px; }
+    .catalog-sidebar { position:static; height:auto; max-height:320px; width:100%; }
+    .catalog-sidebar nav { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .catalog-main { width:100%; }
+    .catalog-toolbar { flex-wrap:wrap; }
+    .catalog-previews { gap:32px; }
+    .catalog-preview-bar { padding:1rem; }
+    .catalog-preview-bar a { display:none; }
+  }
 </style>

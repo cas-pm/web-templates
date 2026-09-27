@@ -1,0 +1,21 @@
+---
+import type { VariantData } from './schema';
+interface Props {id:string;data:VariantData<'expanding-panels'>}
+const {id,data}=Astro.props;
+---
+<section id={id} class="cb cb-section" data-panels style={`--cb-duration:${data.durationMs}ms;--cb-panel-height:${data.height}px`}>
+  <header class="cb-heading"><h2>{data.heading}</h2><p>{data.intro}</p></header>
+  <div class="cb-panels">{data.images.map((photo,i)=><article class="cb-panel" data-active={i===0?'true':'false'}>
+    <img src={photo.src} alt={photo.alt} loading="lazy" style={`object-position:${photo.position}`} />
+    <button type="button" class="cb-panel-select" aria-pressed={i===0} aria-label={`Show ${photo.title}`}><span>{photo.title}</span></button>
+    <div class="cb-panel-caption"><h3>{photo.title}</h3><p>{photo.caption}</p>{photo.href&&<a href={photo.href}>Explore this place ↗</a>}</div>
+  </article>)}</div>
+</section>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-panels]').forEach(root=>{
+    const panels=[...root.querySelectorAll<HTMLElement>('.cb-panel')];
+    const select=(index:number)=>panels.forEach((panel,i)=>{panel.dataset.active=String(i===index);panel.querySelector('button')!.setAttribute('aria-pressed',String(i===index));});
+    panels.forEach((panel,i)=>{const button=panel.querySelector('button')!;button.addEventListener('click',()=>select(i));button.addEventListener('keydown',event=>{let next=i;if(event.key==='ArrowRight'||event.key==='ArrowDown')next=(i+1)%panels.length;else if(event.key==='ArrowLeft'||event.key==='ArrowUp')next=(i-1+panels.length)%panels.length;else if(event.key==='Home')next=0;else if(event.key==='End')next=panels.length-1;else return;event.preventDefault();select(next);panels[next].querySelector('button')!.focus();});});
+    root.dataset.enhanced='true';
+  });
+</script>

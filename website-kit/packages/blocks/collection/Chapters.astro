@@ -1,0 +1,21 @@
+---
+import type { VariantData } from './schema';
+interface Props {id:string;data:VariantData<'pinned-chapters'>}
+const {id,data}=Astro.props;
+---
+<section id={id} class="cb cb-section" data-chapters>
+  <header class="cb-heading"><h2>{data.heading}</h2><p>{data.intro}</p></header>
+  <div class="cb-chapters">
+    <div class="cb-chapter-sticky" aria-hidden="true"><span class="cb-chapter-count">01 / {String(data.chapters.length).padStart(2,'0')}</span>{data.chapters.map((chapter,i)=><div class="cb-chapter-summary" hidden={i!==0}><h3>{chapter.title}</h3><p>{chapter.body}</p></div>)}</div>
+    <div>{data.chapters.map((chapter,i)=><article class="cb-chapter" data-chapter={i}><div class="cb-chapter-original"><span>{String(i+1).padStart(2,'0')}</span><h3>{chapter.title}</h3><p>{chapter.body}</p></div><img src={chapter.image.src} alt={chapter.image.alt} loading="lazy" style={`object-position:${chapter.image.position}`} /></article>)}</div>
+  </div>
+</section>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-chapters]').forEach(root=>{
+    const chapters=[...root.querySelectorAll<HTMLElement>('.cb-chapter')];const summaries=[...root.querySelectorAll<HTMLElement>('.cb-chapter-summary')];const count=root.querySelector('.cb-chapter-count')!;
+    root.dataset.enhanced='true';let queued=false;
+    const update=()=>{queued=false;let active=0;chapters.forEach((chapter,i)=>{if(chapter.getBoundingClientRect().top<innerHeight*.55)active=i;});summaries.forEach((summary,i)=>summary.hidden=i!==active);count.textContent=`${String(active+1).padStart(2,'0')} / ${String(chapters.length).padStart(2,'0')}`;};
+    const schedule=()=>{if(!queued){queued=true;requestAnimationFrame(update);}};
+    const observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){window.addEventListener('scroll',schedule,{passive:true});window.addEventListener('resize',schedule);update();}else{window.removeEventListener('scroll',schedule);window.removeEventListener('resize',schedule);}});observer.observe(root);
+  });
+</script>

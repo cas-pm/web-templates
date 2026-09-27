@@ -1,4 +1,6 @@
 ---
+import Collection from '../collection/Collection.astro';
+import { isCollection, collectionVariants } from '../collection/schema';
 import Hero from '../hero/Hero.astro';
 import Services from '../services/Services.astro';
 import Features from '../features/Features.astro';
@@ -20,24 +22,28 @@ import { ContactPropsSchema } from '../contact/schema';
 interface Section { id: string; type: string; label: string; data: any }
 interface Props { sections: Section[] }
 const { sections } = Astro.props;
-const allowed = new Set(['hero','services','features','gallery','testimonials','stats','faq','cta','contact','editorial']);
+const allowed = new Set(['hero','services','features','gallery','testimonials','stats','faq','cta','contact','editorial','story','projects','comparison','details']);
 const ids = new Set<string>();
 for (const section of sections) {
   if (!allowed.has(section.type) || !/^[a-z][a-z0-9-]*$/.test(section.id) || ids.has(section.id)) throw new Error(`Invalid or duplicate section: ${section.id}`);
+  const namedVariant = collectionVariants.find(item => item.variant === section.data.variant);
+  if (namedVariant && namedVariant.type !== section.type) throw new Error(`Variant ${section.data.variant} belongs to ${namedVariant.type}, not ${section.type}`);
+  if (['story','projects','comparison','details'].includes(section.type) && !namedVariant) throw new Error(`Unknown variant for ${section.id}`);
   ids.add(section.id);
 }
 ---
-{sections.map(section => <div class:list={["curated-section", { "curated-section--hero": section.type === "hero" && ["full-bleed", "video"].includes(section.data.variant) }]} data-section-name={section.label}>
-  {section.type === 'hero' && <Hero id={section.id} data={HeroPropsSchema.parse(section.data)} />}
-  {section.type === 'services' && <Services id={section.id} data={ServicesPropsSchema.parse(section.data)} />}
-  {section.type === 'features' && <Features id={section.id} data={FeaturesPropsSchema.parse(section.data)} />}
-  {section.type === 'gallery' && <Gallery id={section.id} data={GalleryPropsSchema.parse(section.data)} />}
-  {section.type === 'testimonials' && <Testimonials id={section.id} data={TestimonialsPropsSchema.parse(section.data)} />}
-  {section.type === 'stats' && <Stats id={section.id} data={StatsPropsSchema.parse(section.data)} />}
-  {section.type === 'faq' && <Faq id={section.id} data={FaqPropsSchema.parse(section.data)} />}
-  {section.type === 'cta' && <Cta id={section.id} data={CtaPropsSchema.parse(section.data)} />}
-  {section.type === 'contact' && <Contact id={section.id} data={ContactPropsSchema.parse(section.data)} />}
-  {section.type === 'editorial' && <section id={section.id} class="mk-section editorial" data-block="editorial"><div><span class="mk-caption">{section.data.eyebrow}</span><h2>{section.data.heading}</h2></div><div class="editorial-copy">{Array.isArray(section.data.paragraphs) && section.data.paragraphs.map((paragraph: unknown) => typeof paragraph === 'string' && <p>{paragraph}</p>)}</div></section>}
+{sections.map(section => <div class:list={["curated-section", { "curated-section--hero": section.type === "hero" && ["full-bleed", "video", "cinematic-reveal"].includes(section.data.variant) }]} data-section-name={section.label}>
+  {isCollection(section.data) && <Collection id={section.id} data={section.data} />}
+  {!isCollection(section.data) && section.type === 'hero' && <Hero id={section.id} data={HeroPropsSchema.parse(section.data)} />}
+  {!isCollection(section.data) && section.type === 'services' && <Services id={section.id} data={ServicesPropsSchema.parse(section.data)} />}
+  {!isCollection(section.data) && section.type === 'features' && <Features id={section.id} data={FeaturesPropsSchema.parse(section.data)} />}
+  {!isCollection(section.data) && section.type === 'gallery' && <Gallery id={section.id} data={GalleryPropsSchema.parse(section.data)} />}
+  {!isCollection(section.data) && section.type === 'testimonials' && <Testimonials id={section.id} data={TestimonialsPropsSchema.parse(section.data)} />}
+  {!isCollection(section.data) && section.type === 'stats' && <Stats id={section.id} data={StatsPropsSchema.parse(section.data)} />}
+  {!isCollection(section.data) && section.type === 'faq' && <Faq id={section.id} data={FaqPropsSchema.parse(section.data)} />}
+  {!isCollection(section.data) && section.type === 'cta' && <Cta id={section.id} data={CtaPropsSchema.parse(section.data)} />}
+  {!isCollection(section.data) && section.type === 'contact' && <Contact id={section.id} data={ContactPropsSchema.parse(section.data)} />}
+  {!isCollection(section.data) && section.type === 'editorial' && <section id={section.id} class="mk-section editorial" data-block="editorial"><div><span class="mk-caption">{section.data.eyebrow}</span><h2>{section.data.heading}</h2></div><div class="editorial-copy">{Array.isArray(section.data.paragraphs) && section.data.paragraphs.map((paragraph: unknown) => typeof paragraph === 'string' && <p>{paragraph}</p>)}</div></section>}
 </div>)}
 <style>
   .editorial {display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(2rem,8vw,9rem);border-top:1px solid var(--mk-line)}

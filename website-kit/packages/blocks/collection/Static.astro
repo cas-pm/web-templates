@@ -1,0 +1,13 @@
+---
+import type { CollectionData } from './schema';
+interface Props {id:string;data:CollectionData}
+const {id,data}=Astro.props;
+---
+<section id={id} class:list={['cb','cb-section',`cb-${data.variant}`]}>
+  {data.variant==='editorial-mosaic'&&<><header class="cb-heading"><h2>{data.heading}</h2><p>{data.intro}</p></header><div class="cb-mosaic">{data.images.map(photo=><figure><img src={photo.src} alt={photo.alt} loading="lazy" style={`object-position:${photo.position}`} /><figcaption><strong>{photo.title}</strong><span>{photo.caption}</span>{photo.href&&<a href={photo.href}>View project ↗</a>}</figcaption></figure>)}</div></>}
+  {data.variant==='typographic-menu'&&<><header class="cb-heading"><h2>{data.heading}</h2><p>{data.intro}</p></header><div class="cb-service-menu">{data.items.map(item=><article><h3>{item.title}</h3><div><p>{item.description}</p>{item.price&&<span>{item.price}</span>}{item.link&&<a href={item.link.href}>{item.link.label} ↗</a>}</div></article>)}</div></>}
+  {data.variant==='image-statement'&&<div class="cb-statement"><img src={data.image.src} alt={data.image.alt} loading="lazy" style={`object-position:${data.image.position}`} /><div><p>{data.intro}</p><h2>{data.heading}</h2><p>{data.body}</p>{data.link&&<a class="cb-link" href={data.link.href}>{data.link.label} ↗</a>}</div></div>}
+  {data.variant==='specification-sheet'&&<div class="cb-spec"><img src={data.image.src} alt={data.image.alt} loading="lazy" style={`object-position:${data.image.position}`} /><div><h2>{data.heading}</h2><p>{data.intro}</p><dl>{data.details.map(detail=><div><dt>{detail.label}</dt><dd>{detail.value}</dd></div>)}</dl>{data.link&&<a class="cb-link" href={data.link.href}>{data.link.label} ↗</a>}</div></div>}
+  {data.variant==='portrait-feature'&&<div class="cb-portrait"><img src={data.portrait.src} alt={data.portrait.alt} loading="lazy" style={`object-position:${data.portrait.position}`} /><div><h2 class="cb-quiet-heading">{data.heading}</h2><figure><blockquote><p>“{data.quote}”</p></blockquote><figcaption><strong>{data.name}</strong><span>{data.role}</span></figcaption></figure></div></div>}
+  {data.variant==='final-invitation'&&<div class="cb-invitation"><h2>{data.heading}</h2><div class="cb-invitation-bottom"><div><p>{data.intro}</p><a class="cb-link" href={data.cta.href}>{data.cta.label}<span aria-hidden="true">↗</span></a></div><address>{data.details.map(link=><a href={link.href}>{link.label}</a>)}<p>{data.note}</p></address></div></div>}
+</section>

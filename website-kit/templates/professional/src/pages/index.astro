@@ -1,10 +1,9 @@
 ---
-import Base from "../layouts/Base.astro";
-// Professional starter — compose from @web/blocks.
-// Suggested blocks: hero, services, stats, logos, testimonials, cta, contact, footer
-// TODO: import blocks and feed them data from content/.
+import TemplateLayout from '@web/blocks/shared/TemplateLayout.astro';
+import CuratedSections from '@web/blocks/shared/CuratedSections.astro';
+import content from '../../content/home.json';
+import pages from '../../content/pages.json';
+const page = pages.pages.find(p => p.slug === 'home')!;
+const links = pages.pages.filter(p => p.slug !== 'home').map(p => ({label:p.title,href:`/${p.slug}`}));
 ---
-<Base title="Professional">
-  {/* TODO: hero, services, stats, logos, testimonials, cta, contact, footer */}
-  <h1>Professional template</h1>
-</Base>
+<TemplateLayout title={content.name} {...content} links={links} navCta={{label:'Contact',href:'/contact'}} theme="professional"><CuratedSections sections={page.sections} /></TemplateLayout>

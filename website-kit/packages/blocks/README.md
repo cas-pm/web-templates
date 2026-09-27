@@ -9,7 +9,7 @@ Two layers live here — keep them straight:
 
 Each folder is a presentational block:
 
-- `<Name>.astro` — the component (skeleton).
+- `<Name>.astro` — the rendered, responsive component.
 - `schema.ts` — zod schema for the component's **props** (`<Name>Props`).
 - `example.json` — sample props, valid against the schema.
 - `README.md` — usage.
@@ -29,3 +29,10 @@ This is what `content/pages.json` conforms to and what content-assist reads.
 The per-block `schema.ts` (props) and the content model (`src/`) are related but
 serve different jobs: props = how a block renders; content model = what is
 stored and edited. Component prop schemas import shared primitives from `src/`.
+
+## Styling and motion
+
+Load `shared/DesignSystem.astro` once per layout and use `mk-site` / `mk-shell`
+wrappers. See [the customization guide](../../docs/customization.md) for themes,
+props, motion controls and form integration. Preview all content blocks at `/blocks`
+in the professional template.

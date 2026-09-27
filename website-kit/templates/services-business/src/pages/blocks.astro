@@ -1,0 +1,14 @@
+---
+import { PagesFileSchema } from "@web/blocks/schemas";
+import Base from '../layouts/Base.astro';
+import BlockRenderer from '../components/BlockRenderer.astro';
+import content from '../../content/pages.json';
+const blocks = PagesFileSchema.parse(content).pages.flatMap(page => page.blocks).filter((block,index,all) => all.findIndex(other => other.type === block.type) === index).filter(block => block.type !== 'legal');
+const names: Record<string,string> = {hero:'Hero · First impression',services:'Services · Card grid',richText:'Story · Editorial copy',serviceCard:'Service · Spotlight',faq:'Questions · Accordion',cta:'Action · Invitation'};
+---
+<Base title="Section library" description="Named and reusable blocks for the service business template.">
+  <div class="library"><aside><p class="overline">SECTION LIBRARY</p><h1>Meridian blocks</h1><p>Click a block to inspect its live example. Edit the matching entry in <code>content/pages.json</code>.</p><nav aria-label="Sections">{blocks.map((block,index) => <a href={`#block-${index}`}><span>{String(index+1).padStart(2,'0')}</span>{names[block.type] ?? block.type}</a>)}</nav><a href="/">← Back to website</a></aside><div class="examples"><header><p class="overline">LIVE PREVIEW</p><h2>Build by section.</h2><p>These are the actual sections used by the site. Content and order are defined page by page.</p></header>{blocks.map((block,index) => <div id={`block-${index}`}><p class="example-label">{names[block.type] ?? block.type}</p><BlockRenderer block={block} /></div>)}</div></div>
+</Base>
+<style>
+.library{display:grid;grid-template-columns:270px minmax(0,1fr)}aside{background:var(--mk-ink);color:var(--mk-paper);padding:2rem;position:sticky;top:0;height:100svh;overflow:auto}aside h1{font-size:1.7rem}aside p{line-height:1.5}aside nav{display:grid;margin:2rem 0}aside a{color:inherit;padding:.7rem .2rem;text-decoration:none;border-bottom:1px solid #ffffff30}aside nav span{opacity:.5;margin-right:1rem}aside a:hover{text-decoration:underline}.overline,.example-label{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase}.examples{min-width:0}.examples header{padding:4rem;background:var(--mk-surface)}.examples header h2{font-size:3rem;margin:0}.examples>div{border-top:2px solid var(--mk-accent)}.example-label{padding:1rem 2rem;margin:0;color:var(--mk-accent);font-weight:700}@media(max-width:760px){.library{display:block}aside{position:relative;height:auto}}
+</style>

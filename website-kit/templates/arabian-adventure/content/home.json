@@ -1,0 +1,136 @@
+{
+  "name": "Arabian Adventure",
+  "tagline": "Follow the horizon.",
+  "email": "hello@arabian-adventure.example",
+  "description": "A concept for thoughtfully guided desert experiences in the UAE. Sample content for a prospective client.",
+  "hero": {
+    "variant": "full-bleed",
+    "heading": "The desert is calling.",
+    "subheading": "Step away from the city and discover the quiet, colour and possibility of the dunes.",
+    "cta": {
+      "label": "Discover experiences",
+      "href": "/experiences"
+    },
+    "media": "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=2400&q=85",
+    "mediaAlt": "Golden desert dunes under an open sky",
+    "height": 100,
+    "overlay": 0.54,
+    "align": "left",
+    "mediaPosition": "center",
+    "eyebrow": "A UAE desert experience",
+    "scrollLink": {
+      "label": "Discover Stillwater",
+      "href": "#services"
+    }
+  },
+  "services": {
+    "eyebrow": "Choose your journey",
+    "heading": "A different way into the desert.",
+    "intro": "Slow mornings, open horizons and evenings worth remembering.",
+    "items": [
+      {
+        "title": "Sunrise trails",
+        "description": "An early start and an unhurried view as the desert wakes.",
+        "href": "/experiences"
+      },
+      {
+        "title": "Private escapes",
+        "description": "A more personal route, planned around your group.",
+        "href": "/experiences"
+      },
+      {
+        "title": "Evening gatherings",
+        "description": "Warm light, good company and a place to pause.",
+        "href": "/experiences"
+      }
+    ]
+  },
+  "features": {
+    "variant": "grid",
+    "heading": "Space to feel it all.",
+    "items": [
+      {
+        "title": "A considered pace",
+        "description": "Time to take in the landscape, without rushing through it.",
+        "icon": "◌"
+      },
+      {
+        "title": "Made for your group",
+        "description": "An enquiry led experience with room for different needs.",
+        "icon": "✦"
+      },
+      {
+        "title": "Local perspective",
+        "description": "Ideas shaped by the place and the people who know it.",
+        "icon": "◇"
+      }
+    ]
+  },
+  "gallery": {
+    "heading": "Moments beyond the map.",
+    "intro": "A visual direction for the concept. Replace with licensed client photography.",
+    "images": [
+      {
+        "src": "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Sunlit dune formations"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=1200&q=85",
+        "alt": "Desert landscape in warm evening light"
+      }
+    ]
+  },
+  "faq": {
+    "heading": "Before you go.",
+    "emitJsonLd": false,
+    "items": [
+      {
+        "question": "How do I plan an experience?",
+        "answer": "Send your preferred date, group size and the kind of experience you have in mind. The team can confirm options and availability."
+      },
+      {
+        "question": "Can an experience be private?",
+        "answer": "Private enquiries can be discussed based on group size, date and availability."
+      },
+      {
+        "question": "What should I bring?",
+        "answer": "Comfortable clothing, sun protection and water are useful. Confirm the final preparation details when booking."
+      }
+    ]
+  },
+  "cta": {
+    "heading": "Go where the day takes you.",
+    "body": "Tell us what you imagine. We will help shape the next step.",
+    "cta": {
+      "label": "Plan an experience",
+      "href": "/contact"
+    }
+  },
+  "navCta": {
+    "label": "Plan an experience",
+    "href": "/contact"
+  },
+  "navigation": {
+    "sticky": true,
+    "menuLabel": "Menu",
+    "closeLabel": "Close"
+  },
+  "links": [
+    {
+      "label": "Experiences",
+      "href": "/experiences"
+    },
+    {
+      "label": "Our approach",
+      "href": "/about"
+    },
+    {
+      "label": "The moments",
+      "href": "/gallery"
+    },
+    {
+      "label": "Contact",
+      "href": "/contact"
+    }
+  ]
+}

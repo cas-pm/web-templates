@@ -4,11 +4,11 @@
  * create-client — scaffold a new client website repo from the monorepo
  * templates. See README.md for the full description.
  *
- * This is a skeleton: argument parsing and the plan are real; the filesystem/
- * git operations are marked TODO so the flow is clear without side effects yet.
+ * Creates an independent client workspace with local shared packages.
  */
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+import fs from "node:fs/promises";
 
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
 
@@ -18,14 +18,14 @@ const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..
  * @typedef {Object} Options
  * @property {string} clientName
  * @property {string} dir
- * @property {"services-business" | "hospitality" | "professional"} template
+ * @property {"services-business" | "hospitality" | "professional" | "arabian-adventure"} template
  * @property {boolean} withGrowth
  * @property {boolean} withAssist
  * @property {string} flyApp
  * @property {boolean} dryRun
  */
 
-const TEMPLATES = ["services-business", "hospitality", "professional"];
+const TEMPLATES = ["services-business", "hospitality", "professional", "arabian-adventure"];
 const USAGE = `Usage: create-client <client-name> --dir <path> [--template <${TEMPLATES.join("|")}>] [--with-growth] [--with-assist] [--fly-app <name>] [--dry-run]`;
 
 /**
@@ -87,6 +87,9 @@ export function buildCopyPlan(opts) {
   /** @type {CopyPlanItem[]} */
   const plan = [
     { from: `templates/${opts.template}`, to: "." },
+    { from: ".gitignore", to: ".gitignore" },
+    { from: "tsconfig.base.json", to: "tsconfig.base.json" },
+    { from: "docs/customization.md", to: "docs/customization.md" },
     { from: "docs/seo-content-sheet.md", to: "docs/seo-content-sheet.md" },
     { from: "docs/seo-content-sheet.csv", to: "docs/seo-content-sheet.csv" },
     // Shared packages every site depends on.
@@ -134,14 +137,47 @@ async function main(opts) {
     return;
   }
 
-  // TODO: mkdir targetDir; refuse if it exists and is non-empty.
-  // TODO: copy each plan item (recursive), skipping node_modules/dist/.astro.
-  // TODO: rewrite fly.toml `app`, package.json name, and site title using
-  //       opts.clientName / opts.flyApp.
-  // TODO: write a client-scoped package.json + pnpm-workspace.yaml so only the
-  //       copied packages are wired up.
-  // TODO: git init && initial commit.
-  throw new Error("filesystem/git operations not implemented (skeleton)");
+  const entries = await fs.readdir(targetDir).catch(error => {
+    if (error.code === "ENOENT") return [];
+    throw error;
+  });
+  if (entries.length) throw new Error(`target must be empty: ${targetDir}`);
+  await fs.mkdir(targetDir, { recursive: true });
+  try {
+    for (const item of plan) {
+      const from = path.join(REPO_ROOT, item.from);
+      const to = path.join(targetDir, item.to);
+      await fs.mkdir(path.dirname(to), { recursive: true });
+      await fs.cp(from, to, { recursive: true, filter: src => !src.split(path.sep).some(part => ["node_modules", "dist", ".astro", ".git", ".DS_Store"].includes(part)) });
+    }
+    const pkgPath = path.join(targetDir, "package.json");
+    const pkg = JSON.parse(await fs.readFile(pkgPath, "utf8"));
+    const originalName = pkg.name;
+    pkg.name = `@client/${slugify(opts.clientName)}`;
+    pkg.packageManager = "pnpm@10.33.0";
+    pkg.engines = { ...pkg.engines, node: ">=22" };
+    const kitPackage = JSON.parse(await fs.readFile(path.join(REPO_ROOT, "package.json"), "utf8"));
+    pkg.devDependencies = { ...kitPackage.devDependencies, ...pkg.devDependencies };
+    await fs.writeFile(pkgPath, JSON.stringify(pkg, null, 2) + "\n");
+    const workspace = ["packages/*"];
+    if (opts.withGrowth || opts.withAssist) workspace.push("services/*", "apps/*");
+    await fs.writeFile(path.join(targetDir, "pnpm-workspace.yaml"), `packages:\n${workspace.map(item => `  - "${item}"`).join("\n")}\n`);
+    await fs.writeFile(path.join(targetDir, "README.md"), `# ${opts.clientName}\n\nBased on the ${opts.template} starter.\n\nRun \`pnpm install\`, \`pnpm dev\`, \`pnpm check\`, and \`pnpm build\`. Review \`docs/architecture.md\` and \`/blocks/\` for section editing. Replace demo claims, images and contact details before publishing.\n`);
+    await fs.copyFile(path.join(REPO_ROOT, "docs/architecture.md"), path.join(targetDir, "docs/architecture.md"));
+    await fs.copyFile(path.join(REPO_ROOT, "docs/plug-and-play-prompt.md"), path.join(targetDir, "docs/plug-and-play-prompt.md"));
+    await fs.copyFile(path.join(REPO_ROOT, "docs/design-references.md"), path.join(targetDir, "docs/design-references.md"));
+    if (opts.template === "services-business") {
+      const flyFile = path.join(targetDir, "fly.toml");
+      let fly = await fs.readFile(flyFile, "utf8");
+      fly = fly.replace(/^app\s*=.*$/m, `app = "${opts.flyApp}"`);
+      await fs.writeFile(flyFile, fly);
+    }
+    // Lockfile is generated for the isolated workspace by pnpm install.
+    console.log(`Created ${targetDir} (${originalName} → ${pkg.name}). Run pnpm install.`);
+  } catch (error) {
+    await fs.rm(targetDir, { recursive: true, force: true });
+    throw error;
+  }
 }
 
 // Only run when invoked directly (not when imported by tests).

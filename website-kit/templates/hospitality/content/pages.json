@@ -1,0 +1,528 @@
+{
+  "pages": [
+    {
+      "slug": "home",
+      "title": "Stillwater",
+      "description": "A quiet countryside retreat. Thoughtfully made spaces, seasonal food and time to yourself.",
+      "sections": [
+        {
+          "id": "hero",
+          "label": "Hero · Immersive",
+          "type": "hero",
+          "data": {
+            "variant": "full-bleed",
+            "heading": "Somewhere to simply be.",
+            "subheading": "Wake slowly. Wander a little. Settle into a quieter rhythm at our small countryside retreat.",
+            "cta": {
+              "label": "Enquire about a stay",
+              "href": "/contact"
+            },
+            "media": "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=2400&q=85",
+            "mediaAlt": "A secluded house surrounded by lush green trees",
+            "height": 100,
+            "overlay": 0.54,
+            "align": "left",
+            "mediaPosition": "center",
+            "eyebrow": "A countryside retreat",
+            "scrollLink": {
+              "label": "Discover Stillwater",
+              "href": "#services"
+            }
+          }
+        },
+        {
+          "id": "offerings",
+          "label": "Offerings · Three cards",
+          "type": "services",
+          "data": {
+            "heading": "Stay a little. Feel a world away.",
+            "items": [
+              {
+                "title": "Restful rooms",
+                "description": "Natural textures, soft linen and a view worth waking up for. Thoughtful spaces for long mornings and early nights.",
+                "href": "/contact"
+              },
+              {
+                "title": "Food with a sense of place",
+                "description": "Seasonal plates, local ingredients and a table to gather around. Simple food, made with care.",
+                "href": "/contact"
+              },
+              {
+                "title": "Your kind of outdoors",
+                "description": "Follow a woodland path, find a quiet corner with a book, or set out to explore the surrounding countryside.",
+                "href": "/contact"
+              }
+            ],
+            "eyebrow": "The experience",
+            "intro": "Thoughtful spaces, seasonal food and days that unfold at your own pace."
+          }
+        },
+        {
+          "id": "story",
+          "label": "Story · Editorial split",
+          "type": "editorial",
+          "data": {
+            "heading": "A place to make your own.",
+            "paragraphs": [
+              "Every detail is considered, so the experience feels effortless.",
+              "Explore how this approach can work for you."
+            ],
+            "eyebrow": "The thinking"
+          }
+        },
+        {
+          "id": "moments",
+          "label": "Gallery · Horizontal story",
+          "type": "gallery",
+          "data": {
+            "heading": "Find your favourite corner.",
+            "images": [
+              {
+                "src": "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=1200&q=85",
+                "alt": "A retreat among the trees"
+              },
+              {
+                "src": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=85",
+                "alt": "The long way home"
+              }
+            ],
+            "intro": "Take your time. Explore the details."
+          }
+        },
+        {
+          "id": "benefits",
+          "label": "Benefits · Icon grid",
+          "type": "features",
+          "data": {
+            "variant": "grid",
+            "heading": "Less on the agenda. More to enjoy.",
+            "items": [
+              {
+                "title": "Unhurried mornings",
+                "description": "Coffee by the window. Breakfast when you’re ready. Time that feels like your own.",
+                "icon": "☼"
+              },
+              {
+                "title": "Room to reconnect",
+                "description": "Shared tables and quiet corners. Space to be together, and space just for you.",
+                "icon": "◎"
+              },
+              {
+                "title": "Nature on your doorstep",
+                "description": "Fresh air, leafy paths and the pleasure of having nowhere else to be.",
+                "icon": "⌁"
+              }
+            ]
+          }
+        },
+        {
+          "id": "questions",
+          "label": "Questions · Accordion",
+          "type": "faq",
+          "data": {
+            "heading": "Make yourself at home.",
+            "emitJsonLd": false,
+            "items": [
+              {
+                "question": "How do I enquire about a stay?",
+                "answer": "Send us your preferred dates, the number of guests and anything you would like us to know. We’ll reply with availability and the details of your stay."
+              },
+              {
+                "question": "Can you accommodate dietary needs?",
+                "answer": "Tell us about your dietary needs when you enquire so we can confirm the options available before you book."
+              },
+              {
+                "question": "What should I bring?",
+                "answer": "A good book, comfortable walking shoes and clothes for the season. We’ll include any other useful details in your booking confirmation."
+              }
+            ]
+          }
+        },
+        {
+          "id": "next-step",
+          "label": "Action · Invitation",
+          "type": "cta",
+          "data": {
+            "heading": "A little time away does wonders.",
+            "body": "Tell us when you’d like to visit. We’ll take it from there.",
+            "cta": {
+              "label": "Plan your stay",
+              "href": "mailto:stay@stillwater.example"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "slug": "stays",
+      "title": "Stay your way",
+      "description": "Explore the stays and experiences at Stillwater.",
+      "sections": [
+        {
+          "id": "hero",
+          "label": "Hero · Full-bleed",
+          "type": "hero",
+          "data": {
+            "variant": "full-bleed",
+            "heading": "A stay that stays with you.",
+            "subheading": "Discover the options and find the right fit for you.",
+            "media": "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=2400&q=85",
+            "mediaAlt": "A secluded house surrounded by lush green trees",
+            "height": 72,
+            "overlay": 0.53,
+            "align": "left",
+            "eyebrow": "Stay your way",
+            "cta": {
+              "label": "Ask about availability",
+              "href": "/contact"
+            }
+          }
+        },
+        {
+          "id": "offerings",
+          "label": "Offerings · Three cards",
+          "type": "services",
+          "data": {
+            "heading": "Stay a little. Feel a world away.",
+            "items": [
+              {
+                "title": "Restful rooms",
+                "description": "Natural textures, soft linen and a view worth waking up for. Thoughtful spaces for long mornings and early nights.",
+                "href": "/contact"
+              },
+              {
+                "title": "Food with a sense of place",
+                "description": "Seasonal plates, local ingredients and a table to gather around. Simple food, made with care.",
+                "href": "/contact"
+              },
+              {
+                "title": "Your kind of outdoors",
+                "description": "Follow a woodland path, find a quiet corner with a book, or set out to explore the surrounding countryside.",
+                "href": "/contact"
+              }
+            ],
+            "eyebrow": "The experience",
+            "intro": "Thoughtful spaces, seasonal food and days that unfold at your own pace."
+          }
+        },
+        {
+          "id": "details",
+          "label": "Story · Editorial split",
+          "type": "editorial",
+          "data": {
+            "heading": "Designed around your day.",
+            "paragraphs": [
+              "A flexible starting point for the moments that matter. Ask us about availability and details before you book.",
+              "We can discuss what fits your goals and shape a clear next step together."
+            ],
+            "eyebrow": "Our approach"
+          }
+        },
+        {
+          "id": "benefits",
+          "label": "Benefits · Icon grid",
+          "type": "features",
+          "data": {
+            "variant": "grid",
+            "heading": "Less on the agenda. More to enjoy.",
+            "items": [
+              {
+                "title": "Unhurried mornings",
+                "description": "Coffee by the window. Breakfast when you’re ready. Time that feels like your own.",
+                "icon": "☼"
+              },
+              {
+                "title": "Room to reconnect",
+                "description": "Shared tables and quiet corners. Space to be together, and space just for you.",
+                "icon": "◎"
+              },
+              {
+                "title": "Nature on your doorstep",
+                "description": "Fresh air, leafy paths and the pleasure of having nowhere else to be.",
+                "icon": "⌁"
+              }
+            ]
+          }
+        },
+        {
+          "id": "next-step",
+          "label": "Action · Invitation",
+          "type": "cta",
+          "data": {
+            "heading": "Ready to explore the details?",
+            "body": "Tell us what you need and we will share the next steps.",
+            "cta": {
+              "label": "Get in touch",
+              "href": "/contact"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "slug": "about",
+      "title": "About",
+      "description": "Learn the philosophy behind Stillwater.",
+      "sections": [
+        {
+          "id": "hero",
+          "label": "Hero · Full-bleed",
+          "type": "hero",
+          "data": {
+            "variant": "full-bleed",
+            "heading": "A little more about us.",
+            "subheading": "The ideas and people behind the experience.",
+            "media": "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=2400&q=85",
+            "mediaAlt": "A secluded house surrounded by lush green trees",
+            "height": 72,
+            "overlay": 0.53,
+            "align": "left",
+            "eyebrow": "Our story",
+            "cta": {
+              "label": "Get in touch",
+              "href": "/contact"
+            }
+          }
+        },
+        {
+          "id": "story",
+          "label": "Story · Editorial split",
+          "type": "editorial",
+          "data": {
+            "heading": "Thoughtful from the beginning.",
+            "paragraphs": [
+              "We believe the best experiences make room for people, place and purpose.",
+              "Our work starts by listening, then shaping details that feel effortless and distinctive."
+            ],
+            "eyebrow": "What matters"
+          }
+        },
+        {
+          "id": "benefits",
+          "label": "Values · Icon grid",
+          "type": "features",
+          "data": {
+            "variant": "grid",
+            "heading": "Less on the agenda. More to enjoy.",
+            "items": [
+              {
+                "title": "Unhurried mornings",
+                "description": "Coffee by the window. Breakfast when you’re ready. Time that feels like your own.",
+                "icon": "☼"
+              },
+              {
+                "title": "Room to reconnect",
+                "description": "Shared tables and quiet corners. Space to be together, and space just for you.",
+                "icon": "◎"
+              },
+              {
+                "title": "Nature on your doorstep",
+                "description": "Fresh air, leafy paths and the pleasure of having nowhere else to be.",
+                "icon": "⌁"
+              }
+            ]
+          }
+        },
+        {
+          "id": "next-step",
+          "label": "Action · Invitation",
+          "type": "cta",
+          "data": {
+            "heading": "Start a conversation.",
+            "body": "We would love to hear what you have in mind.",
+            "cta": {
+              "label": "Get in touch",
+              "href": "/contact"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "slug": "gallery",
+      "title": "Gallery",
+      "description": "A visual introduction to Stillwater.",
+      "sections": [
+        {
+          "id": "hero",
+          "label": "Hero · Full-bleed",
+          "type": "hero",
+          "data": {
+            "variant": "full-bleed",
+            "heading": "Take a closer look.",
+            "subheading": "A glimpse of the atmosphere, details and possibilities.",
+            "media": "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=2400&q=85",
+            "mediaAlt": "A secluded house surrounded by lush green trees",
+            "height": 72,
+            "overlay": 0.53,
+            "align": "left",
+            "eyebrow": "In pictures",
+            "cta": {
+              "label": "Make an enquiry",
+              "href": "/contact"
+            }
+          }
+        },
+        {
+          "id": "moments",
+          "label": "Gallery · Horizontal story",
+          "type": "gallery",
+          "data": {
+            "heading": "Find your favourite corner.",
+            "images": [
+              {
+                "src": "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=1200&q=85",
+                "alt": "A retreat among the trees"
+              },
+              {
+                "src": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=85",
+                "alt": "The long way home"
+              }
+            ],
+            "intro": "Take your time. Explore the details."
+          }
+        },
+        {
+          "id": "perspective",
+          "label": "Story · Editorial split",
+          "type": "editorial",
+          "data": {
+            "heading": "Look beyond the first impression.",
+            "paragraphs": [
+              "The best details reveal themselves when you spend more time with them.",
+              "These images illustrate a direction. Replace them with approved, licensed photography before client launch."
+            ],
+            "eyebrow": "The details"
+          }
+        },
+        {
+          "id": "next-step",
+          "label": "Action · Invitation",
+          "type": "cta",
+          "data": {
+            "heading": "See yourself here?",
+            "body": "Tell us what you are looking for.",
+            "cta": {
+              "label": "Get in touch",
+              "href": "/contact"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "slug": "faq",
+      "title": "Questions",
+      "description": "Practical answers about Stillwater.",
+      "sections": [
+        {
+          "id": "hero",
+          "label": "Hero · Full-bleed",
+          "type": "hero",
+          "data": {
+            "variant": "full-bleed",
+            "heading": "Good to know.",
+            "subheading": "Find answers to common questions before getting in touch.",
+            "media": "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=2400&q=85",
+            "mediaAlt": "A secluded house surrounded by lush green trees",
+            "height": 72,
+            "overlay": 0.53,
+            "align": "left",
+            "eyebrow": "Before you begin",
+            "cta": {
+              "label": "Ask a question",
+              "href": "/contact"
+            }
+          }
+        },
+        {
+          "id": "questions",
+          "label": "Questions · Accordion",
+          "type": "faq",
+          "data": {
+            "heading": "Make yourself at home.",
+            "emitJsonLd": false,
+            "items": [
+              {
+                "question": "How do I enquire about a stay?",
+                "answer": "Send us your preferred dates, the number of guests and anything you would like us to know. We’ll reply with availability and the details of your stay."
+              },
+              {
+                "question": "Can you accommodate dietary needs?",
+                "answer": "Tell us about your dietary needs when you enquire so we can confirm the options available before you book."
+              },
+              {
+                "question": "What should I bring?",
+                "answer": "A good book, comfortable walking shoes and clothes for the season. We’ll include any other useful details in your booking confirmation."
+              }
+            ]
+          }
+        },
+        {
+          "id": "next-step",
+          "label": "Action · Invitation",
+          "type": "cta",
+          "data": {
+            "heading": "Still have a question?",
+            "body": "Send us a note and we will help.",
+            "cta": {
+              "label": "Get in touch",
+              "href": "/contact"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "slug": "contact",
+      "title": "Contact",
+      "description": "Get in touch with Stillwater.",
+      "sections": [
+        {
+          "id": "hero",
+          "label": "Hero · Full-bleed",
+          "type": "hero",
+          "data": {
+            "variant": "full-bleed",
+            "heading": "Let’s make a start.",
+            "subheading": "Share a little about what you have in mind and we will reply with the next step.",
+            "media": "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=2400&q=85",
+            "mediaAlt": "A secluded house surrounded by lush green trees",
+            "height": 72,
+            "overlay": 0.53,
+            "align": "left",
+            "eyebrow": "Get in touch",
+            "cta": {
+              "label": "Email us",
+              "href": "mailto:stay@stillwater.example"
+            }
+          }
+        },
+        {
+          "id": "details",
+          "label": "Story · Editorial split",
+          "type": "editorial",
+          "data": {
+            "heading": "Start with a conversation.",
+            "paragraphs": [
+              "Tell us about your plans, ideal timing and any details that matter to you.",
+              "We will respond with the information you need to move forward."
+            ],
+            "eyebrow": "How to reach us"
+          }
+        },
+        {
+          "id": "contact-options",
+          "label": "Contact · Direct channels",
+          "type": "contact",
+          "data": {
+            "heading": "We’d love to hear from you.",
+            "channels": {
+              "email": "stay@stillwater.example"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

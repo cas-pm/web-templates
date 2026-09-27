@@ -1,14 +1,6 @@
 ---
 import type { LogosProps } from "./schema";
-
-interface Props {
-  data: LogosProps;
-}
-const { data } = Astro.props;
-// TODO: implement the Logos block markup + styles.
-// Variants: scroll-snap, marquee
+interface Props { data: LogosProps; id?: string }
+const { data, id } = Astro.props;
 ---
-
-<section data-block="logos" data-variant={data.variant}>
-  {/* TODO: render Logos using `data`. */}
-</section>
+<section id={id} class="mk-section mk-logos" data-block="logos" data-variant={data.variant} aria-label="Partners"><div class="mk-logo-window" tabindex="0" aria-label="Partner logos"><div class="mk-logo-track">{data.items.map(item => <div>{item.href ? <a href={item.href}><img src={item.src} alt={item.name} width="160" height="60" loading="lazy" /></a> : <img src={item.src} alt={item.name} width="160" height="60" loading="lazy" />}</div>)}{data.variant === 'marquee' && data.items.map(item => <div aria-hidden="true"><img src={item.src} alt="" width="160" height="60" loading="lazy" /></div>)}</div></div>{data.variant === 'marquee' && <button type="button" class="mk-motion-toggle" hidden aria-pressed="false">Pause animation</button>}</section>

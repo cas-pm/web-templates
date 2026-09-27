@@ -2,7 +2,7 @@
 
 ## Files
 
-- `Gallery.astro` — presentational component (skeleton).
+- `Gallery.astro` — responsive presentational component.
 - `schema.ts` — zod props schema (`GalleryProps`).
 - `example.json` — sample props, valid against the schema.
 
@@ -16,4 +16,4 @@ import example from "@web/blocks/gallery/example.json";
 <Gallery data={example} />
 ```
 
-TODO: document props and styling hooks.
+See [the customization guide](../../../docs/customization.md) for theme tokens, motion settings and layout setup. Parse JSON with the exported props schema to apply defaults before rendering.

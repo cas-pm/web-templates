@@ -1,14 +1,51 @@
 ---
 import type { HeroProps } from "./schema";
-
-interface Props {
-  data: HeroProps;
-}
-const { data } = Astro.props;
-// TODO: implement the Hero block markup + styles.
-// Variants: split, centered, full-bleed, video
+interface Props { data: HeroProps; id?: string }
+const { data, id } = Astro.props;
+const immersive = data.variant === 'full-bleed' || data.variant === 'video';
+const settings = [
+  data.height !== undefined && `--mk-hero-height:${data.height}svh`,
+  data.overlay !== undefined && `--mk-hero-overlay:${data.overlay}`,
+  data.mediaPosition && `--mk-hero-position:${data.mediaPosition}`,
+].filter(Boolean).join(';');
 ---
-
-<section data-block="hero" data-variant={data.variant}>
-  {/* TODO: render Hero using `data`. */}
+<section id={id} class:list={["mk-hero", `mk-hero--${data.variant}`, { 'mk-hero--immersive': immersive }]} data-block="hero" data-align={data.align ?? 'left'} style={settings}>
+  {data.media && <div class="mk-hero-media" data-motion={immersive ? undefined : 'wipe'}>
+    {data.variant === "video"
+      ? <video src={data.media} poster={data.poster} muted playsinline loop={data.loop ?? true} controls preload="metadata" data-background-video data-autoplay={String(data.autoplay ?? false)} aria-label={data.mediaAlt ?? 'Hero video'} />
+      : <img src={data.media} alt={data.mediaAlt ?? ""} width="1920" height="1080" fetchpriority="high" />}
+  </div>}
+  <div class="mk-hero-copy" data-motion="intro">
+    {data.eyebrow && <span class="mk-hero-eyebrow">{data.eyebrow}</span>}
+    <h1>{data.heading}</h1>
+    {data.subheading && <p>{data.subheading}</p>}
+    <div class="mk-hero-actions">
+      {data.cta && <a class="mk-button" href={data.cta.href}>{data.cta.label}<span aria-hidden="true">↗</span></a>}
+      {data.secondaryCta && <a class="mk-hero-secondary" href={data.secondaryCta.href}>{data.secondaryCta.label}</a>}
+    </div>
+  </div>
+  {data.scrollLink && <a class="mk-hero-scroll" href={data.scrollLink.href}>{data.scrollLink.label}<span aria-hidden="true">↓</span></a>}
+  {data.variant === 'video' && data.media && <button class="mk-video-toggle" type="button" hidden aria-label="Play hero video">Play video</button>}
 </section>
+<script>
+  document.querySelectorAll<HTMLElement>('.mk-hero--video').forEach(root => {
+    const video = root.querySelector<HTMLVideoElement>('video');
+    const button = root.querySelector<HTMLButtonElement>('.mk-video-toggle');
+    if (!video || !button) return;
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    video.controls = false;
+    button.hidden = false;
+    const sync = () => {
+      button.textContent = video.paused ? 'Play video' : 'Pause video';
+      button.setAttribute('aria-label', video.paused ? 'Play hero video' : 'Pause hero video');
+    };
+    const play = () => video.play().catch(() => { sync(); });
+    button.addEventListener('click', () => video.paused ? void play() : video.pause());
+    video.addEventListener('error', () => { button.textContent = 'Video unavailable'; button.setAttribute('aria-label', 'Video unavailable'); button.disabled = true; });
+    video.addEventListener('play', sync); video.addEventListener('pause', sync);
+    reduced.addEventListener('change', () => { if (reduced.matches) video.pause(); });
+    document.addEventListener('visibilitychange', () => { if(document.hidden) video.pause(); });
+    if(video.dataset.autoplay === 'true' && !reduced.matches && !root.closest('[data-motion-disabled]')) void play();
+    sync();
+  });
+</script>

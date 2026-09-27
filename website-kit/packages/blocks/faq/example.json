@@ -1,10 +1,18 @@
 {
-  "heading": "FAQ",
+  "heading": "Before we begin.",
+  "emitJsonLd": false,
   "items": [
     {
-      "question": "TODO?",
-      "answer": "TODO."
+      "question": "Where do we start?",
+      "answer": "With a conversation about your business, your audience and what needs to change. From there we outline a scope, timeline and fixed project fee."
+    },
+    {
+      "question": "Can we work together remotely?",
+      "answer": "Absolutely. Our process combines focused video calls, shared working files and clear feedback milestones."
+    },
+    {
+      "question": "Can our team update the website?",
+      "answer": "Yes. We design with reusable sections and provide a handover so your team can update content confidently."
     }
-  ],
-  "emitJsonLd": true
+  ]
 }

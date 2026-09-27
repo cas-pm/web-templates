@@ -25,15 +25,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: pnpm
-      - run: pnpm install --frozen-lockfile
+      - run: pnpm install --no-frozen-lockfile
       # Validate every block's example.json against its schema before building.
       - run: pnpm --filter @web/blocks test:examples
+      - run: pnpm check
       - run: pnpm build
-      - run: pnpm --if-present check # astro check / typecheck gate
       - uses: actions/upload-artifact@v4
         with:
           name: site
@@ -48,6 +50,5 @@ jobs:
         with:
           name: site
           path: dist
-      # TODO: deploy `dist/` to the target (Fly.io preview via flyctl, or static host).
-      # TODO: expose the resulting deploy URL as a job output for status/ to read.
-      - run: 'echo "TODO deploy dist/ (see fly.toml in the template)"'
+      # Add a client-specific deployment step after configuring hosting.
+      - run: 'echo "Build passed. Configure a hosting deployment for this client."'

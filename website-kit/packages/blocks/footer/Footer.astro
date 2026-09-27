@@ -1,13 +1,6 @@
 ---
 import type { FooterProps } from "./schema";
-
-interface Props {
-  data: FooterProps;
-}
-const { data } = Astro.props;
-// TODO: implement the Footer block markup + styles.
+interface Props { data: FooterProps; id?: string }
+const { data, id } = Astro.props;
 ---
-
-<section data-block="footer">
-  {/* TODO: render Footer using `data`. */}
-</section>
+<footer id={id} class="mk-footer" data-block="footer">{data.columns.map(column => <div><h3>{column.title}</h3><ul role="list">{column.links.map(link => <li><a href={link.href}>{link.label}</a></li>)}</ul></div>)}<div><nav aria-label="Legal">{data.legalLinks.map(link => <a href={link.href}>{link.label}</a>)}</nav>{data.copyright && <p>{data.copyright}</p>}</div></footer>

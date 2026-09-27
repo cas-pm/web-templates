@@ -1,14 +1,7 @@
 ---
 import type { FaqProps } from "./schema";
-
-interface Props {
-  data: FaqProps;
-}
-const { data } = Astro.props;
-// TODO: implement the Faq block markup + styles.
-// Note: accordion + FAQ JSON-LD
+interface Props { data: FaqProps; id?: string }
+const { data, id } = Astro.props;
 ---
-
-<section data-block="faq">
-  {/* TODO: render Faq using `data`. */}
-</section>
+<section id={id} class="mk-section mk-faq" data-block="faq"><h2>{data.heading ?? "Good questions"}</h2><div>{data.items.map(item => <details><summary><span>{item.question}</span><span class="mk-plus" aria-hidden="true">+</span></summary><div class="mk-service-body"><p>{item.answer}</p></div></details>)}</div></section>
+{data.emitJsonLd && <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: data.items.map(i => ({ "@type": "Question", name: i.question, acceptedAnswer: { "@type": "Answer", text: i.answer } })) }).replace(/</g, "\\u003c")} />}

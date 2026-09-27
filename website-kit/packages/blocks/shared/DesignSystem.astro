@@ -1,0 +1,89 @@
+---
+import "./design.css";
+---
+<script>
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const active = new Set<Animation>();
+  // CSS minifiers may normalise 800ms to .8s; handle both units.
+  function durationMs(el: Element) {
+    const value = getComputedStyle(el).getPropertyValue('--mk-duration').trim();
+    const amount = parseFloat(value);
+    return Number.isFinite(amount) ? amount * (value.endsWith('ms') ? 1 : 1000) : 800;
+  }
+  function animate(el: Element, frames: Keyframe[], duration = 800) {
+    if (reduced.matches || el.closest('[data-motion-disabled]')) return;
+    const configured = durationMs(el);
+    const animation = el.animate(frames, { duration: Number.isFinite(configured) ? configured : duration, easing: 'cubic-bezier(.2,.65,.2,1)' });
+    active.add(animation);
+    animation.finished.catch(() => {}).finally(() => active.delete(animation));
+  }
+  reduced.addEventListener('change', () => { if (reduced.matches) active.forEach(a => a.finish()); });
+  document.querySelectorAll<HTMLElement>('[data-block="logos"][data-variant="marquee"]').forEach(root => {
+    const button = root.querySelector<HTMLButtonElement>('.mk-motion-toggle')!;
+    button.hidden = false;
+    root.dataset.running = 'true';
+    button.addEventListener('click', () => {
+      const paused = root.dataset.paused !== 'true';
+      root.dataset.paused = String(paused);
+      button.setAttribute('aria-pressed', String(paused));
+      button.textContent = paused ? 'Play animation' : 'Pause animation';
+    });
+  });
+  // Content stays visible if JavaScript or IntersectionObserver is unavailable.
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        observer.unobserve(entry.target);
+        animate(entry.target, entry.target.getAttribute('data-motion') === 'wipe'
+          ? [{ clipPath: 'inset(0 12% 0 0 round 18px)', opacity: .3 }, { clipPath: 'inset(0 0% 0 0 round 18px)', opacity: 1 }]
+          : [{ transform: 'translateY(20px)', opacity: .2 }, { transform: 'translateY(0)', opacity: 1 }]);
+      }
+    }, { threshold: .12 });
+    document.querySelectorAll('[data-motion]').forEach(el => observer.observe(el));
+  }
+  if ('IntersectionObserver' in window) {
+    const counts = new IntersectionObserver(entries => {
+      entries.filter(entry => entry.isIntersecting).forEach(entry => {
+        counts.unobserve(entry.target);
+        const el = entry.target as HTMLElement;
+        const value = Number(el.dataset.count);
+        if (!Number.isFinite(value) || reduced.matches || el.closest('[data-motion-disabled]')) return;
+        const duration = durationMs(el);
+        if (duration === 0) return;
+        const precision = Math.min(6, (String(value).split('.')[1] ?? '').length);
+        const start = performance.now();
+        const tick = (now: number) => {
+          const progress = reduced.matches || el.closest('[data-motion-disabled]') ? 1 : Math.min(1, (now - start) / (Number.isFinite(duration) ? duration : 800));
+          el.textContent = progress === 1 ? String(value) : (value * (1 - (1 - progress) ** 3)).toFixed(precision);
+          if(progress < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      });
+    }, { threshold: .5 });
+    document.querySelectorAll('[data-count]').forEach(el => counts.observe(el));
+  }
+  document.querySelectorAll<HTMLElement>('[data-block="testimonials"]').forEach(root => {
+    const track = root.querySelector<HTMLElement>('.mk-quote-track')!;
+    const controls = root.querySelector<HTMLElement>('.mk-slider-controls');
+    if (!controls) return;
+    controls.hidden = false;
+    const prev = controls.querySelector<HTMLButtonElement>('[data-prev]')!;
+    const next = controls.querySelector<HTMLButtonElement>('[data-next]')!;
+    const position = controls.querySelector<HTMLElement>('[data-position]')!;
+    let index = 0;
+    function sync() {
+      index = Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
+      prev.disabled = index === 0;
+      next.disabled = index >= track.children.length - 1;
+      position.textContent = `${index + 1} / ${track.children.length}`;
+    }
+    function go(delta: number) {
+      track.scrollTo({ left: (index + delta) * track.clientWidth, behavior: reduced.matches ? 'instant' : 'smooth' });
+    }
+    prev.addEventListener('click', () => go(-1)); next.addEventListener('click', () => go(1));
+    track.addEventListener('scroll', sync, { passive: true });
+    new ResizeObserver(sync).observe(track);
+    sync();
+  });
+</script>

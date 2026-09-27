@@ -1,14 +1,9 @@
 ---
 import type { FeaturesProps } from "./schema";
-
-interface Props {
-  data: FeaturesProps;
-}
-const { data } = Astro.props;
-// TODO: implement the Features block markup + styles.
-// Variants: grid, alternating, icon-list
+interface Props { data: FeaturesProps; id?: string }
+const { data, id } = Astro.props;
 ---
-
-<section data-block="features" data-variant={data.variant}>
-  {/* TODO: render Features using `data`. */}
+<section id={id} class:list={["mk-section", "mk-features", `mk-features--${data.variant}`]} data-block="features">
+  {data.heading && <h2>{data.heading}</h2>}
+  <div class="mk-feature-grid">{data.items.map(item => <article>{item.icon && <span class="mk-feature-icon" aria-hidden="true">{item.icon}</span>}<h3>{item.title}</h3><p>{item.description}</p></article>)}</div>
 </section>

@@ -1,9 +1,19 @@
 {
+  "heading": "Example figures",
   "items": [
     {
-      "label": "Projects",
+      "label": "Projects delivered",
       "value": 120,
       "suffix": "+"
+    },
+    {
+      "label": "Years of experience",
+      "value": 12
+    },
+    {
+      "label": "Client rating",
+      "value": 4.9,
+      "suffix": "/5"
     }
   ]
 }

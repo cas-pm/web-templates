@@ -1,0 +1,136 @@
+{
+  "name": "Stillwater",
+  "tagline": "A slower pace. A little closer to nature.",
+  "email": "stay@stillwater.example",
+  "description": "A quiet countryside retreat. Thoughtfully made spaces, seasonal food and time to yourself.",
+  "hero": {
+    "variant": "full-bleed",
+    "heading": "Somewhere to simply be.",
+    "subheading": "Wake slowly. Wander a little. Settle into a quieter rhythm at our small countryside retreat.",
+    "cta": {
+      "label": "Enquire about a stay",
+      "href": "#contact"
+    },
+    "media": "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=2400&q=85",
+    "mediaAlt": "A secluded house surrounded by lush green trees",
+    "height": 100,
+    "overlay": 0.54,
+    "align": "left",
+    "mediaPosition": "center",
+    "eyebrow": "A countryside retreat",
+    "scrollLink": {
+      "label": "Discover Stillwater",
+      "href": "#services"
+    }
+  },
+  "services": {
+    "heading": "Stay a little. Feel a world away.",
+    "items": [
+      {
+        "title": "Restful rooms",
+        "description": "Natural textures, soft linen and a view worth waking up for. Thoughtful spaces for long mornings and early nights.",
+        "href": "#gallery"
+      },
+      {
+        "title": "Food with a sense of place",
+        "description": "Seasonal plates, local ingredients and a table to gather around. Simple food, made with care.",
+        "href": "#contact"
+      },
+      {
+        "title": "Your kind of outdoors",
+        "description": "Follow a woodland path, find a quiet corner with a book, or set out to explore the surrounding countryside.",
+        "href": "#gallery"
+      }
+    ],
+    "eyebrow": "The experience",
+    "intro": "Thoughtful spaces, seasonal food and days that unfold at your own pace."
+  },
+  "features": {
+    "variant": "grid",
+    "heading": "Less on the agenda. More to enjoy.",
+    "items": [
+      {
+        "title": "Unhurried mornings",
+        "description": "Coffee by the window. Breakfast when you\u2019re ready. Time that feels like your own.",
+        "icon": "\u263c"
+      },
+      {
+        "title": "Room to reconnect",
+        "description": "Shared tables and quiet corners. Space to be together, and space just for you.",
+        "icon": "\u25ce"
+      },
+      {
+        "title": "Nature on your doorstep",
+        "description": "Fresh air, leafy paths and the pleasure of having nowhere else to be.",
+        "icon": "\u2301"
+      }
+    ]
+  },
+  "gallery": {
+    "heading": "Find your favourite corner.",
+    "images": [
+      {
+        "src": "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=1200&q=85",
+        "alt": "A retreat among the trees"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=85",
+        "alt": "The long way home"
+      }
+    ],
+    "intro": "Take your time. Explore the details."
+  },
+  "faq": {
+    "heading": "Make yourself at home.",
+    "emitJsonLd": false,
+    "items": [
+      {
+        "question": "How do I enquire about a stay?",
+        "answer": "Send us your preferred dates, the number of guests and anything you would like us to know. We\u2019ll reply with availability and the details of your stay."
+      },
+      {
+        "question": "Can you accommodate dietary needs?",
+        "answer": "Tell us about your dietary needs when you enquire so we can confirm the options available before you book."
+      },
+      {
+        "question": "What should I bring?",
+        "answer": "A good book, comfortable walking shoes and clothes for the season. We\u2019ll include any other useful details in your booking confirmation."
+      }
+    ]
+  },
+  "cta": {
+    "heading": "A little time away does wonders.",
+    "body": "Tell us when you\u2019d like to visit. We\u2019ll take it from there.",
+    "cta": {
+      "label": "Plan your stay",
+      "href": "mailto:stay@stillwater.example"
+    }
+  },
+  "navCta": {
+    "label": "Plan your stay",
+    "href": "#contact"
+  },
+  "navigation": {
+    "sticky": true,
+    "menuLabel": "Menu",
+    "closeLabel": "Close"
+  },
+  "links": [
+    {
+      "label": "The experience",
+      "href": "#services"
+    },
+    {
+      "label": "Take a look",
+      "href": "#gallery"
+    },
+    {
+      "label": "Slow living",
+      "href": "#approach"
+    },
+    {
+      "label": "Plan your stay",
+      "href": "#contact"
+    }
+  ]
+}

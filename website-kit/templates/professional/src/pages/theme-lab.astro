@@ -1,0 +1,122 @@
+---
+import TemplateLayout from "@web/blocks/shared/TemplateLayout.astro";
+import Hero from "@web/blocks/hero/Hero.astro";
+import { HeroPropsSchema } from "@web/blocks/hero/schema";
+import Services from "@web/blocks/services/Services.astro";
+import { ServicesPropsSchema } from "@web/blocks/services/schema";
+import servicesExample from "@web/blocks/services/example.json";
+import Features from "@web/blocks/features/Features.astro";
+import { FeaturesPropsSchema } from "@web/blocks/features/schema";
+import featuresExample from "@web/blocks/features/example.json";
+import Gallery from "@web/blocks/gallery/Gallery.astro";
+import { GalleryPropsSchema } from "@web/blocks/gallery/schema";
+import Testimonials from "@web/blocks/testimonials/Testimonials.astro";
+import { TestimonialsPropsSchema } from "@web/blocks/testimonials/schema";
+import testimonialsExample from "@web/blocks/testimonials/example.json";
+import Stats from "@web/blocks/stats/Stats.astro";
+import { StatsPropsSchema } from "@web/blocks/stats/schema";
+import statsExample from "@web/blocks/stats/example.json";
+import Logos from "@web/blocks/logos/Logos.astro";
+import { LogosPropsSchema } from "@web/blocks/logos/schema";
+import logosExample from "@web/blocks/logos/example.json";
+import Pricing from "@web/blocks/pricing/Pricing.astro";
+import { PricingPropsSchema } from "@web/blocks/pricing/schema";
+import pricingExample from "@web/blocks/pricing/example.json";
+import Faq from "@web/blocks/faq/Faq.astro";
+import { FaqPropsSchema } from "@web/blocks/faq/schema";
+import faqExample from "@web/blocks/faq/example.json";
+import Cta from "@web/blocks/cta/Cta.astro";
+import { CtaPropsSchema } from "@web/blocks/cta/schema";
+import ctaExample from "@web/blocks/cta/example.json";
+import Contact from "@web/blocks/contact/Contact.astro";
+import { ContactPropsSchema } from "@web/blocks/contact/schema";
+import contactExample from "@web/blocks/contact/example.json";
+import content from "../../content/home.json";
+const hero = HeroPropsSchema.parse(content.hero);
+const gallery = GalleryPropsSchema.parse(content.gallery);
+---
+<TemplateLayout title="Block library · Forma" description="Preview reusable website sections and customise the theme." name="Block library" tagline="A starting point. Make it yours." email="hello@forma.example" links={[{label:'Back to template',href:'/'}]}>
+  <aside class="customizer" aria-label="Customise the preview">
+    <div><strong>Make it yours</strong><span>Changes apply to this preview.</span></div>
+    <label>Accent<input type="color" value="#554a91" data-accent /></label>
+    <label>Corner radius<input type="range" min="0" max="64" value="18" data-radius /><output data-radius-value>18px</output></label>
+    <label>Entrance speed<select data-speed><option value="450">Quick</option><option value="800" selected>Gentle</option><option value="1400">Slow</option><option value="0">Off</option></select></label>
+    <label>Hero height<input type="range" min="50" max="120" value="100" data-hero-height /><output data-height-value>100vh</output></label>
+    <label>Image shade<input type="range" min="0" max="90" value="54" data-hero-shade /><output data-shade-value>54%</output></label>
+    <label>Image focus<select data-hero-focus><option>center</option><option>left</option><option>right</option><option>top</option><option>bottom</option></select></label>
+    <button type="button" data-replay>Replay entrance</button><button type="button" data-export>Download theme</button>
+    <span data-status role="status"></span>
+  </aside>
+  <Hero id="preview-hero" data={hero} />
+  <Hero id="preview-video" data={HeroPropsSchema.parse({
+    variant: 'video', heading: 'A little movement. A lasting impression.',
+    eyebrow: 'Full-screen video hero',
+    subheading: 'A local motion study. Replace the video and poster with your own footage.',
+    media: '/media/studio-loop.webm', poster: '/media/studio-poster.png',
+    mediaAlt: 'Slowly moving sculptural shapes in lavender', autoplay: false, loop: true,
+    height: 100, overlay: 0.55, cta: { label: 'Explore the blocks', href: '#services' }
+  })} />
+  <Services id="services" data={ServicesPropsSchema.parse(servicesExample)} />
+  <Features id="preview-features" data={FeaturesPropsSchema.parse(featuresExample)} />
+  <Gallery id="gallery" data={gallery} />
+  <Testimonials id="preview-testimonials" data={TestimonialsPropsSchema.parse(testimonialsExample)} />
+  <Stats id="preview-stats" data={StatsPropsSchema.parse(statsExample)} />
+  <Logos id="preview-logos" data={LogosPropsSchema.parse(logosExample)} />
+  <Pricing id="preview-pricing" data={PricingPropsSchema.parse(pricingExample)} />
+  <Faq id="preview-faq" data={FaqPropsSchema.parse(faqExample)} />
+  <Cta id="preview-cta" data={CtaPropsSchema.parse(ctaExample)} />
+  <Contact id="contact" data={ContactPropsSchema.parse({ ...contactExample, formAction: undefined })} />
+</TemplateLayout>
+<script>
+  const site = document.querySelector<HTMLElement>('.mk-site')!;
+  const accent = document.querySelector<HTMLInputElement>('[data-accent]')!;
+  const radius = document.querySelector<HTMLInputElement>('[data-radius]')!;
+  const speed = document.querySelector<HTMLSelectElement>('[data-speed]')!;
+  const status = document.querySelector<HTMLElement>('[data-status]')!;
+  const heroPreview = document.querySelector<HTMLElement>('#preview-hero')!;
+  const height = document.querySelector<HTMLInputElement>('[data-hero-height]')!;
+  const shade = document.querySelector<HTMLInputElement>('[data-hero-shade]')!;
+  const focus = document.querySelector<HTMLSelectElement>('[data-hero-focus]')!;
+  function update() {
+    heroPreview.style.setProperty('--mk-hero-height', `${height.value}svh`);
+    heroPreview.style.setProperty('--mk-hero-overlay', String(Number(shade.value) / 100));
+    heroPreview.style.setProperty('--mk-hero-position', focus.value);
+    document.querySelector('[data-height-value]')!.textContent = `${height.value}vh`;
+    document.querySelector('[data-shade-value]')!.textContent = `${shade.value}%`;
+    site.style.setProperty('--mk-accent', accent.value);
+    // Choose a readable button label for arbitrary user-selected colours.
+    const channels = accent.value.match(/[a-f0-9]{2}/gi)!.map(v => parseInt(v,16)/255).map(v => v <= .04045 ? v/12.92 : ((v+.055)/1.055)**2.4);
+    const luminance = channels[0] * .2126 + channels[1] * .7152 + channels[2] * .0722;
+    site.style.setProperty('--mk-on-accent', luminance > .179 ? '#000000' : '#ffffff');
+    site.style.setProperty('--mk-radius', `${radius.value}px`);
+    site.style.setProperty('--mk-duration', `${speed.value}ms`);
+    site.toggleAttribute('data-motion-disabled', speed.value === '0');
+    document.querySelector('[data-radius-value]')!.textContent = `${radius.value}px`;
+    if(speed.value === '0') { document.getAnimations().forEach(a => a.cancel()); document.querySelectorAll('video').forEach(video => video.pause()); }
+  }
+  height.addEventListener('input', update); shade.addEventListener('input', update); focus.addEventListener('change', update);
+  accent.addEventListener('input', update); radius.addEventListener('input', update); speed.addEventListener('change', update);
+  document.querySelector('[data-replay]')!.addEventListener('click', () => {
+    const hero = document.querySelector<HTMLElement>('#preview-hero')!;
+    hero.scrollIntoView({ block: 'start' });
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches || speed.value === '0') { status.textContent = 'Motion is turned off.'; return; }
+    hero.querySelector('.mk-hero-copy')!.animate([{opacity:.2,transform:'translateY(20px)'},{opacity:1,transform:'translateY(0)'}],{duration:Number(speed.value),easing:'ease-out'});
+    hero.querySelector('.mk-hero-media')!.animate([{clipPath:'inset(0 12% 0 0)',opacity:.3},{clipPath:'inset(0)',opacity:1}],{duration:Number(speed.value),easing:'ease-out'});
+    status.textContent = 'Entrance replayed.';
+  });
+  document.querySelector('[data-export]')!.addEventListener('click', () => {
+    update();
+    const css = `.mk-site[data-theme], .mk-site {\n  --mk-accent: ${accent.value};\n  --mk-on-accent: ${site.style.getPropertyValue('--mk-on-accent')};\n  --mk-radius: ${radius.value}px;\n  --mk-duration: ${speed.value}ms;\n}\n.mk-site .mk-hero--immersive {\n  --mk-hero-height: ${height.value}svh !important;\n  --mk-hero-overlay: ${Number(shade.value)/100} !important;\n  --mk-hero-position: ${focus.value} !important;\n}\n` + (speed.value === '0' ? '.mk-site * { animation: none !important; transition: none !important; }\n' : '');
+    const url = URL.createObjectURL(new Blob([css],{type:'text/css'}));
+    const link = document.createElement('a');link.href=url;link.download='theme.css';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+    status.textContent = 'Theme downloaded.';
+  });
+</script>
+<style>
+  .customizer { margin-top: 2rem; padding: 1.3rem; display: flex; align-items: center; flex-wrap: wrap; gap: 1.5rem; background: var(--mk-surface); border-radius: 12px; }
+  .customizer > div span { display: block; font-size: .8rem; color: var(--mk-muted); }
+  .customizer label { display: grid; gap: .3rem; font-size: .85rem; }
+  .customizer input[type="color"] { width: 60px; height: 30px; padding: 0; border: 0; }
+  .customizer select,.customizer button { padding: .6rem; font: inherit; background: var(--mk-paper); color: var(--mk-ink); border: 1px solid var(--mk-line); border-radius: 6px; }
+  .customizer output,.customizer [role="status"] { font-size: .75rem; }
+</style>

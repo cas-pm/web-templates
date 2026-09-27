@@ -19,6 +19,8 @@ export const site = {
   address: "Suite 4, 122 Deansgate, Manchester M3 2BW",
   companyNumber: "12345678",
   vatNumber: "GB 123 4567 89",
+  navigation: { sticky: true, menuLabel: "Menu", closeLabel: "Close" },
+  navCta: { label: "Get a quote", href: "/contact" },
   nav: [
     { label: "Services", href: "/services" },
     { label: "About", href: "/about" },

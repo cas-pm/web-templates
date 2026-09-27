@@ -1,10 +1,20 @@
 {
-  "heading": "What clients say",
+  "heading": "Example testimonials \u2014 replace with customer feedback",
   "items": [
     {
-      "quote": "TODO",
-      "author": "Jane Doe",
-      "role": "CEO"
+      "quote": "Our website finally feels like us. The process was clear, collaborative and refreshingly straightforward.",
+      "author": "Sample customer",
+      "role": "Brand project"
+    },
+    {
+      "quote": "We can update every section ourselves. It gives our small team the freedom to keep moving.",
+      "author": "Sample customer",
+      "role": "Website project"
+    },
+    {
+      "quote": "From the first conversation to the final handover, every detail felt considered.",
+      "author": "Sample customer",
+      "role": "Studio collaboration"
     }
   ]
 }

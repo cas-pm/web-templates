@@ -1,0 +1,9 @@
+---
+import TemplateLayout from '@web/blocks/shared/TemplateLayout.astro';
+import CuratedSections from '@web/blocks/shared/CuratedSections.astro';
+import content from '../../content/home.json';
+import pages from '../../content/pages.json';
+const page = pages.pages.find(p => p.slug === 'home')!;
+const links = pages.pages.filter(p => p.slug !== 'home').map(p => ({label:p.title,href:`/${p.slug}`}));
+---
+<TemplateLayout title={content.name} {...content} links={links} navCta={{label:'Contact',href:'/contact'}} theme="adventure"><CuratedSections sections={page.sections} /></TemplateLayout>

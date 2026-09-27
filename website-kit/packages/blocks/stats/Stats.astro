@@ -1,14 +1,6 @@
 ---
 import type { StatsProps } from "./schema";
-
-interface Props {
-  data: StatsProps;
-}
-const { data } = Astro.props;
-// TODO: implement the Stats block markup + styles.
-// Note: count-up on reveal
+interface Props { data: StatsProps; id?: string }
+const { data, id } = Astro.props;
 ---
-
-<section data-block="stats">
-  {/* TODO: render Stats using `data`. */}
-</section>
+<section id={id} class="mk-section mk-stats" data-block="stats">{data.heading && <h2>{data.heading}</h2>}<dl>{data.items.map(item => <div><dt>{item.label}</dt><dd>{item.prefix}<span data-count={item.value}>{item.value}</span>{item.suffix}</dd></div>)}</dl></section>

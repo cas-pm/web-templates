@@ -9,7 +9,9 @@ export const ServiceItemSchema = z.object({
 });
 
 export const ServicesPropsSchema = z.object({
+  eyebrow: z.string().max(80).optional(),
   heading: z.string().max(80).optional(),
+  intro: z.string().max(280).optional(),
   items: z.array(ServiceItemSchema).min(1),
 });
 export type ServicesProps = z.infer<typeof ServicesPropsSchema>;

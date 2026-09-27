@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { HeroPresentationFields } from "../shared/hero-options.js";
 
 /**
  * Zod schemas for every block type. These are the single source of truth for
@@ -13,13 +14,13 @@ import { z } from "zod";
 export const AllowedFormatting = z.enum(["bold", "italic", "link"]);
 export type AllowedFormatting = z.infer<typeof AllowedFormatting>;
 
-/** Absolute URL (http/https/mailto/tel) or a root-relative internal path ("/contact"). */
+/** Absolute URL (http/https/mailto/tel) a same-page fragment, or a root-relative internal path ("/contact"). */
 export const HrefSchema = z
   .string()
   .min(1)
   .refine(
-    (v) => v.startsWith("/") || /^(https?|mailto|tel):/.test(v),
-    { message: "href must be a root-relative path or an absolute http(s)/mailto/tel URL" },
+    (v) => v.startsWith("/") || /^#[^\s]+$/.test(v) || /^(https?|mailto|tel):/.test(v),
+    { message: "href must be a fragment, root-relative path or an absolute http(s)/mailto/tel URL" },
   );
 
 /** A CTA link. Editing the label is allowed; changing the href is not (see registry). */
@@ -30,6 +31,7 @@ export const CtaSchema = z.object({
 export type Cta = z.infer<typeof CtaSchema>;
 
 export const HeroBlockSchema = z.object({
+  ...HeroPresentationFields,
   type: z.literal("hero"),
   heading: z.string().min(1).max(120),
   subheading: z.string().max(220),

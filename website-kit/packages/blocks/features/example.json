@@ -1,11 +1,21 @@
 {
   "variant": "grid",
-  "heading": "Why us",
+  "heading": "Small team. Shared ambition.",
   "items": [
     {
-      "title": "Fast",
-      "description": "TODO",
-      "icon": "bolt"
+      "title": "Direct collaboration",
+      "description": "Work with the people doing the work. Fewer handovers, more useful conversations.",
+      "icon": "\u25ce"
+    },
+    {
+      "title": "Built for everyday use",
+      "description": "A practical system your team can make their own, with the guidance to keep it consistent.",
+      "icon": "\u25a7"
+    },
+    {
+      "title": "Considered from the start",
+      "description": "We connect strategy, design and development so every decision serves the same purpose.",
+      "icon": "\u2301"
     }
   ]
 }

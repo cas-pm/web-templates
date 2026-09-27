@@ -1,0 +1,136 @@
+{
+  "name": "Forma Studio",
+  "tagline": "Clear thinking. Considered design. Lasting change.",
+  "email": "hello@forma.example",
+  "description": "An independent design studio for ambitious businesses. Strategy, identity and digital experiences.",
+  "hero": {
+    "variant": "full-bleed",
+    "heading": "Make room for what comes next.",
+    "subheading": "We bring clarity to your brand and character to your digital world. An independent studio for businesses ready to move forward.",
+    "cta": {
+      "label": "Explore our approach",
+      "href": "#services"
+    },
+    "media": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=2400&q=85",
+    "mediaAlt": "Sunlit creative workspace with expansive windows and natural materials",
+    "height": 100,
+    "overlay": 0.54,
+    "align": "left",
+    "mediaPosition": "center",
+    "eyebrow": "Independent thinking. Enduring design.",
+    "scrollLink": {
+      "label": "Discover the studio",
+      "href": "#services"
+    }
+  },
+  "services": {
+    "heading": "Good ideas, beautifully realised.",
+    "items": [
+      {
+        "title": "Strategy & direction",
+        "description": "A clear point of view, built from listening. We find what makes your business different and turn it into a direction everyone can get behind.",
+        "href": "#contact"
+      },
+      {
+        "title": "Brand identity",
+        "description": "An identity that feels like you. From the first sketch to a complete visual language, we build brands with room to grow.",
+        "href": "#contact"
+      },
+      {
+        "title": "Digital experiences",
+        "description": "Thoughtful websites that connect the dots between your story and what your customers need. Easy to use. Easy to keep evolving.",
+        "href": "#contact"
+      }
+    ],
+    "eyebrow": "The studio",
+    "intro": "From the first idea to the final detail, we bring your next chapter into focus."
+  },
+  "features": {
+    "variant": "grid",
+    "heading": "Small team. Shared ambition.",
+    "items": [
+      {
+        "title": "Direct collaboration",
+        "description": "Work with the people doing the work. Fewer handovers, more useful conversations.",
+        "icon": "\u25ce"
+      },
+      {
+        "title": "Built for everyday use",
+        "description": "A practical system your team can make their own, with the guidance to keep it consistent.",
+        "icon": "\u25a7"
+      },
+      {
+        "title": "Considered from the start",
+        "description": "We connect strategy, design and development so every decision serves the same purpose.",
+        "icon": "\u2301"
+      }
+    ]
+  },
+  "gallery": {
+    "heading": "A study in possibility.",
+    "images": [
+      {
+        "src": "/img/studio.svg",
+        "alt": "Form studies \u2014 identity exploration"
+      },
+      {
+        "src": "/img/system.svg",
+        "alt": "Open spaces \u2014 a visual system"
+      }
+    ],
+    "intro": "Take a closer look at our visual explorations."
+  },
+  "faq": {
+    "heading": "Before we begin.",
+    "emitJsonLd": false,
+    "items": [
+      {
+        "question": "Where do we start?",
+        "answer": "With a conversation about your business, your audience and what needs to change. From there we outline a scope, timeline and fixed project fee."
+      },
+      {
+        "question": "Can we work together remotely?",
+        "answer": "Absolutely. Our process combines focused video calls, shared working files and clear feedback milestones."
+      },
+      {
+        "question": "Can our team update the website?",
+        "answer": "Yes. We design with reusable sections and provide a handover so your team can update content confidently."
+      }
+    ]
+  },
+  "cta": {
+    "heading": "Your next chapter starts here.",
+    "body": "Tell us what you have in mind. We\u2019ll work out the next step together.",
+    "cta": {
+      "label": "Start a conversation",
+      "href": "mailto:hello@forma.example"
+    }
+  },
+  "navCta": {
+    "label": "Let\u2019s talk",
+    "href": "#contact"
+  },
+  "navigation": {
+    "sticky": true,
+    "menuLabel": "Menu",
+    "closeLabel": "Close"
+  },
+  "links": [
+    {
+      "label": "The studio",
+      "href": "#services"
+    },
+    {
+      "label": "Selected work",
+      "href": "#gallery"
+    },
+    {
+      "label": "Our approach",
+      "href": "#approach"
+    },
+    {
+      "label": "Contact",
+      "href": "#contact"
+    }
+  ]
+}

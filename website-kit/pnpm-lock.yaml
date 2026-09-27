@@ -118,6 +118,37 @@ importers:
         specifier: ^3.23.8
         version: 3.25.76
 
+  templates/arabian-adventure:
+    dependencies:
+      '@web/analytics':
+        specifier: workspace:*
+        version: link:../../packages/analytics
+      '@web/blocks':
+        specifier: workspace:*
+        version: link:../../packages/blocks
+      '@web/motion':
+        specifier: workspace:*
+        version: link:../../packages/motion
+      '@web/seo':
+        specifier: workspace:*
+        version: link:../../packages/seo
+      '@web/tokens':
+        specifier: workspace:*
+        version: link:../../packages/tokens
+      '@web/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      astro:
+        specifier: ^4.16.0
+        version: 4.16.19(@types/node@22.20.4)(rollup@4.63.5)(typescript@5.9.3)
+      zod:
+        specifier: ^3.23.8
+        version: 3.25.76
+    devDependencies:
+      '@astrojs/check':
+        specifier: ^0.9.4
+        version: 0.9.10(@emnapi/runtime@1.11.3)(prettier@3.9.9)(typescript@5.9.3)
+
   templates/hospitality:
     dependencies:
       '@web/analytics':

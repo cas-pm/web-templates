@@ -1,13 +1,9 @@
 ---
 import type { GalleryProps } from "./schema";
-
-interface Props {
-  data: GalleryProps;
-}
-const { data } = Astro.props;
-// TODO: implement the Gallery block markup + styles.
+interface Props { data: GalleryProps; id?: string }
+const { data, id } = Astro.props;
 ---
-
-<section data-block="gallery">
-  {/* TODO: render Gallery using `data`. */}
+<section id={id} class="mk-section mk-gallery" data-block="gallery">
+  <div class="mk-section-heading mk-heading-row"><h2>{data.heading ?? "A closer look"}</h2>{data.intro && <p>{data.intro}</p>}</div>
+  <div class="mk-gallery-track" tabindex="0" aria-label={data.heading ?? "Image gallery"}>{data.images.map(item => <figure data-motion="wipe"><img src={item.src} alt={item.alt} width={item.width ?? 1000} height={item.height ?? 800} loading="lazy" /><figcaption><span>{item.alt}</span><span aria-hidden="true">↗</span></figcaption></figure>)}</div>
 </section>

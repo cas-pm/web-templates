@@ -1,0 +1,573 @@
+{
+  "pages": [
+    {
+      "slug": "home",
+      "title": "Arabian Adventure",
+      "description": "A concept for thoughtfully guided desert experiences in the UAE. Sample content for a prospective client.",
+      "sections": [
+        {
+          "id": "hero",
+          "label": "Hero · Immersive",
+          "type": "hero",
+          "data": {
+            "variant": "full-bleed",
+            "heading": "The desert is calling.",
+            "subheading": "Step away from the city and discover the quiet, colour and possibility of the dunes.",
+            "cta": {
+              "label": "Discover experiences",
+              "href": "/experiences"
+            },
+            "media": "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=2400&q=85",
+            "mediaAlt": "Golden desert dunes under an open sky",
+            "height": 100,
+            "overlay": 0.54,
+            "align": "left",
+            "mediaPosition": "center",
+            "eyebrow": "A UAE desert experience",
+            "scrollLink": {
+              "label": "Discover Stillwater",
+              "href": "#services"
+            }
+          }
+        },
+        {
+          "id": "offerings",
+          "label": "Offerings · Three cards",
+          "type": "services",
+          "data": {
+            "eyebrow": "Choose your journey",
+            "heading": "A different way into the desert.",
+            "intro": "Slow mornings, open horizons and evenings worth remembering.",
+            "items": [
+              {
+                "title": "Sunrise trails",
+                "description": "An early start and an unhurried view as the desert wakes.",
+                "href": "/experiences"
+              },
+              {
+                "title": "Private escapes",
+                "description": "A more personal route, planned around your group.",
+                "href": "/experiences"
+              },
+              {
+                "title": "Evening gatherings",
+                "description": "Warm light, good company and a place to pause.",
+                "href": "/experiences"
+              }
+            ]
+          }
+        },
+        {
+          "id": "story",
+          "label": "Story · Editorial split",
+          "type": "editorial",
+          "data": {
+            "heading": "Good ideas start with clear thinking.",
+            "paragraphs": [
+              "We connect strategy, identity and digital craft into a coherent system.",
+              "Explore how this approach can work for you."
+            ],
+            "eyebrow": "The thinking"
+          }
+        },
+        {
+          "id": "journey",
+          "label": "Journey · Three steps",
+          "type": "services",
+          "data": {
+            "eyebrow": "How it unfolds",
+            "heading": "From first message to open horizon.",
+            "items": [
+              {
+                "title": "Tell us your idea",
+                "description": "Share your date, group size and the mood you are after."
+              },
+              {
+                "title": "Shape the route",
+                "description": "Discuss timing, pace and available options together."
+              },
+              {
+                "title": "Make it yours",
+                "description": "Confirm the details before you set off."
+              }
+            ]
+          }
+        },
+        {
+          "id": "numbers",
+          "label": "Facts · Concept labels",
+          "type": "stats",
+          "data": {
+            "heading": "The experience, your way",
+            "items": [
+              {
+                "value": 1,
+                "label": "Open conversation"
+              },
+              {
+                "value": 2,
+                "label": "Ways to explore"
+              },
+              {
+                "value": 3,
+                "label": "Moments to savour"
+              }
+            ]
+          }
+        },
+        {
+          "id": "moments",
+          "label": "Gallery · Horizontal story",
+          "type": "gallery",
+          "data": {
+            "heading": "Moments beyond the map.",
+            "intro": "A visual direction for the concept. Replace with licensed client photography.",
+            "images": [
+              {
+                "src": "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=1200&q=85",
+                "alt": "Sunlit dune formations"
+              },
+              {
+                "src": "https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=1200&q=85",
+                "alt": "Desert landscape in warm evening light"
+              }
+            ]
+          }
+        },
+        {
+          "id": "benefits",
+          "label": "Benefits · Icon grid",
+          "type": "features",
+          "data": {
+            "variant": "grid",
+            "heading": "Space to feel it all.",
+            "items": [
+              {
+                "title": "A considered pace",
+                "description": "Time to take in the landscape, without rushing through it.",
+                "icon": "◌"
+              },
+              {
+                "title": "Made for your group",
+                "description": "An enquiry led experience with room for different needs.",
+                "icon": "✦"
+              },
+              {
+                "title": "Local perspective",
+                "description": "Ideas shaped by the place and the people who know it.",
+                "icon": "◇"
+              }
+            ]
+          }
+        },
+        {
+          "id": "questions",
+          "label": "Questions · Accordion",
+          "type": "faq",
+          "data": {
+            "heading": "Before you go.",
+            "emitJsonLd": false,
+            "items": [
+              {
+                "question": "How do I plan an experience?",
+                "answer": "Send your preferred date, group size and the kind of experience you have in mind. The team can confirm options and availability."
+              },
+              {
+                "question": "Can an experience be private?",
+                "answer": "Private enquiries can be discussed based on group size, date and availability."
+              },
+              {
+                "question": "What should I bring?",
+                "answer": "Comfortable clothing, sun protection and water are useful. Confirm the final preparation details when booking."
+              }
+            ]
+          }
+        },
+        {
+          "id": "next-step",
+          "label": "Action · Invitation",
+          "type": "cta",
+          "data": {
+            "heading": "Go where the day takes you.",
+            "body": "Tell us what you imagine. We will help shape the next step.",
+            "cta": {
+              "label": "Plan an experience",
+              "href": "/contact"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "slug": "experiences",
+      "title": "Experiences",
+      "description": "Explore a demo concept for guided desert experiences in the UAE.",
+      "sections": [
+        {
+          "id": "hero",
+          "label": "Hero · Full-bleed",
+          "type": "hero",
+          "data": {
+            "variant": "full-bleed",
+            "heading": "Built to move you forward.",
+            "subheading": "Discover the options and find the right fit for you.",
+            "media": "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=2400&q=85",
+            "mediaAlt": "Golden desert dunes under an open sky",
+            "height": 72,
+            "overlay": 0.53,
+            "align": "left",
+            "eyebrow": "Our services",
+            "cta": {
+              "label": "Start a project",
+              "href": "/contact"
+            }
+          }
+        },
+        {
+          "id": "offerings",
+          "label": "Offerings · Three cards",
+          "type": "services",
+          "data": {
+            "eyebrow": "Choose your journey",
+            "heading": "A different way into the desert.",
+            "intro": "Slow mornings, open horizons and evenings worth remembering.",
+            "items": [
+              {
+                "title": "Sunrise trails",
+                "description": "An early start and an unhurried view as the desert wakes.",
+                "href": "/experiences"
+              },
+              {
+                "title": "Private escapes",
+                "description": "A more personal route, planned around your group.",
+                "href": "/experiences"
+              },
+              {
+                "title": "Evening gatherings",
+                "description": "Warm light, good company and a place to pause.",
+                "href": "/experiences"
+              }
+            ]
+          }
+        },
+        {
+          "id": "details",
+          "label": "Story · Editorial split",
+          "type": "editorial",
+          "data": {
+            "heading": "A connected approach.",
+            "paragraphs": [
+              "Every project starts with understanding the challenge. The right mix of services follows from there.",
+              "We can discuss what fits your goals and shape a clear next step together."
+            ],
+            "eyebrow": "Our approach"
+          }
+        },
+        {
+          "id": "benefits",
+          "label": "Benefits · Icon grid",
+          "type": "features",
+          "data": {
+            "variant": "grid",
+            "heading": "Space to feel it all.",
+            "items": [
+              {
+                "title": "A considered pace",
+                "description": "Time to take in the landscape, without rushing through it.",
+                "icon": "◌"
+              },
+              {
+                "title": "Made for your group",
+                "description": "An enquiry led experience with room for different needs.",
+                "icon": "✦"
+              },
+              {
+                "title": "Local perspective",
+                "description": "Ideas shaped by the place and the people who know it.",
+                "icon": "◇"
+              }
+            ]
+          }
+        },
+        {
+          "id": "next-step",
+          "label": "Action · Invitation",
+          "type": "cta",
+          "data": {
+            "heading": "Ready to explore the details?",
+            "body": "Tell us what you need and we will share the next steps.",
+            "cta": {
+              "label": "Get in touch",
+              "href": "/contact"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "slug": "about",
+      "title": "About",
+      "description": "Learn the philosophy behind Arabian Adventure.",
+      "sections": [
+        {
+          "id": "hero",
+          "label": "Hero · Full-bleed",
+          "type": "hero",
+          "data": {
+            "variant": "full-bleed",
+            "heading": "A studio with a point of view.",
+            "subheading": "The ideas and people behind the experience.",
+            "media": "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=2400&q=85",
+            "mediaAlt": "Golden desert dunes under an open sky",
+            "height": 72,
+            "overlay": 0.53,
+            "align": "left",
+            "eyebrow": "Our story",
+            "cta": {
+              "label": "Get in touch",
+              "href": "/contact"
+            }
+          }
+        },
+        {
+          "id": "story",
+          "label": "Story · Editorial split",
+          "type": "editorial",
+          "data": {
+            "heading": "Thoughtful from the beginning.",
+            "paragraphs": [
+              "We believe the best experiences make room for people, place and purpose.",
+              "Our work starts by listening, then shaping details that feel effortless and distinctive."
+            ],
+            "eyebrow": "What matters"
+          }
+        },
+        {
+          "id": "benefits",
+          "label": "Values · Icon grid",
+          "type": "features",
+          "data": {
+            "variant": "grid",
+            "heading": "Space to feel it all.",
+            "items": [
+              {
+                "title": "A considered pace",
+                "description": "Time to take in the landscape, without rushing through it.",
+                "icon": "◌"
+              },
+              {
+                "title": "Made for your group",
+                "description": "An enquiry led experience with room for different needs.",
+                "icon": "✦"
+              },
+              {
+                "title": "Local perspective",
+                "description": "Ideas shaped by the place and the people who know it.",
+                "icon": "◇"
+              }
+            ]
+          }
+        },
+        {
+          "id": "next-step",
+          "label": "Action · Invitation",
+          "type": "cta",
+          "data": {
+            "heading": "Start a conversation.",
+            "body": "We would love to hear what you have in mind.",
+            "cta": {
+              "label": "Get in touch",
+              "href": "/contact"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "slug": "work",
+      "title": "Selected work",
+      "description": "A visual introduction to Arabian Adventure.",
+      "sections": [
+        {
+          "id": "hero",
+          "label": "Hero · Full-bleed",
+          "type": "hero",
+          "data": {
+            "variant": "full-bleed",
+            "heading": "Ideas brought into focus.",
+            "subheading": "A glimpse of the atmosphere, details and possibilities.",
+            "media": "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=2400&q=85",
+            "mediaAlt": "Golden desert dunes under an open sky",
+            "height": 72,
+            "overlay": 0.53,
+            "align": "left",
+            "eyebrow": "In pictures",
+            "cta": {
+              "label": "Make an enquiry",
+              "href": "/contact"
+            }
+          }
+        },
+        {
+          "id": "moments",
+          "label": "Gallery · Horizontal story",
+          "type": "gallery",
+          "data": {
+            "heading": "Moments beyond the map.",
+            "intro": "A visual direction for the concept. Replace with licensed client photography.",
+            "images": [
+              {
+                "src": "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=1200&q=85",
+                "alt": "Sunlit dune formations"
+              },
+              {
+                "src": "https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=1200&q=85",
+                "alt": "Desert landscape in warm evening light"
+              }
+            ]
+          }
+        },
+        {
+          "id": "perspective",
+          "label": "Story · Editorial split",
+          "type": "editorial",
+          "data": {
+            "heading": "Look beyond the first impression.",
+            "paragraphs": [
+              "The best details reveal themselves when you spend more time with them.",
+              "These images illustrate a direction. Replace them with approved, licensed photography before client launch."
+            ],
+            "eyebrow": "The details"
+          }
+        },
+        {
+          "id": "next-step",
+          "label": "Action · Invitation",
+          "type": "cta",
+          "data": {
+            "heading": "See yourself here?",
+            "body": "Tell us what you are looking for.",
+            "cta": {
+              "label": "Get in touch",
+              "href": "/contact"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "slug": "faq",
+      "title": "Questions",
+      "description": "Practical answers about Arabian Adventure.",
+      "sections": [
+        {
+          "id": "hero",
+          "label": "Hero · Full-bleed",
+          "type": "hero",
+          "data": {
+            "variant": "full-bleed",
+            "heading": "Good to know.",
+            "subheading": "Find answers to common questions before getting in touch.",
+            "media": "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=2400&q=85",
+            "mediaAlt": "Golden desert dunes under an open sky",
+            "height": 72,
+            "overlay": 0.53,
+            "align": "left",
+            "eyebrow": "Before you begin",
+            "cta": {
+              "label": "Ask a question",
+              "href": "/contact"
+            }
+          }
+        },
+        {
+          "id": "questions",
+          "label": "Questions · Accordion",
+          "type": "faq",
+          "data": {
+            "heading": "Before you go.",
+            "emitJsonLd": false,
+            "items": [
+              {
+                "question": "How do I plan an experience?",
+                "answer": "Send your preferred date, group size and the kind of experience you have in mind. The team can confirm options and availability."
+              },
+              {
+                "question": "Can an experience be private?",
+                "answer": "Private enquiries can be discussed based on group size, date and availability."
+              },
+              {
+                "question": "What should I bring?",
+                "answer": "Comfortable clothing, sun protection and water are useful. Confirm the final preparation details when booking."
+              }
+            ]
+          }
+        },
+        {
+          "id": "next-step",
+          "label": "Action · Invitation",
+          "type": "cta",
+          "data": {
+            "heading": "Still have a question?",
+            "body": "Send us a note and we will help.",
+            "cta": {
+              "label": "Get in touch",
+              "href": "/contact"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "slug": "contact",
+      "title": "Contact",
+      "description": "Get in touch with Arabian Adventure.",
+      "sections": [
+        {
+          "id": "hero",
+          "label": "Hero · Full-bleed",
+          "type": "hero",
+          "data": {
+            "variant": "full-bleed",
+            "heading": "Let’s make a start.",
+            "subheading": "Share a little about what you have in mind and we will reply with the next step.",
+            "media": "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=2400&q=85",
+            "mediaAlt": "Golden desert dunes under an open sky",
+            "height": 72,
+            "overlay": 0.53,
+            "align": "left",
+            "eyebrow": "Get in touch",
+            "cta": {
+              "label": "Email us",
+              "href": "mailto:hello@arabian-adventure.example"
+            }
+          }
+        },
+        {
+          "id": "details",
+          "label": "Story · Editorial split",
+          "type": "editorial",
+          "data": {
+            "heading": "Start with a conversation.",
+            "paragraphs": [
+              "Tell us about your plans, ideal timing and any details that matter to you.",
+              "We will respond with the information you need to move forward."
+            ],
+            "eyebrow": "How to reach us"
+          }
+        },
+        {
+          "id": "contact-options",
+          "label": "Contact · Direct channels",
+          "type": "contact",
+          "data": {
+            "heading": "We’d love to hear from you.",
+            "channels": {
+              "email": "hello@arabian-adventure.example"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -2,9 +2,20 @@
   "variant": "marquee",
   "items": [
     {
-      "name": "Client",
-      "src": "/logos/client.svg",
-      "href": "https://client.example"
+      "name": "North",
+      "src": "/logos/north.svg"
+    },
+    {
+      "name": "Arc",
+      "src": "/logos/arc.svg"
+    },
+    {
+      "name": "Fieldwork",
+      "src": "/logos/fieldwork.svg"
+    },
+    {
+      "name": "Common",
+      "src": "/logos/common.svg"
     }
   ]
 }

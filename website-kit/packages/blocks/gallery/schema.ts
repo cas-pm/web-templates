@@ -9,6 +9,7 @@ export const GalleryImageSchema = z.object({
 
 export const GalleryPropsSchema = z.object({
   heading: z.string().max(80).optional(),
+  intro: z.string().max(280).optional(),
   images: z.array(GalleryImageSchema).min(1),
 });
 export type GalleryProps = z.infer<typeof GalleryPropsSchema>;

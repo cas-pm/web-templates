@@ -1,10 +1,20 @@
 {
-  "heading": "Services",
+  "heading": "Good ideas, beautifully realised.",
   "items": [
     {
-      "title": "Consulting",
-      "description": "TODO",
-      "href": "/services/consulting"
+      "title": "Strategy & direction",
+      "description": "A clear point of view, built from listening. We find what makes your business different and turn it into a direction everyone can get behind.",
+      "href": "#contact"
+    },
+    {
+      "title": "Brand identity",
+      "description": "An identity that feels like you. From the first sketch to a complete visual language, we build brands with room to grow.",
+      "href": "#contact"
+    },
+    {
+      "title": "Digital experiences",
+      "description": "Thoughtful websites that connect the dots between your story and what your customers need. Easy to use. Easy to keep evolving.",
+      "href": "#contact"
     }
   ]
 }

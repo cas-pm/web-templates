@@ -1,7 +1,10 @@
 # Hospitality template
 
-Multi-page starter composed from `@web/blocks`.
+A complete responsive single-page starter composed from `@web/blocks`.
 
-**Suggested block flow:** hero, gallery, features, testimonials, faq, contact, footer
+Edit `content/home.json` for copy, image URLs and calls to action. Reorder sections
+in `src/pages/index.astro`. Theme overrides live in the shared `TemplateLayout.astro`.
 
-TODO: build out pages and `content/pages.json` (see `templates/services-business` for the reference wiring).
+The sample photos are hosted on Unsplash; replace them with client-owned assets.
+
+See [the customization guide](../../docs/customization.md) for integration and motion settings.

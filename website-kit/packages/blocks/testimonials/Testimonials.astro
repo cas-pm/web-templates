@@ -1,14 +1,10 @@
 ---
 import type { TestimonialsProps } from "./schema";
-
-interface Props {
-  data: TestimonialsProps;
-}
-const { data } = Astro.props;
-// TODO: implement the Testimonials block markup + styles.
-// Note: Embla slider
+interface Props { data: TestimonialsProps; id?: string }
+const { data, id } = Astro.props;
 ---
-
-<section data-block="testimonials">
-  {/* TODO: render Testimonials using `data`. */}
+<section id={id} class="mk-section mk-testimonials" data-block="testimonials">
+  {data.heading && <h2 class="mk-caption">{data.heading}</h2>}
+  <div class="mk-quote-track" tabindex="0" aria-label="Testimonials">{data.items.map(item => <figure><blockquote>“{item.quote}”</blockquote><figcaption>{item.avatar && <img src={item.avatar} alt="" width="48" height="48" loading="lazy" />}<div><strong>{item.author}</strong>{item.role && <span>{item.role}</span>}</div></figcaption></figure>)}</div>
+  {data.items.length > 1 && <div class="mk-slider-controls" hidden><button type="button" data-prev aria-label="Previous testimonial">←</button><span data-position aria-live="polite">1 / {data.items.length}</span><button type="button" data-next aria-label="Next testimonial">→</button></div>}
 </section>

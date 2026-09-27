@@ -1,13 +1,56 @@
 ---
 import type { HeaderProps } from "./schema";
-
-interface Props {
-  data: HeaderProps;
-}
-const { data } = Astro.props;
-// TODO: implement the Header block markup + styles.
+interface Props { data: HeaderProps; id?: string }
+const { data, id } = Astro.props;
+const navId = `${id ?? 'site-header'}-navigation`;
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 ---
-
-<section data-block="header">
-  {/* TODO: render Header using `data`. */}
-</section>
+<header id={id} class="mk-header" data-block="header" data-sticky={String(data.sticky !== false)}>
+  <div class="mk-header-inner">
+    <a class="mk-brand" href={data.logoHref} aria-label={`${data.logoText} home`}>
+      {data.logoImage ? <img class="mk-brand-image" src={data.logoImage} alt="" width="36" height="36" /> : <span class="mk-brand-mark" aria-hidden="true"></span>}
+      {data.logoText}
+    </a>
+    <button class="mk-menu-toggle" type="button" aria-expanded="false" aria-controls={navId} data-open-label={data.menuLabel ?? 'Menu'} data-close-label={data.closeLabel ?? 'Close'} hidden><span data-menu-label>{data.menuLabel ?? 'Menu'}</span><span class="mk-menu-icon" aria-hidden="true"></span></button>
+    <nav id={navId} class="mk-header-nav" aria-label="Primary">
+      <ul class="mk-nav-links" role="list">{data.links.map(link => <li><a href={link.href} aria-current={!link.href.startsWith('#') && (link.href.replace(/\/$/, '') || '/') === path ? 'page' : undefined}>{link.label}</a></li>)}</ul>
+      {data.cta && <a class="mk-button mk-nav-cta" href={data.cta.href}>{data.cta.label}<span aria-hidden="true">↗</span></a>}
+    </nav>
+  </div>
+</header>
+<script>
+  document.querySelectorAll<HTMLElement>('.mk-header').forEach(header => {
+    const toggle = header.querySelector<HTMLButtonElement>('.mk-menu-toggle')!;
+    const label = toggle.querySelector<HTMLElement>('[data-menu-label]')!;
+    const nav = header.querySelector<HTMLElement>('nav')!;
+    const mobile = matchMedia('(max-width: 900px)');
+    header.dataset.enhanced = 'true'; toggle.hidden = false;
+    const close = (restoreFocus = false) => {
+      header.dataset.menuOpen = 'false'; toggle.setAttribute('aria-expanded', 'false');
+      label.textContent = toggle.dataset.openLabel!;
+      if (restoreFocus) toggle.focus();
+    };
+    toggle.addEventListener('click', () => {
+      if (toggle.getAttribute('aria-expanded') === 'true') return close();
+      header.dataset.menuOpen = 'true'; toggle.setAttribute('aria-expanded', 'true');
+      label.textContent = toggle.dataset.closeLabel!;
+    });
+    header.addEventListener('keydown', e => { if(e.key === 'Escape') close(true); });
+    nav.addEventListener('click', e => { if((e.target as Element).closest('a')) close(); });
+    document.addEventListener('click', e => { if(!header.contains(e.target as Node)) close(); });
+    document.addEventListener('focusin', e => { if(!header.contains(e.target as Node)) close(); });
+    mobile.addEventListener('change', () => close());
+    const links = [...nav.querySelectorAll<HTMLAnchorElement>('.mk-nav-links a[href^="#"]')];
+    const sections = links.map(link => ({link, target: document.getElementById(link.hash.slice(1))})).filter(item => item.target);
+    let queued = false;
+    const update = () => {
+      queued = false;
+      header.dataset.scrolled = String(scrollY > 16);
+      const threshold = header.getBoundingClientRect().height + 100;
+      const current = sections.filter(item => item.target!.getBoundingClientRect().top <= threshold).sort((a,b) => b.target!.getBoundingClientRect().top - a.target!.getBoundingClientRect().top)[0];
+      sections.forEach(item => item === current ? item.link.setAttribute('aria-current', 'location') : item.link.removeAttribute('aria-current'));
+    };
+    window.addEventListener('scroll', () => { if(!queued) { queued = true; requestAnimationFrame(update); } }, {passive:true});
+    update();
+  });
+</script>

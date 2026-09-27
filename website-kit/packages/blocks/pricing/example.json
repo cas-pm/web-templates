@@ -1,18 +1,37 @@
 {
-  "heading": "Pricing",
+  "heading": "Example plans",
   "plans": [
     {
-      "name": "Starter",
-      "price": "£99",
-      "period": "mo",
+      "name": "Essentials",
+      "price": "\u00a3950",
+      "period": "/ project",
       "features": [
-        "TODO"
+        "A focused single-page website",
+        "Your content and brand colours",
+        "Responsive layout",
+        "Handover guide"
       ],
       "cta": {
-        "label": "Choose",
-        "href": "/contact"
+        "label": "Discuss essentials",
+        "href": "mailto:hello@forma.example"
       },
       "featured": false
+    },
+    {
+      "name": "Complete",
+      "price": "\u00a32,400",
+      "period": "/ project",
+      "features": [
+        "A complete multi-page website",
+        "Custom visual direction",
+        "Reusable content blocks",
+        "Launch and handover support"
+      ],
+      "cta": {
+        "label": "Discuss your project",
+        "href": "mailto:hello@forma.example"
+      },
+      "featured": true
     }
   ]
 }

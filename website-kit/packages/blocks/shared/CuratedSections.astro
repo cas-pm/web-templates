@@ -1,0 +1,46 @@
+---
+import Hero from '../hero/Hero.astro';
+import Services from '../services/Services.astro';
+import Features from '../features/Features.astro';
+import Gallery from '../gallery/Gallery.astro';
+import Testimonials from '../testimonials/Testimonials.astro';
+import Stats from '../stats/Stats.astro';
+import Faq from '../faq/Faq.astro';
+import Cta from '../cta/Cta.astro';
+import Contact from '../contact/Contact.astro';
+import { HeroPropsSchema } from '../hero/schema';
+import { ServicesPropsSchema } from '../services/schema';
+import { FeaturesPropsSchema } from '../features/schema';
+import { GalleryPropsSchema } from '../gallery/schema';
+import { TestimonialsPropsSchema } from '../testimonials/schema';
+import { StatsPropsSchema } from '../stats/schema';
+import { FaqPropsSchema } from '../faq/schema';
+import { CtaPropsSchema } from '../cta/schema';
+import { ContactPropsSchema } from '../contact/schema';
+interface Section { id: string; type: string; label: string; data: any }
+interface Props { sections: Section[] }
+const { sections } = Astro.props;
+const allowed = new Set(['hero','services','features','gallery','testimonials','stats','faq','cta','contact','editorial']);
+const ids = new Set<string>();
+for (const section of sections) {
+  if (!allowed.has(section.type) || !/^[a-z][a-z0-9-]*$/.test(section.id) || ids.has(section.id)) throw new Error(`Invalid or duplicate section: ${section.id}`);
+  ids.add(section.id);
+}
+---
+{sections.map(section => <div class="curated-section" data-section-name={section.label}>
+  {section.type === 'hero' && <Hero id={section.id} data={HeroPropsSchema.parse(section.data)} />}
+  {section.type === 'services' && <Services id={section.id} data={ServicesPropsSchema.parse(section.data)} />}
+  {section.type === 'features' && <Features id={section.id} data={FeaturesPropsSchema.parse(section.data)} />}
+  {section.type === 'gallery' && <Gallery id={section.id} data={GalleryPropsSchema.parse(section.data)} />}
+  {section.type === 'testimonials' && <Testimonials id={section.id} data={TestimonialsPropsSchema.parse(section.data)} />}
+  {section.type === 'stats' && <Stats id={section.id} data={StatsPropsSchema.parse(section.data)} />}
+  {section.type === 'faq' && <Faq id={section.id} data={FaqPropsSchema.parse(section.data)} />}
+  {section.type === 'cta' && <Cta id={section.id} data={CtaPropsSchema.parse(section.data)} />}
+  {section.type === 'contact' && <Contact id={section.id} data={ContactPropsSchema.parse(section.data)} />}
+  {section.type === 'editorial' && <section id={section.id} class="mk-section editorial" data-block="editorial"><div><span class="mk-caption">{section.data.eyebrow}</span><h2>{section.data.heading}</h2></div><div class="editorial-copy">{Array.isArray(section.data.paragraphs) && section.data.paragraphs.map((paragraph: unknown) => typeof paragraph === 'string' && <p>{paragraph}</p>)}</div></section>}
+</div>)}
+<style>
+  .editorial {display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(2rem,8vw,9rem);border-top:1px solid var(--mk-line)}
+  .editorial h2 {max-width:12ch}.editorial-copy {color:var(--mk-muted);font-size:clamp(1rem,1.5vw,1.25rem);line-height:1.7}.editorial-copy p:first-child {margin-top:0}
+  @media(max-width:760px){.editorial{grid-template-columns:1fr;gap:1rem}}
+</style>

@@ -1,13 +1,6 @@
 ---
 import type { CtaProps } from "./schema";
-
-interface Props {
-  data: CtaProps;
-}
-const { data } = Astro.props;
-// TODO: implement the Cta block markup + styles.
+interface Props { data: CtaProps; id?: string }
+const { data, id } = Astro.props;
 ---
-
-<section data-block="cta">
-  {/* TODO: render Cta using `data`. */}
-</section>
+<section id={id} class="mk-section mk-cta" data-block="cta"><div><h2>{data.heading}</h2>{data.body && <p>{data.body}</p>}</div><a class="mk-button" href={data.cta.href}>{data.cta.label}<span aria-hidden="true">↗</span></a></section>

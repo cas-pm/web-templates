@@ -1,13 +1,12 @@
 ---
 import type { ServicesProps } from "./schema";
-
-interface Props {
-  data: ServicesProps;
-}
-const { data } = Astro.props;
-// TODO: implement the Services block markup + styles.
+interface Props { data: ServicesProps; id?: string }
+const { data, id } = Astro.props;
 ---
-
-<section data-block="services">
-  {/* TODO: render Services using `data`. */}
+<section id={id} class="mk-section mk-services" data-block="services">
+  <div class="mk-section-heading">{data.eyebrow && <span class="mk-caption">{data.eyebrow}</span>}<h2>{data.heading ?? "Designed around you"}</h2>{data.intro && <p>{data.intro}</p>}</div>
+  <div class="mk-service-list">{data.items.map((item, i) => <details open={i === 0}>
+    <summary><span>{item.title}</span><span class="mk-plus" aria-hidden="true">+</span></summary>
+    <div class="mk-service-body"><p>{item.description}</p>{item.href && <a class="mk-text-link" href={item.href}>Explore {item.title.toLowerCase()} <span aria-hidden="true">↗</span></a>}</div>
+  </details>)}</div>
 </section>

@@ -1,14 +1,6 @@
 ---
 import type { ContactProps } from "./schema";
-
-interface Props {
-  data: ContactProps;
-}
-const { data } = Astro.props;
-// TODO: implement the Contact block markup + styles.
-// Note: form + WhatsApp/tel/mail tracked
+interface Props { data: ContactProps; id?: string }
+const { data, id } = Astro.props;
 ---
-
-<section data-block="contact">
-  {/* TODO: render Contact using `data`. */}
-</section>
+<section id={id} class="mk-section mk-contact" data-block="contact"><div><h2>{data.heading ?? "Let’s talk."}</h2><div class="mk-contact-channels">{data.channels.email && <a href={`mailto:${data.channels.email}`}>{data.channels.email}</a>}{data.channels.tel && <a href={`tel:${data.channels.tel}`}>{data.channels.tel}</a>}{data.channels.whatsapp && <a href={`https://wa.me/${data.channels.whatsapp.replace(/\D/g, '')}`}>Chat on WhatsApp</a>}</div></div>{data.formAction && <form action={data.formAction} method="post"><label>Your name<input name="name" autocomplete="name" required /></label><label>Email address<input name="email" type="email" autocomplete="email" required /></label><label>What do you have in mind?<textarea name="message" rows="5" required></textarea></label><button class="mk-button" type="submit">Send enquiry <span aria-hidden="true">↗</span></button></form>}</section>

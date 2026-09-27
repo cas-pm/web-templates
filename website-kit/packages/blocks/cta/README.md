@@ -2,7 +2,7 @@
 
 ## Files
 
-- `Cta.astro` — presentational component (skeleton).
+- `Cta.astro` — responsive presentational component.
 - `schema.ts` — zod props schema (`CtaProps`).
 - `example.json` — sample props, valid against the schema.
 
@@ -16,4 +16,4 @@ import example from "@web/blocks/cta/example.json";
 <Cta data={example} />
 ```
 
-TODO: document props and styling hooks.
+See [the customization guide](../../../docs/customization.md) for theme tokens, motion settings and layout setup. Parse JSON with the exported props schema to apply defaults before rendering.

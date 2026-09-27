@@ -1,66 +1,58 @@
-# website-kit
+# Website kit workspace
 
-Monorepo (pnpm workspace) for building and operating client websites.
+For clone commands, selecting only one template and the reusable client-setup
+prompt, start with the [repository README](../README.md).
+
+## Templates
+
+| Template | Demo | Pages |
+| --- | --- | --- |
+| `services-business` | Meridian bookkeeping | Home, Services, About, Contact, Privacy, Cookies |
+| `hospitality` | Stillwater retreat | Home, Stays, About, Gallery, FAQ, Contact |
+| `professional` | Forma design studio | Home, Services, About, Work, FAQ, Contact |
+| `arabian-adventure` | UAE desert prospect concept | Home, Experiences, About, Gallery, FAQ, Contact |
+
+Each template includes a `/blocks/` catalogue. Curated templates render
+`content/pages.json` and use `content/home.json` for brand details. The services
+business uses the restricted editor model with `src/lib/site.ts` for branding.
 
 ## Folder map
 
-```
-website-kit/
-├─ packages/
-│  ├─ blocks/          Block component library + the editable content model
-│  │  ├─ header/  hero/  features/  services/  logos/  testimonials/
-│  │  ├─ stats/  gallery/  pricing/  faq/  cta/  contact/  footer/
-│  │  │     each: <Name>.astro · schema.ts · example.json · README.md
-│  │  └─ src/          schemas.ts (content model) · registry.ts (editable maps)
-│  ├─ motion/          reveal.ts · slider.ts · gsap-presets.ts
-│  ├─ seo/             Seo.astro · jsonld/ · sitemap.ts
-│  ├─ tokens/          base.ts · themes/ (default, dark)
-│  ├─ analytics/       Gtm.astro · events.ts · consent.ts
-│  └─ ui/              Button.astro · Card.astro · Section.astro
-├─ templates/
-│  ├─ services-business/   reference starter (fully wired: pages.json, privacy,
-│  │                       cookies, fly.toml, Dockerfile)
-│  ├─ hospitality/
-│  └─ professional/
-├─ apps/               operator UIs (only shipped when the module is sold)
-│  ├─ insights-portal/     consumes services/insights-api
-│  └─ content-portal/      consumes services/content-assist
-├─ services/
-│  ├─ insights-api/    Hono + GA4 Data API (analytics)
-│  └─ content-assist/  AI propose → validate → publish → deploy (content editing)
-├─ tooling/
-│  ├─ github-actions/  build-and-deploy.yml template
-│  └─ create-client/   copy a template + shared packages into a new client repo
-└─ docs/               seo-content-sheet.{md,csv}
-```
-
-## Status
-
-Everything here is a **skeleton**: typed interfaces + TODOs, not full
-implementations. It compiles/type-checks:
-
-- `pnpm -r typecheck` — all TS packages/services.
-- `pnpm --filter <astro project> check` — Astro projects (`astro check`).
+- `templates/`: the four client starters.
+- `packages/blocks/`: reusable Astro sections, prop schemas, sample data and shared layouts.
+- `packages/motion/`: reveal and slider helpers.
+- `packages/ui/`, `tokens/`, `seo/`, `analytics/`: shared supporting packages.
+- `tooling/create-client/`: generates an independent client workspace.
+- `apps/` and `services/`: optional portal/API scaffolds, not required for static sites.
+- `docs/`: architecture, customization, design references and client prompts.
 
 ## Commands
 
-```sh
-pnpm install
-pnpm -r typecheck
-pnpm --filter @web/template-services-business build
+Run from this directory:
 
-# Scaffold a client repo:
+```sh
+pnpm install --frozen-lockfile
+pnpm --filter @web/template-professional dev --port 3020
+pnpm --filter './templates/**' check
+pnpm --filter './templates/**' build
+pnpm -r typecheck
+pnpm --filter @web/blocks test:examples
+node tooling/validate-templates.mjs
+
 node tooling/create-client/create-client.mjs "Client Name" \
-  --dir ../clients/client --template services-business [--with-growth] [--with-assist]
+  --dir ../clients/client --template professional
 ```
 
-## Two things to know about `packages/blocks`
+The client generator includes the chosen template and its required shared
+packages. Add `--with-growth` or `--with-assist` only when those optional scaffold
+modules are needed. Replace demo content and assets before launch.
 
-It currently holds **two** models (see `packages/blocks/README.md`):
+Component prop schemas and the restricted content-assist schemas serve different
+purposes; see [the blocks README](packages/blocks/README.md).
 
-1. The **component library** (per-block folders) — what renders on the page.
-2. The **content model** (`src/schemas.ts` + `src/registry.ts`) — what
-   `content/pages.json` stores and what `content-assist` is allowed to edit.
+## Guides
 
-These only overlap on `hero` today. See the open question in the project notes
-about whether to unify them.
+- [Architecture and editing workflow](docs/architecture.md)
+- [Customization, full-width heroes and navigation](docs/customization.md)
+- [Reusable client design prompt](docs/plug-and-play-prompt.md)
+- [Design references](docs/design-references.md)
